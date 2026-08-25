@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "repository": "github.com/faustbrian/go-localized",
+  "go_version": "1.26.6",
+  "modules": [
+    {
+      "directory": ".",
+      "module_path": "github.com/faustbrian/go-localized",
+      "go_version": "1.26.6",
+      "packages": [
+        {
+          "module_directory": ".",
+          "directory": ".",
+          "name": "localized",
+          "import_path": "github.com/faustbrian/go-localized",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "encoding",
+          "name": "encoding",
+          "import_path": "github.com/faustbrian/go-localized/encoding",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "http",
+          "name": "http",
+          "import_path": "github.com/faustbrian/go-localized/http",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "localizedconfig",
+          "name": "localizedconfig",
+          "import_path": "github.com/faustbrian/go-localized/localizedconfig",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "localizedhttpclient",
+          "name": "localizedhttpclient",
+          "import_path": "github.com/faustbrian/go-localized/localizedhttpclient",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "localizedquery",
+          "name": "localizedquery",
+          "import_path": "github.com/faustbrian/go-localized/localizedquery",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "localizedtest",
+          "name": "localizedtest",
+          "import_path": "github.com/faustbrian/go-localized/localizedtest",
+          "kind": "test support",
+          "production": false,
+          "executable": true,
+          "coverage_required": false,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "localizedvalidation",
+          "name": "localizedvalidation",
+          "import_path": "github.com/faustbrian/go-localized/localizedvalidation",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "localizedwire",
+          "name": "localizedwire",
+          "import_path": "github.com/faustbrian/go-localized/localizedwire",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "match",
+          "name": "match",
+          "import_path": "github.com/faustbrian/go-localized/match",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        },
+        {
+          "module_directory": ".",
+          "directory": "postgres",
+          "name": "postgres",
+          "import_path": "github.com/faustbrian/go-localized/postgres",
+          "kind": "public",
+          "production": true,
+          "executable": true,
+          "coverage_required": true,
+          "build_required": true,
+          "build_tags": []
+        }
+      ],
+      "purpose": "`localized` provides immutable UTF-8 text keyed by canonical BCP 47 language tags. Exact lookup, language matching, and application fallback are separate operations. The package does not provide catalogs, formatting, pluralization, translation loading, language detection, or global locale policy.",
+      "lifecycle": "stable",
+      "kind": "public library",
+      "releasable": true,
+      "family": "foundations",
+      "family_label": "Foundations",
+      "family_description": "Common immutable values, deterministic seams, configuration, identity propagation, and input validation.",
+      "family_order": 1,
+      "version": "v1.0.0",
+      "tag_prefix": "v",
+      "owned_dependencies": [
+        "github.com/faustbrian/go-api-query",
+        "github.com/faustbrian/go-circuit-breaker",
+        "github.com/faustbrian/go-config",
+        "github.com/faustbrian/go-http-client",
+        "github.com/faustbrian/go-international",
+        "github.com/faustbrian/go-validation",
+        "github.com/faustbrian/go-wire"
+      ],
+      "reverse_owned_dependencies": [],
+      "external_runtime_dependencies": [
+        "github.com/jackc/pgx/v5",
+        "golang.org/x/text"
+      ],
+      "required_services": [
+        "postgresql"
+      ],
+      "build_tags": [],
+      "test_tags": [
+        "integration"
+      ],
+      "interoperability_tools": [],
+      "specifications": [],
+      "conformance_corpora": [],
+      "provenance": [],
+      "goal_files": [
+        ".ai/GOAL.md",
+        ".ai/GOAL_HARDEN.md"
+      ],
+      "goal_status": "implementation-evidence-inventoried",
+      "goal_evidence": [
+        {
+          "file": ".ai/GOAL.md",
+          "requirements_sha256": "7c71f644e0403dd3368cdef251e01dc1e383403a8ade578b3aa296a2222819ba",
+          "implementation_evidence": [
+            "CHANGELOG.md",
+            "README.md",
+            "docs/README.md",
+            "docs/api.md",
+            "docs/architecture.md",
+            "docs/compatibility.md",
+            "docs/hardening.md",
+            "docs/performance.md",
+            "docs/security.md"
+          ],
+          "verification_gates": [
+            "format-check",
+            "tidy-check",
+            "safety",
+            "vet",
+            "test",
+            "race",
+            "coverage",
+            "lint",
+            "staticcheck",
+            "vulnerability",
+            "secrets",
+            "licenses",
+            "sbom",
+            "fuzz",
+            "mutation",
+            "nilaway",
+            "docs",
+            "api",
+            "conformance",
+            "interoperability",
+            "benchmark"
+          ],
+          "implementation_status": "implemented-requires-fresh-verification"
+        },
+        {
+          "file": ".ai/GOAL_HARDEN.md",
+          "requirements_sha256": "b546f7c70d411f77cb3868f973590b068068bc73ae26762913fcf24028eaf7d7",
+          "implementation_evidence": [
+            "CHANGELOG.md",
+            "README.md",
+            "docs/README.md",
+            "docs/api.md",
+            "docs/architecture.md",
+            "docs/compatibility.md",
+            "docs/hardening.md",
+            "docs/performance.md",
+            "docs/security.md"
+          ],
+          "verification_gates": [
+            "format-check",
+            "tidy-check",
+            "safety",
+            "vet",
+            "test",
+            "race",
+            "coverage",
+            "lint",
+            "staticcheck",
+            "vulnerability",
+            "secrets",
+            "licenses",
+            "sbom",
+            "fuzz",
+            "mutation",
+            "nilaway",
+            "docs",
+            "api",
+            "conformance",
+            "interoperability",
+            "benchmark"
+          ],
+          "implementation_status": "implemented-requires-fresh-verification"
+        }
+      ],
+      "gates": {
+        "api_compatibility": true,
+        "benchmarks": true,
+        "conformance": false,
+        "coverage": true,
+        "documentation": true,
+        "fuzz": true,
+        "lint": true,
+        "mutation": true,
+        "race": true,
+        "security": true,
+        "tests": true
+      }
+    }
+  ]
+}

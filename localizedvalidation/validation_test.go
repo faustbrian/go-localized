@@ -5,9 +5,9 @@ import (
 	"strings"
 	"testing"
 
-	localized "github.com/faustbrian/golib/pkg/localized"
-	validation "github.com/faustbrian/golib/pkg/localized/localizedvalidation"
-	validationcore "github.com/faustbrian/golib/pkg/validation"
+	localized "github.com/faustbrian/go-localized"
+	validation "github.com/faustbrian/go-localized/localizedvalidation"
+	validationcore "github.com/faustbrian/go-validation"
 )
 
 func value(t *testing.T, text string) localized.Text {

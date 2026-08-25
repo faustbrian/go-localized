@@ -1,18 +1,9 @@
-# Code of conduct
+# Code Of Conduct
 
-We pledge to make participation welcoming and harassment-free regardless of
-age, body size, disability, ethnicity, sex characteristics, gender identity or
-expression, experience, education, socioeconomic status, nationality,
-appearance, race, caste, color, religion, or sexual identity and orientation.
+Participants must communicate professionally, assume good intent while
+evaluating technical claims from evidence, and avoid harassment, discrimination,
+personal attacks, threats, or disclosure of private information.
 
-Contributors MUST communicate constructively, accept responsibility, respect
-privacy, and focus criticism on the work. Harassment, threats, sexualized
-attention, publishing private information, and sustained disruption are not
-acceptable.
-
-Maintainers may edit, remove, or reject contributions and temporarily or
-permanently restrict participation for behavior they deem inappropriate.
-Report conduct concerns privately to the repository owner. Reports will be
-reviewed promptly, fairly, and with confidentiality appropriate to the case.
-
-This policy applies in project spaces and when representing the project.
+Maintainers may edit, reject, or remove contributions and participation that
+violate these expectations. Report conduct concerns privately to the repository
+owner. Reports will be reviewed confidentially and addressed proportionally.

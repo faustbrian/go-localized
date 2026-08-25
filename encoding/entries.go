@@ -8,8 +8,8 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/faustbrian/golib/pkg/international/locale"
-	localized "github.com/faustbrian/golib/pkg/localized"
+	"github.com/faustbrian/go-international/locale"
+	localized "github.com/faustbrian/go-localized"
 )
 
 const defaultMaxInputBytes = 9 << 20

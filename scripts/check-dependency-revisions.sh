@@ -19,9 +19,9 @@ cleanup() {
 trap cleanup EXIT
 
 modules=(
-    github.com/faustbrian/golib/pkg/api-query
-    github.com/faustbrian/golib/pkg/international
-    github.com/faustbrian/golib/pkg/validation
+    github.com/faustbrian/go-api-query
+    github.com/faustbrian/go-international
+    github.com/faustbrian/go-validation
 )
 repos=(api-query international validation)
 

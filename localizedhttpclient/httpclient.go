@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	httpclient "github.com/faustbrian/golib/pkg/http-client"
-	localized "github.com/faustbrian/golib/pkg/localized"
-	localizedhttp "github.com/faustbrian/golib/pkg/localized/http"
-	localizedmatch "github.com/faustbrian/golib/pkg/localized/match"
+	httpclient "github.com/faustbrian/go-http-client"
+	localized "github.com/faustbrian/go-localized"
+	localizedhttp "github.com/faustbrian/go-localized/http"
+	localizedmatch "github.com/faustbrian/go-localized/match"
 )
 
 // Error is a stable privacy-safe HTTP client adapter error identity.

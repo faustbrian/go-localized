@@ -4,10 +4,10 @@ import (
 	"errors"
 	"testing"
 
-	apiquery "github.com/faustbrian/golib/pkg/api-query"
-	"github.com/faustbrian/golib/pkg/international/locale"
-	localized "github.com/faustbrian/golib/pkg/localized"
-	"github.com/faustbrian/golib/pkg/localized/localizedquery"
+	apiquery "github.com/faustbrian/go-api-query"
+	"github.com/faustbrian/go-international/locale"
+	localized "github.com/faustbrian/go-localized"
+	"github.com/faustbrian/go-localized/localizedquery"
 )
 
 func TestExactValuePreservesMissingAndPresentEmpty(t *testing.T) {

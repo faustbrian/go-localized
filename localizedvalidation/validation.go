@@ -7,8 +7,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	localized "github.com/faustbrian/golib/pkg/localized"
-	validationcore "github.com/faustbrian/golib/pkg/validation"
+	localized "github.com/faustbrian/go-localized"
+	validationcore "github.com/faustbrian/go-validation"
 	"golang.org/x/text/unicode/norm"
 )
 

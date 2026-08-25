@@ -5,9 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/faustbrian/golib/pkg/config/decode"
-	localized "github.com/faustbrian/golib/pkg/localized"
-	"github.com/faustbrian/golib/pkg/localized/localizedconfig"
+	"github.com/faustbrian/go-config/decode"
+	localized "github.com/faustbrian/go-localized"
+	"github.com/faustbrian/go-localized/localizedconfig"
 )
 
 func TestConfigValueHookDecodesLocalizedMapTransactionally(t *testing.T) {

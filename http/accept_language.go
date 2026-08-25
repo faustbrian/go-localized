@@ -8,9 +8,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/faustbrian/golib/pkg/international/locale"
-	localized "github.com/faustbrian/golib/pkg/localized"
-	localizedmatch "github.com/faustbrian/golib/pkg/localized/match"
+	"github.com/faustbrian/go-international/locale"
+	localized "github.com/faustbrian/go-localized"
+	localizedmatch "github.com/faustbrian/go-localized/match"
 )
 
 // Error is a stable privacy-safe HTTP adapter error identity.

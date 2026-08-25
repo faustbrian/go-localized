@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	localized "github.com/faustbrian/golib/pkg/localized"
+	localized "github.com/faustbrian/go-localized"
 )
 
 func TestTextJSONIsCanonicalAndRoundTripsEmptyValues(t *testing.T) {

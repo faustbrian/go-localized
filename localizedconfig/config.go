@@ -4,7 +4,7 @@ package localizedconfig
 import (
 	"reflect"
 
-	localized "github.com/faustbrian/golib/pkg/localized"
+	localized "github.com/faustbrian/go-localized"
 )
 
 // Error is a stable privacy-safe configuration error identity.

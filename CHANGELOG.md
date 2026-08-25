@@ -4,12 +4,13 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-08-25
+
 ### Documentation
 
 - Replace obsolete standalone-repository links and workflow claims with
   monorepo-canonical targets and current release guidance.
-- Keep the changelog and security policy explicit that `v1.0.0` is planned but
-  has not been published.
+- Document the package's initial stable `v1.0.0` scope and security policy.
 
 - Link the package README to the repository-wide Golib documentation portal.
 
@@ -20,6 +21,7 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Publish the module from its standalone `github.com/faustbrian/go-localized` identity while preserving its documented API and behavior.
 - Refresh local `v0.0.0` owned-module checksums after dependency manifests and
   release notes were normalized; runtime behavior and public APIs are
   unchanged.
@@ -59,12 +61,13 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 - Reproducible dependency pins matching the exact locally verified sibling
   revisions.
 
-### Planned v1.0.0 scope
+### v1.0.0 scope
 
-The following initial scope is implemented but remains unreleased.
+The following initial scope is included in `v1.0.0`.
 
 #### Added
 
 - Initial production contract for localized domain values.
 
-[Unreleased]: https://github.com/faustbrian/golib/commits/main/pkg/localized
+[Unreleased]: https://github.com/faustbrian/go-localized/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/faustbrian/go-localized/releases/tag/v1.0.0

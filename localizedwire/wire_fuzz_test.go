@@ -3,12 +3,12 @@ package localizedwire_test
 import (
 	"testing"
 
-	localized "github.com/faustbrian/golib/pkg/localized"
-	"github.com/faustbrian/golib/pkg/localized/localizedwire"
-	"github.com/faustbrian/golib/pkg/wire/jsonwire"
-	"github.com/faustbrian/golib/pkg/wire/msgpackwire"
-	"github.com/faustbrian/golib/pkg/wire/tomlwire"
-	"github.com/faustbrian/golib/pkg/wire/yamlwire"
+	localized "github.com/faustbrian/go-localized"
+	"github.com/faustbrian/go-localized/localizedwire"
+	"github.com/faustbrian/go-wire/jsonwire"
+	"github.com/faustbrian/go-wire/msgpackwire"
+	"github.com/faustbrian/go-wire/tomlwire"
+	"github.com/faustbrian/go-wire/yamlwire"
 )
 
 func FuzzWireDecoders(f *testing.F) {

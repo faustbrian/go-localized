@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	localized "github.com/faustbrian/golib/pkg/localized"
-	localizedhttp "github.com/faustbrian/golib/pkg/localized/http"
-	localizedmatch "github.com/faustbrian/golib/pkg/localized/match"
+	localized "github.com/faustbrian/go-localized"
+	localizedhttp "github.com/faustbrian/go-localized/http"
+	localizedmatch "github.com/faustbrian/go-localized/match"
 )
 
 func httpFixture(t *testing.T) localized.Text {

@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "repository": "github.com/faustbrian/go-localized",
+  "packages": [
+    {
+      "module_directory": ".",
+      "directory": ".",
+      "name": "localized",
+      "import_path": "github.com/faustbrian/go-localized",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "encoding",
+      "name": "encoding",
+      "import_path": "github.com/faustbrian/go-localized/encoding",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "http",
+      "name": "http",
+      "import_path": "github.com/faustbrian/go-localized/http",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "localizedconfig",
+      "name": "localizedconfig",
+      "import_path": "github.com/faustbrian/go-localized/localizedconfig",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "localizedhttpclient",
+      "name": "localizedhttpclient",
+      "import_path": "github.com/faustbrian/go-localized/localizedhttpclient",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "localizedquery",
+      "name": "localizedquery",
+      "import_path": "github.com/faustbrian/go-localized/localizedquery",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "localizedtest",
+      "name": "localizedtest",
+      "import_path": "github.com/faustbrian/go-localized/localizedtest",
+      "kind": "test support",
+      "production": false,
+      "executable": true,
+      "coverage_required": false,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "localizedvalidation",
+      "name": "localizedvalidation",
+      "import_path": "github.com/faustbrian/go-localized/localizedvalidation",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "localizedwire",
+      "name": "localizedwire",
+      "import_path": "github.com/faustbrian/go-localized/localizedwire",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "match",
+      "name": "match",
+      "import_path": "github.com/faustbrian/go-localized/match",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    },
+    {
+      "module_directory": ".",
+      "directory": "postgres",
+      "name": "postgres",
+      "import_path": "github.com/faustbrian/go-localized/postgres",
+      "kind": "public",
+      "production": true,
+      "executable": true,
+      "coverage_required": true,
+      "build_required": true,
+      "build_tags": []
+    }
+  ]
+}
