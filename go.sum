@@ -3,7 +3,7 @@ github.com/BurntSushi/toml v1.6.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/faustbrian/go-api-query v1.0.0 h1:bnJeQWe59XhlY9TNqQrRXkNj3Z/xRQRNeO56yK3uKug=
+github.com/faustbrian/go-api-query v1.0.0 h1:s/MzxvkGePi+MIIXoXG7kwRU+77GG/q6Uq71lGOQKWs=
 github.com/faustbrian/go-api-query v1.0.0/go.mod h1:mPb20YI2uLgkJ8DGdfAYmWa1zSH+dZt6I9AP2P4Er2s=
 github.com/faustbrian/go-circuit-breaker v1.0.0 h1:BmdL19/Th3UiGC/iCwoxNVQ74m0j0nmKio5eVf0F8R0=
 github.com/faustbrian/go-circuit-breaker v1.0.0/go.mod h1:tJ8Xfrv6DG0NiGErqKERXkiBLsyNzOIZ5MZVoD36jEU=
@@ -11,13 +11,13 @@ github.com/faustbrian/go-config v1.0.0 h1:7hN5bWt63nUd87Iu99gI/87aUOLjE437WGrhJB
 github.com/faustbrian/go-config v1.0.0/go.mod h1:pnqiOzoqa91gG8gWhQI7S1BXuE/E0DKRCOh19SQ3qYc=
 github.com/faustbrian/go-http-client v1.0.0 h1:/U98N60WchVexsYjc4NpvdKjGCL3Eixoylstu/7LKK0=
 github.com/faustbrian/go-http-client v1.0.0/go.mod h1:6TTp/UfA5TmhXRbFQwLKltShi7F+wF2nBwyubwKIoTw=
-github.com/faustbrian/go-international v1.0.0 h1:cNs925PEO/JgWcZX7YON6SVaK7uAfZ51K984awCgn5c=
+github.com/faustbrian/go-international v1.0.0 h1:PgpYIGuIGAvcspWgsulJ33C7B1UNB4p/eDq8jVZW2z4=
 github.com/faustbrian/go-international v1.0.0/go.mod h1:7joB3RlwoD7o19uKkQB+8o1Zd1CfSfpH1eOSNtbrcRc=
-github.com/faustbrian/go-jsonapi v1.0.0 h1:a+t7cgBQGG8qkSVwYAnph9WcLKA4Ca9mOx8wz/qqPfo=
+github.com/faustbrian/go-jsonapi v1.0.0 h1:6KscIihkyH+Ik/ZrI5JLU0If9kmfyqm6ZssCmc1vRxA=
 github.com/faustbrian/go-jsonapi v1.0.0/go.mod h1:7XH8Rh5yh1Uj5fJx2azY9XMM8/YdQkGbETVn6RYSkGM=
 github.com/faustbrian/go-validation v1.0.0 h1:xdcMbe4iXEgWBbX7KOpxY63dsCnevzhgk2jtPw5iD0s=
 github.com/faustbrian/go-validation v1.0.0/go.mod h1:oSoKEITwgaCzWpdgdxrV+Q6QPpteJJvRldAeOZL9Plg=
-github.com/faustbrian/go-wire v1.0.0 h1:mNATysIJhl1PC5jsQxN+2URsx95iRuiZDsjq3Rs6pyI=
+github.com/faustbrian/go-wire v1.0.0 h1:m0Rcz+vdhobAKzaySFmMFgwq4qTCzeKhJG1wQ0n6dKM=
 github.com/faustbrian/go-wire v1.0.0/go.mod h1:wcQnBeNpF6pw7vFhnBd0W9+qS7zlATxn2zuUae8aLyU=
 github.com/fxamacker/cbor/v2 v2.9.2 h1:X4Ksno9+x3cz0TZv69ec1hxP/+tymuR8PXQJyDwfh78=
 github.com/fxamacker/cbor/v2 v2.9.2/go.mod h1:vM4b+DJCtHn+zz7h3FFp/hDAI9WNWCsZj23V5ytsSxQ=
