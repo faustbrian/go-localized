@@ -4,10 +4,10 @@ set -euo pipefail
 required=(
   .gitattributes .gitignore .golangci.yml AGENTS.md CHANGELOG.md
   CODE_OF_CONDUCT.md CONTRIBUTING.md LICENSE Makefile NOTICE README.md ROADMAP.md
-  SECURITY.md THIRD_PARTY_NOTICES.md llms.txt llms-full.txt
+  SECURITY.md THIRD_PARTY_NOTICES.md
   docs/README.md docs/quickstart.md docs/semantics.md docs/api.md
   docs/adoption.md docs/architecture.md docs/cookbook.md docs/compatibility.md
-  docs/dependencies.md docs/evidence.md docs/faq.md docs/hardening.md
+  docs/dependencies.md docs/faq.md
   docs/migration.md docs/performance.md docs/releasing.md
   docs/repository-standards.md docs/security.md docs/troubleshooting.md
 )
