@@ -37,6 +37,6 @@ distinguish SQL NULL.
 
 ## Hosted CI is unavailable
 
-Continue locally. `make check`, `make mutation`, and a disposable PostgreSQL
-matrix provide the implementation evidence. Hosted CI is a final publication
-verification, not a development blocker.
+Continue locally with `make check` and the bounded package gates. The hosted
+workflow supplies the PostgreSQL matrix and release-level verification. Do not
+describe a partial local run as release-ready.

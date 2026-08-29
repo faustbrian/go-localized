@@ -4,9 +4,15 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- Replace copied repository tooling with the checksum-pinned `go-library-tools`
+  v1.0.5 contract while preserving package-owned verification evidence and
+  source-specific checks.
+
 ### Documentation
 
-- Replace archived monorepo links and completed execution artifacts with a
+- Replace historical repository links and completed execution artifacts with a
   standalone, human-oriented documentation structure.
 
 ## [1.0.0] - 2026-08-25
@@ -30,8 +36,8 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Documentation
 
-- Replace obsolete standalone-repository links and workflow claims with
-  monorepo-canonical targets and current release guidance.
+- Replace obsolete repository links and workflow claims with current release
+  guidance.
 - Document the package's initial stable `v1.0.0` scope and security policy.
 
 - Link the package README to package-owned documentation.

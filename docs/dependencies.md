@@ -10,9 +10,7 @@ checksums are pinned in `go.mod` and `go.sum`.
 Tool commands use explicit versions for govulncheck, NilAway, and Gremlins.
 GitHub Actions use full commit SHAs with human-readable version comments.
 
-The pinned `international`, `validation`, and `api-query` commits may
-be resolved locally through an ignored Go workspace while awaiting publication;
-`go.mod` contains no checkout-relative replacements. Hosted verification runs
-only after those pins are published. `make dependency-revisions` rejects pin
-drift and tests archived clean commits rather than sibling working trees. See
-[compatibility](compatibility.md).
+Owned dependencies are consumed as released modules. `go.mod` contains no
+checkout-relative replacements or workspace-only resolution. The
+checksum-pinned `go-library-tools` contract validates the module graph and
+prevents dependency or action drift. See [compatibility](compatibility.md).
