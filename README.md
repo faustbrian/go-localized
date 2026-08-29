@@ -100,16 +100,17 @@ in [semantics](docs/semantics.md), the complete public surface in the
 
 ## Development
 
-`make check` runs the complete local gate stack. Hosted workflows mirror these
-commands, but local development does not depend on a remote branch or CI run.
-PostgreSQL integration uses an explicitly supplied disposable database:
+`make check` runs the complete local gate stack through the pinned
+`go-library-tools` CLI. Hosted workflows mirror these commands, but local
+development does not depend on a remote branch or CI run. PostgreSQL-backed
+checks require an explicitly supplied disposable database:
 
 ```sh
-make postgres \
-  POSTGRES_URL='postgres://postgres:postgres@127.0.0.1:5432/localized?sslmode=disable'
+POSTGRES_URL='postgres://postgres:postgres@127.0.0.1:5432/localized?sslmode=disable' \
+  make check
 ```
 
-With Docker and `pg_isready`, `make postgres-matrix` creates isolated ephemeral
+The PostgreSQL version matrix is a CI operation. It uses isolated ephemeral
 containers and verifies PostgreSQL 14 through 18 without using ambient
 services.
 
@@ -117,8 +118,3 @@ services.
 
 MIT. See [LICENSE](LICENSE), [NOTICE](NOTICE), and
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
-
-## Ecosystem
-
-Use the [Golib documentation portal](https://github.com/faustbrian/golib/blob/main/docs/index.md)
-to choose companion packages, supported stacks, recipes, and operations guidance.

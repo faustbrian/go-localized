@@ -14,12 +14,13 @@ Construction, merge, and decoding copy data to preserve ownership. Canonical
 JSON also escapes every key and string deterministically. These allocations are
 part of the immutability contract.
 
-Run:
+Run the repository benchmark gate:
 
 ```sh
-make benchmark BENCH_TIME=1s
+golib check --module .
 ```
 
+The shared gate runs the package benchmarks with a bounded duration.
 Benchmarks report allocations for construction, exact lookup, matching,
 fallback, merge, maximum-size locale sets, encoding, and decoding. Treat results
 as machine-specific baselines; investigate regressions using repeated runs and
