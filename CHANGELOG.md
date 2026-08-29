@@ -7,7 +7,7 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 ### Changed
 
 - Replace copied repository tooling with the checksum-pinned `go-library-tools`
-  v1.0.5 contract while preserving package-owned verification evidence and
+  v1.0.6 contract while preserving package-owned verification evidence and
   source-specific checks.
 
 ### Documentation
