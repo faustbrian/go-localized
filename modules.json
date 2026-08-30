@@ -173,16 +173,24 @@
         "integration"
       ],
       "interoperability_tools": [],
-      "specifications": [],
+      "specifications": [
+        "BCP 47 language tags",
+        "IANA Language Subtag Registry",
+        "RFC 4647 language matching",
+        "RFC 9110 Accept-Language",
+        "RFC 8259 JSON"
+      ],
       "conformance_corpora": [],
-      "provenance": [],
+      "provenance": [
+        "specification/monitoring.json"
+      ],
       "goal_files": [],
       "goal_status": "not-applicable",
       "goal_evidence": [],
       "gates": {
         "api_compatibility": true,
         "benchmarks": true,
-        "conformance": false,
+        "conformance": true,
         "coverage": true,
         "documentation": true,
         "fuzz": true,

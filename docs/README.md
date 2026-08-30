@@ -1,5 +1,7 @@
 # Documentation
 
+- [Specification decisions](specification-decisions.md)
+
 ## Getting started
 
 - [Quickstart](quickstart.md)
