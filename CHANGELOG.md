@@ -6,14 +6,25 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
-- Replace copied repository tooling with the checksum-pinned `go-library-tools`
-  v1.0.6 contract while preserving package-owned verification evidence and
-  source-specific checks.
+- Use the released `go-library-tools` v1.2.0 CLI and immutable merged
+  workflow at `1f9629e5f27418600460b55a50a5b2fc81697fab` while preserving
+  package-owned verification evidence and source-specific checks.
 
 ### Documentation
 
 - Replace historical repository links and completed execution artifacts with a
   standalone, human-oriented documentation structure.
+- Govern BCP 47 identity, IANA registry use, language matching, fallback,
+  `Accept-Language`, and JSON choices through the
+  [specification decision register](docs/specification-decisions.md).
+- Current decision records: `LOCALIZED-DEC-001 sha256:37ebb82077f351332005c6004546474bfa67d618cf5bbeb855e406dd559de7c1`;
+  `LOCALIZED-DEC-002 sha256:b7a30860890d67cfea8ce5c0bd2f6e4fc90bea708bb5b5c3b49b60b4f227f515`;
+  `LOCALIZED-DEC-003 sha256:ad97d7ae459d27f9103e951c7cb020671d2f2d55deeb100fe114ba93b505af41`;
+  `LOCALIZED-DEC-004 sha256:58f9434796ee9b5a9cc70aa43761d771168de04641a0105fde7b3e8fa087627a`;
+  `LOCALIZED-DEC-005 sha256:d24678855c787b97e7567d1076b5cb590afc4046397e9f7d438b5f7bdc6bc891`;
+  `LOCALIZED-DEC-006 sha256:b7ed14e5ee8d3817bc0c22c6f811c8a5139e757c9e78a56f2b60b1d1270ad82c`;
+  `LOCALIZED-DEC-007 sha256:34bd3a418f23297185f8aab87bfae1c424ecd22817449e79f4cdaa0a1d032419`;
+  `LOCALIZED-DEC-008 sha256:9b486e60b10afa18beae1d9f047bf10c9e282cbbca88bfbd801bce1df5d45e7b`.
 
 ## [1.0.0] - 2026-08-25
 

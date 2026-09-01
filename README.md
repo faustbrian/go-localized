@@ -97,6 +97,8 @@ Start at the [documentation index](docs/README.md). The normative behavior is
 in [semantics](docs/semantics.md), the complete public surface in the
 [API reference](docs/api.md), and operational constraints in
 [security](docs/security.md) and [performance](docs/performance.md).
+Observable standards interpretations are governed by the
+[specification decision register](docs/specification-decisions.md).
 
 ## Development
 

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "entries": [
+    {"id":"LOCALIZED-DEC-001","digests":["37ebb82077f351332005c6004546474bfa67d618cf5bbeb855e406dd559de7c1"]},
+    {"id":"LOCALIZED-DEC-002","digests":["b7a30860890d67cfea8ce5c0bd2f6e4fc90bea708bb5b5c3b49b60b4f227f515"]},
+    {"id":"LOCALIZED-DEC-003","digests":["ad97d7ae459d27f9103e951c7cb020671d2f2d55deeb100fe114ba93b505af41"]},
+    {"id":"LOCALIZED-DEC-004","digests":["58f9434796ee9b5a9cc70aa43761d771168de04641a0105fde7b3e8fa087627a"]},
+    {"id":"LOCALIZED-DEC-005","digests":["d24678855c787b97e7567d1076b5cb590afc4046397e9f7d438b5f7bdc6bc891"]},
+    {"id":"LOCALIZED-DEC-006","digests":["b7ed14e5ee8d3817bc0c22c6f811c8a5139e757c9e78a56f2b60b1d1270ad82c"]},
+    {"id":"LOCALIZED-DEC-007","digests":["34bd3a418f23297185f8aab87bfae1c424ecd22817449e79f4cdaa0a1d032419"]},
+    {"id":"LOCALIZED-DEC-008","digests":["9b486e60b10afa18beae1d9f047bf10c9e282cbbca88bfbd801bce1df5d45e7b"]}
+  ]
+}
