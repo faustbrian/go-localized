@@ -6,11 +6,9 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
-- Replace copied repository tooling with the checksum-pinned `go-library-tools`
-  v1.0.6 contract while preserving package-owned verification evidence and
-  source-specific checks.
-- Pin CI specification enforcement to canonical shared tooling commit
-  `3367371735ac409ba101778aafbdaf8e2560064c`.
+- Use the released `go-library-tools` v1.2.0 CLI and immutable merged
+  workflow at `1f9629e5f27418600460b55a50a5b2fc81697fab` while preserving
+  package-owned verification evidence and source-specific checks.
 
 ### Documentation
 
