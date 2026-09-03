@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "repository": "github.com/faustbrian/go-localized",
+  "module": ".",
+  "package": "localizedvalidation",
+  "gate": "mutation",
+  "input_digest": "sha256:639619c9bf6835fc5fd79031d1a41e82ce48bd1da16642b324007cdd2fd38850",
+  "verifier_digest": "sha256:9a9499ff68a8dfd49a0be7995590297a8ee563a1aa226bfd8b9361dc53058108",
+  "result": "passed",
+  "report_digest": "sha256:4e67ed3ae91644da268e3703d7f7c3e9009a89c6df74ddc359a80d5aff9a5848",
+  "environment": {
+    "CGO_ENABLED": "1",
+    "GOARCH": "arm64",
+    "GOOS": "darwin",
+    "GOVERSION": "go1.27.0",
+    "gremlins_binary_sha256": "sha256:6a2beddc477eb410f8a670b6c9049558563d3c4327498fe31604d31c773a959e"
+  },
+  "completed_at": "2026-09-03T09:31:53.228375Z"
+}

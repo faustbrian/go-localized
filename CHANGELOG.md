@@ -6,6 +6,14 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Adopt the checksum-verified `go-library-tools` v1.4.0 CLI and immutable
+  reusable workflow so specification monitoring uses the stable descriptive
+  request profile and public-first module resolution.
+
+- Refresh the eight Golib v1.0.0 dependency checksums to their public proxy
+  identities so local, hosted, and clean-consumer verification use the same
+  immutable module archives.
+
 - Publish complete schema-v2 cohesion metadata and versioned Golib ecosystem
   navigation for immutable localized values, matching, and focused adapters.
 
