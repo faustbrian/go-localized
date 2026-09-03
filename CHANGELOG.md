@@ -6,6 +6,13 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Publish complete schema-v2 cohesion metadata and versioned Golib ecosystem
+  navigation for immutable localized values, matching, and focused adapters.
+
+- Adopt the checksum-verified `go-library-tools` v1.3.0 CLI, add the local
+  `make cohesion` validation entry point, and pin reusable-workflow cohesion
+  enforcement to its final immutable revision.
+
 - Use the released `go-library-tools` v1.2.0 CLI and immutable merged
   workflow at `1f9629e5f27418600460b55a50a5b2fc81697fab` while preserving
   package-owned verification evidence and source-specific checks.
