@@ -215,6 +215,12 @@ requirement strength `MAY`.
 | Upstream status | This is a package migration policy, not an RFC 8259 or BCP 47 requirement. |
 | Reconsider when | Legacy payloads are retired or a versioned wire format requires continued acceptance. |
 
+## Authority review history
+
+| Reviewed | Authority | Disposition | Decision impact |
+|---|---|---|---|
+| 2026-09-03 | RFC 9110 Erratum 9162 | Behavior-neutral. The proposed comma-space spelling concerns combination of repeated HTTP field lines. The localized HTTP adapter accepts one caller-supplied `Accept-Language` value and parses its comma-delimited language ranges; it does not combine repeated field lines. | `LOCALIZED-DEC-006` remains unchanged, including its quality, ordering, duplicate, wildcard, and resource-bound contracts and conformance bindings. |
+
 ## Unresolved decisions
 
 None. New ambiguity, errata, registry drift, matching policy, or wire behavior

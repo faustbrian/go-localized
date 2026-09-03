@@ -19,6 +19,9 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Documentation
 
+- Record RFC 9110 Erratum 9162 as behavior-neutral for the localized HTTP
+  adapter, with no decision or conformance-binding changes.
+
 - Replace historical repository links and completed execution artifacts with a
   standalone, human-oriented documentation structure.
 - Govern BCP 47 identity, IANA registry use, language matching, fallback,
