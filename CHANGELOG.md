@@ -6,11 +6,29 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Adopt the checksum-verified `go-library-tools` v1.4.0 CLI and immutable
+  reusable workflow so specification monitoring uses the stable descriptive
+  request profile and public-first module resolution.
+
+- Refresh the eight Golib v1.0.0 dependency checksums to their public proxy
+  identities so local, hosted, and clean-consumer verification use the same
+  immutable module archives.
+
+- Publish complete schema-v2 cohesion metadata and versioned Golib ecosystem
+  navigation for immutable localized values, matching, and focused adapters.
+
+- Adopt the checksum-verified `go-library-tools` v1.3.0 CLI, add the local
+  `make cohesion` validation entry point, and pin reusable-workflow cohesion
+  enforcement to its final immutable revision.
+
 - Use the released `go-library-tools` v1.2.0 CLI and immutable merged
   workflow at `1f9629e5f27418600460b55a50a5b2fc81697fab` while preserving
   package-owned verification evidence and source-specific checks.
 
 ### Documentation
+
+- Record RFC 9110 Erratum 9162 as behavior-neutral for the localized HTTP
+  adapter, with no decision or conformance-binding changes.
 
 - Replace historical repository links and completed execution artifacts with a
   standalone, human-oriented documentation structure.

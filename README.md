@@ -99,6 +99,8 @@ in [semantics](docs/semantics.md), the complete public surface in the
 [security](docs/security.md) and [performance](docs/performance.md).
 Observable standards interpretations are governed by the
 [specification decision register](docs/specification-decisions.md).
+Shared construction, ownership, lifecycle, and composition expectations are in
+the versioned [Golib ecosystem index](https://github.com/faustbrian/go-library-tools/blob/v1.3.0/docs/ecosystem/README.md).
 
 ## Development
 

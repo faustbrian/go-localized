@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "repository": "github.com/faustbrian/go-localized",
   "go_version": "1.26.6",
   "modules": [
@@ -149,6 +149,112 @@
       "family_label": "Foundations",
       "family_description": "Common immutable values, deterministic seams, configuration, identity propagation, and input validation.",
       "family_order": 1,
+      "cohesion": {
+        "family": "foundations",
+        "secondary_capabilities": [
+          "configuration",
+          "data-encoding",
+          "database-and-storage",
+          "http-and-service-edge",
+          "protocols-and-schemas",
+          "testing-and-conformance",
+          "transport-and-networking"
+        ],
+        "responsibility": "Provide immutable localized text values, exact locale lookup, deterministic matching and fallback, and focused configuration, encoding, HTTP, persistence, validation, and wire integrations.",
+        "non_goals": [
+          "Provide translation catalogs, message loading, formatting, pluralization, interpolation, or language detection.",
+          "Own application-wide fallback or process-global locale policy.",
+          "Hide locale identity, matching, persistence, transport, or validation behind a framework runtime."
+        ],
+        "public_package_identifier": "localized",
+        "primary_entry_packages": [
+          "github.com/faustbrian/go-localized"
+        ],
+        "package_selection": {
+          "github.com/faustbrian/go-localized": "Use for immutable localized text values, exact locale lookup, bounded construction, persistent transforms, merge policy, and canonical JSON.",
+          "github.com/faustbrian/go-localized/encoding": "Use for the ordered entry-array encoding that preserves locale and localized-text boundaries.",
+          "github.com/faustbrian/go-localized/http": "Use for bounded Accept-Language parsing and selection with explicit matching semantics.",
+          "github.com/faustbrian/go-localized/localizedconfig": "Use to decode localized text through the Golib configuration contract.",
+          "github.com/faustbrian/go-localized/localizedhttpclient": "Use to add Accept-Language preferences to immutable HTTP-client request specifications and select localized responses.",
+          "github.com/faustbrian/go-localized/localizedquery": "Use for exact locale-aware values and predicates in API-query plans.",
+          "github.com/faustbrian/go-localized/localizedtest": "Use in tests for deterministic localized fixtures and assertions.",
+          "github.com/faustbrian/go-localized/localizedvalidation": "Use for reusable localized-text validation and explicit Unicode normalization.",
+          "github.com/faustbrian/go-localized/localizedwire": "Use to encode and decode localized text through bounded Golib wire formats.",
+          "github.com/faustbrian/go-localized/match": "Use for standards-aligned language matching and explicit application fallback plans.",
+          "github.com/faustbrian/go-localized/postgres": "Use for SQL values, rows, and pgx JSONB integration backed by caller-owned database resources."
+        },
+        "lifecycle_status": "active",
+        "maturity": "stable",
+        "construction_styles": [
+          "builder-build",
+          "new-options",
+          "validated-value"
+        ],
+        "lifecycle_styles": [
+          "stateless"
+        ],
+        "ownership": {
+          "configuration": "caller",
+          "mutable_inputs": [
+            "borrow",
+            "copy"
+          ],
+          "runtime_resources": "none",
+          "background_work": "none"
+        },
+        "optional_owned_dependencies": [],
+        "adapters": [
+          "github.com/faustbrian/go-localized/encoding",
+          "github.com/faustbrian/go-localized/http",
+          "github.com/faustbrian/go-localized/localizedconfig",
+          "github.com/faustbrian/go-localized/localizedhttpclient",
+          "github.com/faustbrian/go-localized/localizedquery",
+          "github.com/faustbrian/go-localized/localizedvalidation",
+          "github.com/faustbrian/go-localized/localizedwire",
+          "github.com/faustbrian/go-localized/postgres"
+        ],
+        "companions": [
+          "github.com/faustbrian/go-localized/localizedtest",
+          "github.com/faustbrian/go-localized/match"
+        ],
+        "supported_go": {
+          "minimum": "1.26.6",
+          "tested": [
+            "1.26.6"
+          ]
+        },
+        "supported_platforms": [
+          "portable-go"
+        ],
+        "supported_backends": [
+          "postgresql"
+        ],
+        "supported_protocols": [
+          "bcp-47",
+          "rfc-4647",
+          "rfc-8259-json",
+          "rfc-9110-http-semantics"
+        ],
+        "documentation": {
+          "readme": "README.md",
+          "api": "docs/api.md",
+          "adoption": "docs/adoption.md",
+          "security": "docs/security.md",
+          "compatibility": "docs/compatibility.md",
+          "performance": "docs/performance.md",
+          "examples": "docs/quickstart.md",
+          "faq": "docs/faq.md",
+          "changelog": "CHANGELOG.md",
+          "pkg_go_dev": "https://pkg.go.dev/github.com/faustbrian/go-localized",
+          "ecosystem_index": "https://github.com/faustbrian/go-library-tools/blob/v1.3.0/docs/ecosystem/README.md"
+        },
+        "known_good_compatibility_sets": [],
+        "delivery": {
+          "implementation": "not-started",
+          "hardening": "not-started",
+          "release": "not-started"
+        }
+      },
       "version": "1.0.0",
       "tag_prefix": "v",
       "owned_dependencies": [
