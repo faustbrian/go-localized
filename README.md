@@ -77,6 +77,13 @@ For SQL and pgx, use `postgres.NewText(value)` and
 `postgres.JSONBCodec()`. See the [quickstart](docs/quickstart.md) for complete
 construction, fallback, merge, JSON, and PostgreSQL examples.
 
+Optional Golib integrations use target-oriented imports under `adapters/`:
+`adapters/config`, `adapters/httpclient`, `adapters/query`,
+`adapters/validation`, and `adapters/wire`. The original
+`localizedconfig`, `localizedhttpclient`, `localizedquery`,
+`localizedvalidation`, and `localizedwire` paths remain compatible entry points for
+existing consumers.
+
 ## Guarantees
 
 - caller maps, entry slices, rows, iterators, and encoded bytes do not alias

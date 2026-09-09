@@ -19,17 +19,17 @@ domain validation error rather than embedding required-language policy in
 ## Non-empty validated text
 
 ```go
-err := localizedvalidation.Validate(value,
-    localizedvalidation.RequireNonWhitespace(),
-    localizedvalidation.MaxBytes(4<<10),
-    localizedvalidation.MaxLines(4),
-    localizedvalidation.NoControlCharacters(),
+err := validation.Validate(value,
+    validation.RequireNonWhitespace(),
+    validation.MaxBytes(4<<10),
+    validation.MaxLines(4),
+    validation.NoControlCharacters(),
 )
 ```
 
 ## Explicit NFC
 
-Call `localizedvalidation.Normalize(value, localizedvalidation.NFC)` and retain
+Call `validation.Normalize(value, validation.NFC)` and retain
 the returned value. The original remains unchanged.
 
 ## Resolver merge
@@ -45,7 +45,7 @@ encodes SQL NULL; `localized.Text{}` encodes `{}`.
 
 ## Wire formats
 
-Use `localizedwire` functions with explicit `wire` options. YAML, TOML, and
+Use `adapters/wire` functions with explicit wire-format options. YAML, TOML, and
 MessagePack decode into a string map and then revalidate canonical locale keys.
 
 ## Tests
