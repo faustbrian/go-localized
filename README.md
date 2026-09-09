@@ -107,13 +107,14 @@ in [semantics](docs/semantics.md), the complete public surface in the
 Observable standards interpretations are governed by the
 [specification decision register](docs/specification-decisions.md).
 Shared construction, ownership, lifecycle, and composition expectations are in
-the versioned [Golib ecosystem index](https://github.com/faustbrian/go-library-tools/blob/v1.4.0/docs/ecosystem/README.md)
-and its [Foundations family](https://github.com/faustbrian/go-library-tools/blob/v1.4.0/docs/ecosystem/design-language.md#package-families-and-selection).
+the versioned [Golib ecosystem index](https://github.com/faustbrian/go-library-tools/blob/v1.6.1/docs/ecosystem/README.md)
+and its [Foundations family](https://github.com/faustbrian/go-library-tools/blob/v1.6.1/docs/ecosystem/design-language.md#package-families-and-selection).
 
 ## Development
 
 `make check` runs the complete local gate stack through the pinned
-`go-library-tools` CLI. Hosted workflows mirror these commands, but local
+`go-library-tools` CLI. Pull requests run the bounded local CI tier; scheduled
+and release workflows retain the relevant aggregate and release checks. Local
 development does not depend on a remote branch or CI run. PostgreSQL-backed
 checks require an explicitly supplied disposable database:
 
