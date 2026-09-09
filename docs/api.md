@@ -84,7 +84,7 @@
 - `Row`, `Rows`, `FromRows`: deterministic normalized-row helpers.
 - `Error`, `ErrUnsupportedDatabaseType`: safe persistence error identity.
 
-## `localizedvalidation`
+## `adapters/validation`
 
 - `Rule`, `Validate`: composable deterministic validation.
 - `Validator`: typed `validation` adapter with canonical locale-key paths.
@@ -94,33 +94,38 @@
 - `Normalize`: explicit persistent normalization.
 - `Error` and errors for each built-in failure class.
 
-## `localizedwire`
+## `adapters/wire`
 
 `EncodeJSON`/`DecodeJSON`, `EncodeYAML`/`DecodeYAML`,
 `EncodeTOML`/`DecodeTOML`, and
 `EncodeMessagePack`/`DecodeMessagePack` delegate bounded I/O to corresponding
 `wire` packages and revalidate localized ownership.
 
-## `localizedconfig`
+## `adapters/config`
 
 - `Text`, `NewText`: present/null wrapper.
 - `ConfigTextTarget`, `UnmarshalConfigValue`: config structural hooks.
 - `Error`, `ErrInvalidValue`: safe input-shape error.
 
-## `localizedquery`
+## `adapters/query`
 
 - `ExactValue`: convert only a present exact locale to `apiquery.Value`, while
   preserving present-empty.
 - `ExactPredicate`: build one exact-value predicate or return
   `localized.ErrMissingLocale`; matching and fallback are never implicit.
 
-## `localizedhttpclient`
+## `adapters/httpclient`
 
 - `WithPreferences`: write or remove a canonical bounded `Accept-Language`
   header on an immutable http-client request spec.
 - `SelectResponse`: select from the originating request preferences using
   matching only, never configured fallback.
 - `Error`, `ErrInvalidResponse`: safe response-shape error identity.
+
+The released `localizedvalidation`, `localizedwire`, `localizedconfig`,
+`localizedquery`, and `localizedhttpclient` import paths remain supported.
+Canonical adapter aliases preserve their named type and error identities so a
+consumer can migrate imports without changing values, defaults, or behavior.
 
 ## `localizedtest`
 

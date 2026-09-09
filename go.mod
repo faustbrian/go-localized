@@ -4,15 +4,15 @@ go 1.26.6
 
 require (
 	github.com/faustbrian/go-api-query v1.0.0
-	github.com/faustbrian/go-http-client v1.0.0
-	github.com/faustbrian/go-international v1.0.0
+	github.com/faustbrian/go-http-client v1.1.0
+	github.com/faustbrian/go-international v1.1.0
 	github.com/jackc/pgx/v5 v5.10.0
 	golang.org/x/text v0.41.0
 )
 
 require (
 	github.com/faustbrian/go-config v1.0.0
-	github.com/faustbrian/go-validation v1.0.0
+	github.com/faustbrian/go-validation v1.1.0
 )
 
 require (

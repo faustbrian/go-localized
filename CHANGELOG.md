@@ -4,12 +4,22 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+### Added
+
+- Add target-oriented `adapters/config`, `adapters/httpclient`,
+  `adapters/query`, `adapters/validation`, and `adapters/wire` entry points.
+  Existing `localized*` imports retain their public types, errors, defaults,
+  ownership, serialization, and runtime behavior.
+
 ### Changed
 
-- Adopt the checksum-verified `go-library-tools` v1.4.0 CLI and immutable
-  reusable workflow so specification monitoring uses the stable descriptive
-  request profile and public-first module resolution.
-- Advance consumer navigation to the v1.4.0 ecosystem index and its
+- Use the public `go-http-client` and `go-international` v1.1.0 contracts for
+  canonical adapter composition and locale identity.
+
+- Adopt the checksum-verified `go-library-tools` v1.6.1 CLI and immutable
+  reusable workflow so pull requests use proportional local checks while
+  online specification monitoring remains scheduled.
+- Advance consumer navigation to the v1.6.1 ecosystem index and its
   foundations family guidance.
 
 - Refresh the eight Golib v1.0.0 dependency checksums to their public proxy

@@ -40,7 +40,7 @@ does not change `match.Best` semantics.
 | Zero `Text` | no entries | `""` | false | `{}` |
 
 Whitespace-only is valid core text. Applications opt into
-`localizedvalidation.RequireNonWhitespace`.
+`validation.RequireNonWhitespace` from `adapters/validation`.
 
 ## Merge conflicts
 

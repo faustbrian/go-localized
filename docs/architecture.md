@@ -12,19 +12,24 @@ to the locale layer instead of truncating strings.
 Adapters point inward:
 
 ```text
-http ───────────────┐
-postgres ───────────┤
-localizedwire ──────┼──> root Text
-localizedconfig ────┤
-localizedhttpclient ┤
-localizedquery ──────┤
-localizedvalidation ┘
-             match ───> root Text
+http ─────────────────────┐
+postgres ─────────────────┤
+adapters/wire ────────────┼──> root Text
+adapters/config ──────────┤
+adapters/httpclient ──────┤
+adapters/query ───────────┤
+adapters/validation ──────┘
+                   match ───> root Text
 ```
 
 There is no reverse dependency from core to an adapter. Observers receive only
 bounded outcome metadata after resolution and are panic-isolated. No operation
 starts a goroutine or uses a cache.
+
+Released `localized*` adapter paths own the existing implementation and public
+named identities. Target-oriented `adapters/*` packages delegate to those
+paths, which avoids duplicate behavior while keeping old reflection and error
+identity stable.
 
 ## Locale dependency
 

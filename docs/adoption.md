@@ -16,7 +16,8 @@ Read the response-selection header in the HTTP client adapter, pass its value to
 `http.Select`, and decide missing behavior in the application. Do not store a
 request preference in `Text` or configure a process-global default.
 
-For http-client, use `localizedhttpclient.WithPreferences` on the desired
+For http-client, import `adapters/httpclient` and use
+`httpclient.WithPreferences` on the desired
 request layer. `SelectResponse` reads the originating request from a standard
 HTTP response and performs matching only; application fallback remains a
 separate call.
@@ -38,18 +39,20 @@ jsonrpc, and OpenRPC shapes.
 
 ## Configuration
 
-Use `localizedconfig.Text` for a presence-aware config field. `Valid=false`
+Import `adapters/config` and use `config.Text` for a presence-aware config
+field. `Valid=false`
 means explicit null. A valid empty localized object is `Valid=true` with an
 empty `Localized` value. Application required-language checks belong in a
 validator after complete configuration decoding.
 
 ## Validation
 
-Compose `localizedvalidation.Rule` values at the boundary. Core construction
+Compose `validation.Rule` values from `adapters/validation` at the boundary.
+Core construction
 always enforces UTF-8 and resource ownership; it does not impose business rules
 such as required Finnish or non-empty English.
 
-Use `localizedvalidation.Validator(rules...)` inside a `validation` plan.
+Use `validation.Validator(rules...)` inside a `validation` plan.
 It snapshots the rule slice and emits content-free codes at canonical locale
 key paths such as `[en-US]`; localized strings are never report parameters or
 causes.
@@ -62,7 +65,14 @@ empty separately.
 
 ## API queries
 
-Use `localizedquery.ExactValue` or `ExactPredicate` only after the application
+Import `adapters/query` and use `query.ExactValue` or `query.ExactPredicate`
+only after the application
 has selected the locale policy explicitly. The adapter never matches or falls
 back, and it does not invent a database JSON-path mapping; declare that mapping
 in the owning `api-query` compiler configuration.
+
+The original `localizedconfig`, `localizedhttpclient`, `localizedquery`,
+`localizedvalidation`, and `localizedwire` paths remain source-compatible.
+New code should prefer target-oriented `adapters/*` imports. Callers can either
+adopt the canonical package identifier or keep their old identifier with an
+explicit import alias.

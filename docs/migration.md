@@ -1,5 +1,20 @@
 # Migration guide
 
+## Target-oriented adapter imports
+
+New consumers should import `adapters/config`, `adapters/httpclient`,
+`adapters/query`, `adapters/validation`, and `adapters/wire`. Existing
+`localizedconfig`, `localizedhttpclient`, `localizedquery`,
+`localizedvalidation`, and `localizedwire` imports remain supported. Their
+named values and errors are aliased by the canonical packages, so migration is
+behavior-compatible with no serialization, ownership, default, or runtime
+change. Either adopt the canonical package identifier and update selectors, or
+retain the old identifier with an explicit import alias:
+
+```go
+import localizedvalidation "github.com/faustbrian/go-localized/adapters/validation"
+```
+
 ## Locale-keyed Go maps
 
 1. Inventory whether keys contain underscores, aliases, invalid tags, or
