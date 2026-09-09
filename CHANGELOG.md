@@ -4,6 +4,8 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-09
+
 ### Added
 
 - Add target-oriented `adapters/config`, `adapters/httpclient`,
@@ -138,5 +140,6 @@ The following initial scope is included in `v1.0.0`.
 
 - Initial production contract for localized domain values.
 
-[Unreleased]: https://github.com/faustbrian/go-localized/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/faustbrian/go-localized/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/faustbrian/go-localized/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/faustbrian/go-localized/releases/tag/v1.0.0
