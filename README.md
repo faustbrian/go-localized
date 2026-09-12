@@ -7,7 +7,7 @@
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
 [![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-localized?sort=semver)](https://github.com/faustbrian/go-localized/releases)
-[![Go](https://img.shields.io/badge/go-1.26.6-00ADD8?logo=go)](https://go.dev/)
+[![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 `localized` provides immutable UTF-8 text keyed by canonical BCP 47 language
@@ -21,7 +21,7 @@ translation loading, language detection, or global locale policy.
 go get github.com/faustbrian/go-localized
 ```
 
-Go 1.26.6 or later is required.
+Go 1.27.0 or later is required.
 
 ## Five-minute tour
 
