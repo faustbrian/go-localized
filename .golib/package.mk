@@ -4,7 +4,7 @@ FUZZ_TIME ?= 2s
 BENCH_TIME ?= 100ms
 POSTGRES_URL ?=
 
-.PHONY: api-check benchmark check coverage dependency-revisions docs format \
+.PHONY: api api-check benchmark check coverage dependency-revisions docs format \
 	format-check fuzz lint mutation nilaway-advisory postgres postgres-matrix \
 	safety standards test test-race vet vuln workflow-lint
 
@@ -76,6 +76,8 @@ standards:
 
 docs:
 	./scripts/check-docs.sh
+
+api: api-check
 
 api-check:
 	./scripts/check-api-compat.sh

@@ -4,6 +4,11 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- Register the maintained public API baseline and typed compatibility operations
+  while retaining the repository-owned API snapshot oracle.
+
 ### Documentation
 
 - Replace archived monorepo links and completed execution artifacts with a
