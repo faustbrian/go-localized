@@ -3,7 +3,7 @@ module github.com/faustbrian/go-localized
 go 1.27.0
 
 require (
-	github.com/faustbrian/go-api-query v1.0.0
+	github.com/faustbrian/go-api-query v1.1.0
 	github.com/faustbrian/go-config v1.0.0
 	github.com/faustbrian/go-http-client v1.1.0
 	github.com/faustbrian/go-international v1.1.0
