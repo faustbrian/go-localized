@@ -4,6 +4,8 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-09-30
+
 ### Fixed
 
 - Enforce existing JSON, entry-array and collection budgets before further
