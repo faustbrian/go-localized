@@ -57,6 +57,58 @@ func TestSecurityCustomJSONBudgetRetainsParserTagCeiling(t *testing.T) {
 	}
 }
 
+func TestSecurityJSONTextBudgetsWithoutCountMasking(t *testing.T) {
+	limits := localized.DefaultLimits()
+	limits.MaxLocales = 4
+	limits.MaxTextBytes = 2
+	limits.MaxTotalBytes = 5
+	for _, input := range []string{
+		`{"en":"big","invalid_locale":0}`,
+		`{"en":"ok","fi":"ok","sv":"ok","invalid_locale":0}`,
+	} {
+		_, err := localized.DecodeJSON([]byte(input), localized.DecodeOptions{Limits: limits})
+		if !errors.Is(err, localized.ErrLimitExceeded) {
+			t.Fatalf("text budget before malformed input = %v", err)
+		}
+	}
+	limits.MaxTotalBytes = 4
+	value, err := localized.DecodeJSON([]byte(`{"en":"ok","fi":"ok"}`), localized.DecodeOptions{Limits: limits})
+	if err != nil || value.Len() != 2 {
+		t.Fatalf("exact text and total budgets = %v, %v", value.Entries(), err)
+	}
+}
+
+func TestSecurityConstructorAccumulatesThreeTextValues(t *testing.T) {
+	limits := localized.DefaultLimits()
+	limits.MaxTextBytes = 2
+	limits.MaxTotalBytes = 5
+	_, err := localized.NewTextWithLimits(limits,
+		localized.Entry{Locale: mustLocale(t, "en"), Text: "ok"},
+		localized.Entry{Locale: mustLocale(t, "fi"), Text: "ok"},
+		localized.Entry{Locale: mustLocale(t, "sv"), Text: "ok"},
+	)
+	if !errors.Is(err, localized.ErrLimitExceeded) {
+		t.Fatalf("cumulative constructor bytes = %v", err)
+	}
+}
+
+func TestSecurityConstructorsAcceptExactCollectionCount(t *testing.T) {
+	values := make(map[string]string)
+	for i := range localized.DefaultLimits().MaxLocales {
+		values[fmt.Sprintf("x-entry-%d", i)] = "text"
+	}
+	value, err := localized.TextFromMap(values)
+	if err != nil || value.Len() != len(values) {
+		t.Fatalf("exact map count = %d, %v", value.Len(), err)
+	}
+	limits := localized.DefaultLimits()
+	limits.MaxLocales = 1
+	value, err = localized.TextFromPairsWithOptions(localized.ConstructionOptions{Limits: limits}, localized.Pair{Locale: "en", Text: "text"})
+	if err != nil || value.Len() != 1 {
+		t.Fatalf("exact pair count = %d, %v", value.Len(), err)
+	}
+}
+
 func TestSecurityCollectionCountBeforeLocaleParsing(t *testing.T) {
 	values := make(map[string]string)
 	pairs := make([]localized.Pair, 129)
