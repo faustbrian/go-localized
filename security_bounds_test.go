@@ -3,6 +3,7 @@ package localized_test
 import (
 	"errors"
 	"fmt"
+	"strings"
 	"testing"
 
 	localized "github.com/faustbrian/go-localized"
@@ -28,6 +29,32 @@ func TestSecurityJSONLimitsBeforeFurtherInput(t *testing.T) {
 			t.Fatalf("oversized invalid UTF-8 error = %v", err)
 		}
 	})
+}
+
+func TestSecurityNegativeLimitsBeforeLocaleParsing(t *testing.T) {
+	limits := localized.DefaultLimits()
+	limits.MaxLocales = -1
+	t.Run("JSON", func(t *testing.T) {
+		_, err := localized.DecodeJSON([]byte(`{"not_a_locale":0}`), localized.DecodeOptions{Limits: limits})
+		if !errors.Is(err, localized.ErrLimitExceeded) {
+			t.Fatalf("negative JSON limit error = %v", err)
+		}
+	})
+	t.Run("pairs", func(t *testing.T) {
+		_, err := localized.TextFromPairsWithOptions(localized.ConstructionOptions{Limits: limits}, localized.Pair{Locale: "not_a_locale"})
+		if !errors.Is(err, localized.ErrLimitExceeded) {
+			t.Fatalf("negative pair limit error = %v", err)
+		}
+	})
+}
+
+func TestSecurityCustomJSONBudgetRetainsParserTagCeiling(t *testing.T) {
+	limits := localized.DefaultLimits()
+	limits.MaxTagBytes = 512
+	_, err := localized.DecodeJSON([]byte(`{"`+strings.Repeat("a", 256)+`":"text"}`), localized.DecodeOptions{Limits: limits})
+	if !errors.Is(err, localized.ErrLimitExceeded) {
+		t.Fatalf("custom tag budget error = %v", err)
+	}
 }
 
 func TestSecurityCollectionCountBeforeLocaleParsing(t *testing.T) {
