@@ -95,9 +95,6 @@ func NewPlan(chains []Chain, options PlanOptions) (Plan, error) {
 			}
 			seen[candidateKey] = struct{}{}
 			total++
-			if total > options.MaxCandidates {
-				return Plan{}, ErrCandidateLimit
-			}
 		}
 		owned[key] = copy
 	}

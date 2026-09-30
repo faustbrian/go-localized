@@ -22,6 +22,14 @@ func TestSecurityPlanLongestDepthIndependentOfMapOrder(t *testing.T) {
 	}
 }
 
+func TestSecurityPlanEdgeBudgetBeforeCandidateValidation(t *testing.T) {
+	chain := localizedmatch.Chain{From: mustLocale(t, "en"), Candidates: []localizedmatch.Candidate{{}, {}}}
+	_, err := localizedmatch.NewPlan([]localizedmatch.Chain{chain}, localizedmatch.PlanOptions{MaxDepth: 1, MaxCandidates: 1})
+	if !errors.Is(err, localizedmatch.ErrCandidateLimit) {
+		t.Fatalf("edge budget error = %v", err)
+	}
+}
+
 func TestSecurityPlanBoundsSourceCountWithoutEdges(t *testing.T) {
 	_, err := localizedmatch.NewPlan([]localizedmatch.Chain{{From: mustLocale(t, "en")}, {From: mustLocale(t, "fi")}}, localizedmatch.PlanOptions{MaxDepth: 1, MaxCandidates: 1})
 	if !errors.Is(err, localizedmatch.ErrCandidateLimit) {
