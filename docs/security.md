@@ -88,7 +88,7 @@ tags or arbitrary dependency error strings without their own redaction policy.
 | Custom observer or validation rule blocks or leaks | Application owner | Synchronous caller code cannot be forcibly cancelled safely; keep callbacks bounded and content-free. Observer panics are contained, not logged. | New callback or rule implementation. |
 | Wire/config parser allocation or error disclosure | Wire/config maintainer and application owner | Dependency parsers own byte, depth and node budgets; localized checks the resulting collection. Do not expose raw upstream errors to clients. | Dependency or parser-policy change. |
 | Validation report locale paths expose private-use tags | Application owner | Paths identify the failing field by contract; reject private-use tags or redact report paths when they identify tenants. | Reports cross a tenant or logging boundary. |
-| Unicode confusables and markup injection | Application owner | Valid UTF-8 is not semantic or rendering safety; normalize and escape explicitly for the destination. | New rendering or identity use. |
+| Visually similar Unicode characters and markup injection | Application owner | Valid UTF-8 is not semantic or rendering safety; normalize and escape explicitly for the destination. | New rendering or identity use. |
 | Maintainer or build dependency compromise | Repository maintainer | Review pinned dependencies and immutable CI actions, require hosted checks, and use private coordinated disclosure. | Dependency update, advisory or release. |
 
 ## Verification and release boundary
