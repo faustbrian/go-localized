@@ -63,6 +63,16 @@ func DefaultLimits() Limits {
 	}
 }
 
+func constructionLimits(limits Limits) (Limits, error) {
+	if limits == (Limits{}) {
+		limits = DefaultLimits()
+	}
+	if limits.MaxLocales < 0 || limits.MaxTagBytes < 0 || limits.MaxTextBytes < 0 || limits.MaxTotalBytes < 0 {
+		return Limits{}, fmt.Errorf("%w: negative limit", ErrLimitExceeded)
+	}
+	return limits, nil
+}
+
 // Entry associates text with a BCP 47 locale.
 type Entry struct {
 	Locale locale.Tag
@@ -91,13 +101,9 @@ func NewTextWithOptions(options ConstructionOptions, entries ...Entry) (Text, er
 	if options.Duplicates > LastWins {
 		return Text{}, ErrInvalidPolicy
 	}
-	limits := options.Limits
-	if limits == (Limits{}) {
-		limits = DefaultLimits()
-	}
-	if limits.MaxLocales < 0 || limits.MaxTagBytes < 0 ||
-		limits.MaxTextBytes < 0 || limits.MaxTotalBytes < 0 {
-		return Text{}, fmt.Errorf("%w: negative limit", ErrLimitExceeded)
+	limits, err := constructionLimits(options.Limits)
+	if err != nil {
+		return Text{}, err
 	}
 	if len(entries) == 0 {
 		return Text{}, nil
@@ -123,15 +129,15 @@ func NewTextWithOptions(options ConstructionOptions, entries ...Entry) (Text, er
 		if len(key) > limits.MaxTagBytes {
 			return Text{}, fmt.Errorf("%w: tag bytes", ErrLimitExceeded)
 		}
-		if !utf8.ValidString(entry.Text) {
-			return Text{}, ErrInvalidUTF8
-		}
 		if len(entry.Text) > limits.MaxTextBytes {
 			return Text{}, fmt.Errorf("%w: text bytes", ErrLimitExceeded)
 		}
-		total += len(entry.Text)
-		if total > limits.MaxTotalBytes {
+		if len(entry.Text) > limits.MaxTotalBytes-total {
 			return Text{}, fmt.Errorf("%w: total text bytes", ErrLimitExceeded)
+		}
+		total += len(entry.Text)
+		if !utf8.ValidString(entry.Text) {
+			return Text{}, ErrInvalidUTF8
 		}
 		if _, exists := byLocale[key]; exists {
 			switch options.Duplicates {
@@ -160,6 +166,9 @@ func NewTextWithOptions(options ConstructionOptions, entries ...Entry) (Text, er
 
 // TextFromMap parses locale keys and constructs an owned Text value.
 func TextFromMap(values map[string]string) (Text, error) {
+	if len(values) > defaultMaxLocales {
+		return Text{}, fmt.Errorf("%w: locale count", ErrLimitExceeded)
+	}
 	entries := make([]Entry, 0, len(values))
 	for raw, value := range values {
 		if strings.ContainsAny(raw, "_ \t\r\n") {
@@ -244,6 +253,13 @@ func TextFromPairs(pairs ...Pair) (Text, error) {
 // TextFromPairsWithOptions parses strict pair keys and applies explicit
 // construction, duplicate, locale-acceptance, and resource policies.
 func TextFromPairsWithOptions(options ConstructionOptions, pairs ...Pair) (Text, error) {
+	limits, err := constructionLimits(options.Limits)
+	if err != nil {
+		return Text{}, err
+	}
+	if len(pairs) > limits.MaxLocales {
+		return Text{}, fmt.Errorf("%w: locale count", ErrLimitExceeded)
+	}
 	entries := make([]Entry, 0, len(pairs))
 	for _, pair := range pairs {
 		if strings.ContainsAny(pair.Locale, "_ \t\r\n") {

@@ -50,9 +50,6 @@ func EncodeJSON(value Text) ([]byte, error) {
 
 // DecodeJSON parses one bounded localized JSON object without partial results.
 func DecodeJSON(data []byte, options DecodeOptions) (Text, error) {
-	if !utf8.Valid(data) {
-		return Text{}, ErrInvalidUTF8
-	}
 	if options.Mode > PermissiveJSON {
 		return Text{}, ErrInvalidPolicy
 	}
@@ -66,9 +63,12 @@ func DecodeJSON(data []byte, options DecodeOptions) (Text, error) {
 	if len(data) > maxInput {
 		return Text{}, fmt.Errorf("%w: parser input", ErrLimitExceeded)
 	}
-	limits := options.Limits
-	if limits == (Limits{}) {
-		limits = DefaultLimits()
+	if !utf8.Valid(data) {
+		return Text{}, ErrInvalidUTF8
+	}
+	limits, err := constructionLimits(options.Limits)
+	if err != nil {
+		return Text{}, err
 	}
 	trimmed := bytes.TrimSpace(data)
 	if bytes.Equal(trimmed, []byte("null")) {
@@ -89,12 +89,19 @@ func DecodeJSON(data []byte, options DecodeOptions) (Text, error) {
 	}
 
 	entries := make([]Entry, 0)
+	total := 0
 	for decoder.More() {
+		if len(entries) >= limits.MaxLocales {
+			return Text{}, fmt.Errorf("%w: locale count", ErrLimitExceeded)
+		}
 		keyToken, err := decoder.Token()
 		if err != nil {
 			return Text{}, ErrInvalidEncoding
 		}
 		raw := keyToken.(string)
+		if len(raw) > limits.MaxTagBytes {
+			return Text{}, fmt.Errorf("%w: tag bytes", ErrLimitExceeded)
+		}
 		tag, err := parseJSONLocale(raw, options.Mode)
 		if err != nil {
 			return Text{}, err
@@ -107,6 +114,10 @@ func DecodeJSON(data []byte, options DecodeOptions) (Text, error) {
 		if !ok {
 			return Text{}, ErrInvalidEncoding
 		}
+		if len(value) > limits.MaxTextBytes || len(value) > limits.MaxTotalBytes-total {
+			return Text{}, fmt.Errorf("%w: text bytes", ErrLimitExceeded)
+		}
+		total += len(value)
 		entries = append(entries, Entry{Locale: tag, Text: value})
 	}
 	if _, err := decoder.Token(); err != nil {

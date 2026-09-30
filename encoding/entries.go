@@ -5,10 +5,8 @@ import (
 	"bytes"
 	"encoding/json"
 	"io"
-	"strings"
 	"unicode/utf8"
 
-	"github.com/faustbrian/go-international/locale"
 	localized "github.com/faustbrian/go-localized"
 )
 
@@ -38,9 +36,6 @@ func MarshalEntries(value localized.Text) ([]byte, error) {
 
 // UnmarshalEntries strictly decodes one bounded entry array.
 func UnmarshalEntries(data []byte, options DecodeOptions) (localized.Text, error) {
-	if !utf8.Valid(data) {
-		return localized.Text{}, localized.ErrInvalidUTF8
-	}
 	maxInput := options.MaxInputBytes
 	if maxInput < 0 {
 		return localized.Text{}, localized.ErrLimitExceeded
@@ -51,13 +46,42 @@ func UnmarshalEntries(data []byte, options DecodeOptions) (localized.Text, error
 	if len(data) > maxInput {
 		return localized.Text{}, localized.ErrLimitExceeded
 	}
+	if !utf8.Valid(data) {
+		return localized.Text{}, localized.ErrInvalidUTF8
+	}
+	limits := options.Limits
+	if limits == (localized.Limits{}) {
+		limits = localized.DefaultLimits()
+	}
+	if limits.MaxLocales < 0 || limits.MaxTagBytes < 0 || limits.MaxTextBytes < 0 || limits.MaxTotalBytes < 0 {
+		return localized.Text{}, localized.ErrLimitExceeded
+	}
 	if bytes.Equal(bytes.TrimSpace(data), []byte("null")) {
 		return localized.Text{}, localized.ErrNullValue
 	}
 	decoder := json.NewDecoder(bytes.NewReader(data))
 	decoder.DisallowUnknownFields()
-	var wire []Entry
-	if err := decoder.Decode(&wire); err != nil {
+	first, err := decoder.Token()
+	if err != nil || first != json.Delim('[') {
+		return localized.Text{}, localized.ErrInvalidEncoding
+	}
+	entries := make([]localized.Pair, 0)
+	total := 0
+	for decoder.More() {
+		if len(entries) >= limits.MaxLocales {
+			return localized.Text{}, localized.ErrLimitExceeded
+		}
+		var entry Entry
+		if err := decoder.Decode(&entry); err != nil {
+			return localized.Text{}, localized.ErrInvalidEncoding
+		}
+		if len(entry.Locale) > limits.MaxTagBytes || len(entry.Text) > limits.MaxTextBytes || len(entry.Text) > limits.MaxTotalBytes-total {
+			return localized.Text{}, localized.ErrLimitExceeded
+		}
+		total += len(entry.Text)
+		entries = append(entries, localized.Pair{Locale: entry.Locale, Text: entry.Text})
+	}
+	if _, err := decoder.Token(); err != nil {
 		return localized.Text{}, localized.ErrInvalidEncoding
 	}
 	var extra any
@@ -67,16 +91,5 @@ func UnmarshalEntries(data []byte, options DecodeOptions) (localized.Text, error
 		}
 		return localized.Text{}, localized.ErrInvalidEncoding
 	}
-	entries := make([]localized.Entry, 0, len(wire))
-	for _, entry := range wire {
-		if strings.ContainsAny(entry.Locale, "_ \t\r\n") {
-			return localized.Text{}, localized.ErrInvalidLocale
-		}
-		tag, err := locale.Parse(entry.Locale)
-		if err != nil {
-			return localized.Text{}, localized.ErrInvalidLocale
-		}
-		entries = append(entries, localized.Entry{Locale: tag, Text: entry.Text})
-	}
-	return localized.NewTextWithLimits(options.Limits, entries...)
+	return localized.TextFromPairsWithOptions(localized.ConstructionOptions{Limits: limits}, entries...)
 }
