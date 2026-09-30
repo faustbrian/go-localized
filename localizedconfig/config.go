@@ -44,10 +44,16 @@ func (t *Text) UnmarshalConfigValue(input any) error {
 	values := make(map[string]string)
 	switch typed := input.(type) {
 	case map[string]string:
+		if len(typed) > localized.DefaultLimits().MaxLocales {
+			return localized.ErrLimitExceeded
+		}
 		for key, value := range typed {
 			values[key] = value
 		}
 	case map[string]any:
+		if len(typed) > localized.DefaultLimits().MaxLocales {
+			return localized.ErrLimitExceeded
+		}
 		for key, value := range typed {
 			text, ok := value.(string)
 			if !ok {

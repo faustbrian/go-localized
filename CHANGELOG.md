@@ -4,6 +4,21 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+### Fixed
+
+- Enforce existing JSON, entry-array and collection budgets before further
+  parsing or allocation, including config and normalized PostgreSQL rows.
+- Reject fallback graphs beyond their longest-path depth or source-count
+  budget, and bound shared-graph resolution to one visit per chain.
+- Return a privacy-safe error for nil localized PostgreSQL codec destinations
+  instead of panicking.
+
+### Security
+
+- Document trust boundaries, residual-risk owners and coordinated reporting.
+  Valid encodings and public APIs remain unchanged; oversized inputs and
+  invalid fallback graphs can now fail earlier.
+
 ## [1.1.0] - 2026-09-09
 
 ### Added

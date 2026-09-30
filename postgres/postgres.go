@@ -84,6 +84,9 @@ func JSONBCodec() *pgtype.JSONBCodec {
 		},
 		Unmarshal: func(data []byte, target any) error {
 			if typed, ok := target.(*localized.Text); ok {
+				if typed == nil {
+					return ErrUnsupportedDatabaseType
+				}
 				decoded, err := localized.DecodeJSON(data, localized.DecodeOptions{})
 				if err != nil {
 					return err
@@ -114,8 +117,15 @@ func Rows(value localized.Text) []Row {
 
 // FromRows constructs an immutable value from normalized rows.
 func FromRows(rows []Row) (localized.Text, error) {
+	limits := localized.DefaultLimits()
+	if len(rows) > limits.MaxLocales {
+		return localized.Text{}, localized.ErrLimitExceeded
+	}
 	entries := make([]localized.Entry, 0, len(rows))
 	for _, row := range rows {
+		if len(row.Locale) > limits.MaxTagBytes {
+			return localized.Text{}, localized.ErrLimitExceeded
+		}
 		if strings.ContainsAny(row.Locale, "_ \t\r\n") {
 			return localized.Text{}, localized.ErrInvalidLocale
 		}

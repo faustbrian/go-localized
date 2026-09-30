@@ -30,6 +30,7 @@ type Chain struct {
 }
 
 // PlanOptions bounds a graph and provides an optional final default.
+// MaxCandidates separately bounds source-chain count and candidate-edge count.
 type PlanOptions struct {
 	Default       *locale.Tag
 	MaxDepth      int
@@ -52,6 +53,17 @@ func NewPlan(chains []Chain, options PlanOptions) (Plan, error) {
 	}
 	if options.MaxCandidates < 0 {
 		return Plan{}, ErrCandidateLimit
+	}
+	if len(chains) > options.MaxCandidates {
+		return Plan{}, ErrCandidateLimit
+	}
+	// Reject the complete edge budget before copying any caller container.
+	remaining := options.MaxCandidates
+	for _, chain := range chains {
+		if len(chain.Candidates) > remaining {
+			return Plan{}, ErrCandidateLimit
+		}
+		remaining -= len(chain.Candidates)
 	}
 	owned := make(map[string]Chain, len(chains))
 	total := 0
@@ -113,34 +125,42 @@ func validateGraph(chains map[string]Chain, maxDepth int) error {
 		done
 	)
 	states := make(map[string]uint8, len(chains))
-	var visit func(string, int) error
-	visit = func(key string, depth int) error {
+	heights := make(map[string]int, len(chains))
+	var visit func(string, int) (int, error)
+	visit = func(key string, depth int) (int, error) {
 		if depth > maxDepth {
-			return ErrDepthLimit
+			return 0, ErrDepthLimit
 		}
 		if states[key] == active {
-			return ErrFallbackCycle
+			return 0, ErrFallbackCycle
 		}
 		if states[key] == done {
-			return nil
+			return heights[key], nil
 		}
 		states[key] = active
+		height := 1
 		for _, candidate := range chains[key].Candidates {
 			next := candidate.Locale.String()
 			if candidate.Kind == ParentRange && next == key {
 				continue
 			}
 			if _, exists := chains[next]; exists {
-				if err := visit(next, depth+1); err != nil {
-					return err
+				childHeight, err := visit(next, depth+1)
+				if err != nil {
+					return 0, err
+				}
+				height = max(height, 1+childHeight)
+				if height > maxDepth {
+					return 0, ErrDepthLimit
 				}
 			}
 		}
 		states[key] = done
-		return nil
+		heights[key] = height
+		return height, nil
 	}
 	for key := range chains {
-		if err := visit(key, 1); err != nil {
+		if _, err := visit(key, 1); err != nil {
 			return err
 		}
 	}
@@ -161,7 +181,7 @@ func (p Plan) Resolve(value localized.Text, requested locale.Tag) Result {
 		notify(p.observer, Event{Operation: OperationFallback, Kind: result.Kind, CandidateCount: p.candidates})
 		return result
 	}
-	if resolved, ok := p.resolveChain(value, requested, requested); ok {
+	if resolved, ok := p.resolveChain(value, requested, requested, make(map[string]bool, len(p.chains))); ok {
 		result = resolved
 		notify(p.observer, Event{Operation: OperationFallback, Kind: result.Kind, CandidateCount: p.candidates})
 		return result
@@ -178,11 +198,18 @@ func (p Plan) Resolve(value localized.Text, requested locale.Tag) Result {
 	return result
 }
 
-func (p Plan) resolveChain(value localized.Text, requested, current locale.Tag) (Result, bool) {
-	chain, exists := p.chains[current.String()]
+func (p Plan) resolveChain(value localized.Text, requested, current locale.Tag, visited map[string]bool) (Result, bool) {
+	key := current.String()
+	if visited[key] {
+		return Result{}, false
+	}
+	chain, exists := p.chains[key]
 	if !exists {
 		return Result{}, false
 	}
+	// A shared subgraph has the same outcome on every path for this immutable
+	// value. Visit it once to prevent exponential work on missing values.
+	visited[key] = true
 	for _, candidate := range chain.Candidates {
 		switch candidate.Kind {
 		case ExactLocale:
@@ -199,7 +226,7 @@ func (p Plan) resolveChain(value localized.Text, requested, current locale.Tag) 
 		if candidate.Locale.String() == current.String() {
 			continue
 		}
-		if result, ok := p.resolveChain(value, requested, candidate.Locale); ok {
+		if result, ok := p.resolveChain(value, requested, candidate.Locale, visited); ok {
 			return result, true
 		}
 	}
