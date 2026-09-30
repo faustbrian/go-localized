@@ -22,6 +22,29 @@ func TestSecurityPlanLongestDepthIndependentOfMapOrder(t *testing.T) {
 	}
 }
 
+func TestSecurityPlanAcceptsExactSourceAndEdgeCaps(t *testing.T) {
+	chains := []localizedmatch.Chain{
+		{From: mustLocale(t, "en"), Candidates: []localizedmatch.Candidate{{Locale: mustLocale(t, "fi")}}},
+		{From: mustLocale(t, "de"), Candidates: []localizedmatch.Candidate{{Locale: mustLocale(t, "sv")}}},
+	}
+	options := localizedmatch.PlanOptions{MaxDepth: 1, MaxCandidates: 2}
+	plan, err := localizedmatch.NewPlan(chains, options)
+	if err != nil {
+		t.Fatal(err)
+	}
+	value, err := localized.NewText(localized.Entry{Locale: mustLocale(t, "sv"), Text: "Hej"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if result := plan.Resolve(value, chains[1].From); !result.Present || result.Kind != localizedmatch.Fallback || result.Text != "Hej" {
+		t.Fatalf("exact graph budget resolution = %+v", result)
+	}
+	chains[1].Candidates = append(chains[1].Candidates, localizedmatch.Candidate{Locale: mustLocale(t, "it")})
+	if _, err := localizedmatch.NewPlan(chains, options); !errors.Is(err, localizedmatch.ErrCandidateLimit) {
+		t.Fatalf("aggregate edge overflow error = %v", err)
+	}
+}
+
 func TestSecurityPlanEdgeBudgetBeforeCandidateValidation(t *testing.T) {
 	chain := localizedmatch.Chain{From: mustLocale(t, "en"), Candidates: []localizedmatch.Candidate{{}, {}}}
 	_, err := localizedmatch.NewPlan([]localizedmatch.Chain{chain}, localizedmatch.PlanOptions{MaxDepth: 1, MaxCandidates: 1})
