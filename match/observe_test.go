@@ -73,7 +73,7 @@ func TestPlanObserverIsRaceSafeWhenObserverIsRaceSafe(t *testing.T) {
 		t.Fatalf("events = %d", len(events))
 	}
 	for _, event := range events {
-		if event.Operation != localizedmatch.OperationFallback || event.Kind != localizedmatch.Fallback || event.CandidateCount > 4 {
+		if event.Operation != localizedmatch.OperationFallback || event.Kind != localizedmatch.Fallback || event.CandidateCount != 1 {
 			t.Fatalf("event = %+v", event)
 		}
 	}
