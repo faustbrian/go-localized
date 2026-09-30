@@ -53,6 +53,27 @@ func TestSecurityPlanEdgeBudgetBeforeCandidateValidation(t *testing.T) {
 	}
 }
 
+func TestSecurityPlanCumulativeBudgetAcrossThreeChains(t *testing.T) {
+	chains := []localizedmatch.Chain{
+		{From: mustLocale(t, "en"), Candidates: []localizedmatch.Candidate{{Locale: mustLocale(t, "fi")}, {Locale: mustLocale(t, "sv")}}},
+		{From: mustLocale(t, "de"), Candidates: []localizedmatch.Candidate{{Locale: mustLocale(t, "it")}}},
+		{From: mustLocale(t, "fr"), Candidates: []localizedmatch.Candidate{{Locale: mustLocale(t, "es")}}},
+	}
+	if _, err := localizedmatch.NewPlan(chains, localizedmatch.PlanOptions{MaxDepth: 1, MaxCandidates: 3}); !errors.Is(err, localizedmatch.ErrCandidateLimit) {
+		t.Fatalf("four edges within three-edge budget: %v", err)
+	}
+}
+
+func TestSecurityPlanDepthLimitBeforeCycleInspection(t *testing.T) {
+	chains := []localizedmatch.Chain{
+		{From: mustLocale(t, "en"), Candidates: []localizedmatch.Candidate{{Locale: mustLocale(t, "fi")}}},
+		{From: mustLocale(t, "fi"), Candidates: []localizedmatch.Candidate{{Locale: mustLocale(t, "en")}}},
+	}
+	if _, err := localizedmatch.NewPlan(chains, localizedmatch.PlanOptions{MaxDepth: 1, MaxCandidates: 2}); !errors.Is(err, localizedmatch.ErrDepthLimit) {
+		t.Fatalf("depth limit before traversing cycle: %v", err)
+	}
+}
+
 func TestSecurityPlanBoundsSourceCountWithoutEdges(t *testing.T) {
 	_, err := localizedmatch.NewPlan([]localizedmatch.Chain{{From: mustLocale(t, "en")}, {From: mustLocale(t, "fi")}}, localizedmatch.PlanOptions{MaxDepth: 1, MaxCandidates: 1})
 	if !errors.Is(err, localizedmatch.ErrCandidateLimit) {
