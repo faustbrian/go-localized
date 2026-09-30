@@ -53,13 +53,17 @@ Target-oriented `adapters/*` entry points delegate to the same implementations.
 
 There is no implicit network, filesystem, process, environment, goroutine,
 registry, retry, authentication, or authorization boundary in this module.
-Operations are synchronous bounded CPU work. Network and database cancellation
-belongs to the caller's HTTP client or database context; passing an already
-fetched value here does not add blocking I/O. Query adapters create values and
-predicates, not SQL. Output escaping and authorization remain caller owned.
+Core decoding and resolution are synchronous CPU work under explicit limits.
+Network and database cancellation belongs to the caller's HTTP client or
+database context; passing an already-fetched value here does not add blocking
+I/O. Query adapters create values and predicates, not SQL. Output escaping
+and authorization remain caller owned.
 
-Default byte and count limits reject oversized input before conversion and
-parsing work. JSON counts and text budgets are checked as entries arrive.
+Bounded byte decoders and collection constructors reject oversized input
+before further parsing or collection allocation. JSON counts and text budgets
+are checked as entries arrive. PostgreSQL `Scan(string)` first copies the
+already-fetched driver string to bytes; callers must cap row bytes before this
+adapter boundary to bound that transient copy.
 Entry-array decoding does not first materialize an unbounded slice. A fallback
 plan bounds source-chain count independently from candidate-edge count, checks
 the longest path regardless of map iteration order, and visits shared chains
@@ -80,6 +84,7 @@ tags or arbitrary dependency error strings without their own redaction policy.
 | Caller raises resource limits | Application owner | Explicit options intentionally permit larger trusted workloads; cap limits before accepting hostile input. | Limits or ingress trust change. |
 | Builder accumulation before `Build` | Application owner | `Add` collects caller-owned construction policy and reports validation on `Build`; enforce the configured count and text budget while feeding a builder, or use bounded constructors for ingress. | Builder begins receiving attacker-selected input. |
 | Outbound HTTP preference construction | Application owner | `WithPreferences` creates a header from caller-selected preferences and derives its budget from that list; bound list and tag sizes before using external preferences. Inbound selection has independent parser budgets. | Preference source becomes untrusted. |
+| PostgreSQL driver string-copy admission | Application DB owner | `Scan(string)` copies an already-fetched driver string before bounded JSON decoding; cap row bytes before calling `Scan`. | Database field or driver ingress constraints change. |
 | Custom observer or validation rule blocks or leaks | Application owner | Synchronous caller code cannot be forcibly cancelled safely; keep callbacks bounded and content-free. Observer panics are contained, not logged. | New callback or rule implementation. |
 | Wire/config parser allocation or error disclosure | Wire/config maintainer and application owner | Dependency parsers own byte, depth and node budgets; localized checks the resulting collection. Do not expose raw upstream errors to clients. | Dependency or parser-policy change. |
 | Validation report locale paths expose private-use tags | Application owner | Paths identify the failing field by contract; reject private-use tags or redact report paths when they identify tenants. | Reports cross a tenant or logging boundary. |
