@@ -1,9 +1,9 @@
 package validation
 
 import (
-	localized "github.com/faustbrian/go-localized"
-	legacy "github.com/faustbrian/go-localized/localizedvalidation"
-	validationcore "github.com/faustbrian/go-validation"
+	localized "github.com/faustbrian/go-localized/v2"
+	legacy "github.com/faustbrian/go-localized/v2/localizedvalidation"
+	validationcore "github.com/faustbrian/go-validation/v2"
 )
 
 // Error preserves the released localizedvalidation error identity.

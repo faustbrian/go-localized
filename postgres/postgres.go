@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
+	"github.com/faustbrian/go-international/v2/locale"
+	localized "github.com/faustbrian/go-localized/v2"
 	"github.com/jackc/pgx/v5/pgtype"
 )
 

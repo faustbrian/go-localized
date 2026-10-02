@@ -4,6 +4,15 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+### Changed
+
+- Prepare the official `github.com/faustbrian/go-localized/v2` module on main
+  with published API Query, Validation and International v2.0.0 dependencies.
+  Applications must migrate the nominal locale, query and validator imports
+  together. Text algorithms, retained adapter aliases and encoded formats are
+  unchanged; v1 remains independently available at its existing tags.
+- Preserve the v1 API projection and select a separate v2 projection.
+
 ## [1.1.2] - 2026-09-30
 
 ### Fixed

@@ -8,9 +8,9 @@ import (
 	"sync"
 	"testing"
 
-	language "github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
-	localizedmatch "github.com/faustbrian/go-localized/match"
+	language "github.com/faustbrian/go-international/v2/locale"
+	localized "github.com/faustbrian/go-localized/v2"
+	localizedmatch "github.com/faustbrian/go-localized/v2/match"
 )
 
 func TestStandardsCanonicalizationMatrix(t *testing.T) {
