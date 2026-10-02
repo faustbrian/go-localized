@@ -1,12 +1,12 @@
-module github.com/faustbrian/go-localized/v2
+module github.com/faustbrian/go-localized/v3
 
 go 1.27.0
 
 require (
-	github.com/faustbrian/go-api-query/v2 v2.0.0
+	github.com/faustbrian/go-api-query/v3 v3.0.0
 	github.com/faustbrian/go-config v1.0.0
 	github.com/faustbrian/go-http-client v1.1.0
-	github.com/faustbrian/go-international/v2 v2.0.0
+	github.com/faustbrian/go-international/v3 v3.0.0
 	github.com/faustbrian/go-validation/v2 v2.0.0
 	github.com/faustbrian/go-wire v1.0.0
 	github.com/jackc/pgx/v5 v5.11.0

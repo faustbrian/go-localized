@@ -1,8 +1,8 @@
 package config
 
 import (
-	localized "github.com/faustbrian/go-localized/v2"
-	legacy "github.com/faustbrian/go-localized/v2/localizedconfig"
+	localized "github.com/faustbrian/go-localized/v3"
+	legacy "github.com/faustbrian/go-localized/v3/localizedconfig"
 )
 
 // Error preserves the released localizedconfig error identity.

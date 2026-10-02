@@ -3,13 +3,13 @@ package localized_test
 import (
 	"testing"
 
-	apiquery "github.com/faustbrian/go-api-query/v2"
-	"github.com/faustbrian/go-international/v2/locale"
-	localized "github.com/faustbrian/go-localized/v2"
-	query "github.com/faustbrian/go-localized/v2/adapters/query"
-	validation "github.com/faustbrian/go-localized/v2/adapters/validation"
-	legacyquery "github.com/faustbrian/go-localized/v2/localizedquery"
-	legacyvalidation "github.com/faustbrian/go-localized/v2/localizedvalidation"
+	apiquery "github.com/faustbrian/go-api-query/v3"
+	"github.com/faustbrian/go-international/v3/locale"
+	localized "github.com/faustbrian/go-localized/v3"
+	query "github.com/faustbrian/go-localized/v3/adapters/query"
+	validation "github.com/faustbrian/go-localized/v3/adapters/validation"
+	legacyquery "github.com/faustbrian/go-localized/v3/localizedquery"
+	legacyvalidation "github.com/faustbrian/go-localized/v3/localizedvalidation"
 	validationcore "github.com/faustbrian/go-validation/v2"
 )
 
