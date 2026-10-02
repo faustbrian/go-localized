@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v2"
+	localized "github.com/faustbrian/go-localized/v3"
 )
 
 func TestSecurityJSONLimitsBeforeFurtherInput(t *testing.T) {

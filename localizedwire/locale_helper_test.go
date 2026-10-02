@@ -3,7 +3,7 @@ package localizedwire_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v2/locale"
+	"github.com/faustbrian/go-international/v3/locale"
 )
 
 func mustLocale(t testing.TB, raw string) locale.Tag {

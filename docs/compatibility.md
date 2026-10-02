@@ -5,8 +5,8 @@
 | Component | Pinned baseline | Role |
 |---|---|---|
 | Go | 1.27.0 | minimum language and iterator contract |
-| `international/v2/locale` | v2.0.0 | public BCP 47 identity and provenance |
-| `api-query/v2` | v2.0.0 | public query values, operators and predicates |
+| `international/v3/locale` | v3.0.0 | public BCP 47 identity and provenance |
+| `api-query/v3` | v3.0.0 | public query values, operators and predicates |
 | `validation/v2` | v2.0.0 | public validator identity |
 | `golang.org/x/text` | v0.41.0 | private CLDR matching and Unicode normalization |
 | pgx | v5.11.0 | JSONB and PostgreSQL integration |
@@ -33,8 +33,8 @@ package does not expose registry enumeration or mutable registry state.
 ## Stability
 
 Canonical JSON, exact presence, missing/present-empty distinction, merge policy,
-and result kinds preserve the v1 value commitments in v2. Nominal locale,
-query and validator identities change with their module majors; they cannot
-be mixed across versions. The original v1 API baseline is preserved and v2 has
-a separate projection. Matcher choices may change
+and result kinds preserve the v1 and v2 value commitments in v3. Nominal locale
+and query identities adopt v3; validator identity remains v2. Types cannot be
+mixed across module majors. The original v1 and v2 API baselines are preserved;
+v3 uses a separate projection. Matcher choices may change
 only with a documented locale-data dependency update and compatibility vectors.

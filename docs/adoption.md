@@ -2,9 +2,10 @@
 
 ## Major identity
 
-Import the root and its packages beneath `github.com/faustbrian/go-localized/v2`.
-Use International, API Query and Validation v2.0.0 at nominal type boundaries;
-see the [coordinated migration steps](migration.md#official-v2-module-and-dependency-identities).
+Import the root and its packages beneath `github.com/faustbrian/go-localized/v3`.
+Use International and API Query v3.0.0 at nominal type boundaries, while
+retaining Validation v2.0.0; see the
+[coordinated migration steps](migration.md#official-v3-module-and-dependency-identities).
 The root module owns all canonical and retained adapters; none is a separate
 module or independently tagged release.
 

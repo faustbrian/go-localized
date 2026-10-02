@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v2"
-	config "github.com/faustbrian/go-localized/v2/adapters/config"
-	legacy "github.com/faustbrian/go-localized/v2/localizedconfig"
+	localized "github.com/faustbrian/go-localized/v3"
+	config "github.com/faustbrian/go-localized/v3/adapters/config"
+	legacy "github.com/faustbrian/go-localized/v3/localizedconfig"
 )
 
 func TestCanonicalConfigAdapterPreservesCompatibilityIdentity(t *testing.T) {

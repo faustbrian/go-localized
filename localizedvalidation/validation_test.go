@@ -5,8 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v2"
-	validation "github.com/faustbrian/go-localized/v2/localizedvalidation"
+	localized "github.com/faustbrian/go-localized/v3"
+	validation "github.com/faustbrian/go-localized/v3/localizedvalidation"
 	validationcore "github.com/faustbrian/go-validation/v2"
 )
 

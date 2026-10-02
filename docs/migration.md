@@ -1,20 +1,22 @@
 # Migration guide
 
-## Official v2 module and dependency identities
+## Official v3 module and dependency identities
 
-Use `github.com/faustbrian/go-localized/v2` and append `/v2` before package
+Use `github.com/faustbrian/go-localized/v3` and append `/v3` before package
 suffixes in every owning import. Migrate locale values to
-`github.com/faustbrian/go-international/v2/locale`, query values, operators and
-predicates to `github.com/faustbrian/go-api-query/v2`, and validators to
-`github.com/faustbrian/go-validation/v2`. All three dependencies select their
-published v2.0.0 releases. Types from different majors are not interchangeable.
+`github.com/faustbrian/go-international/v3/locale`, query values, operators and
+predicates to `github.com/faustbrian/go-api-query/v3`, selecting v3.0.0 for both
+dependencies. Keep validators on `github.com/faustbrian/go-validation/v2`
+v2.0.0. Types from different majors are not interchangeable; use the public
+tags and releases to establish dependency publication before adoption.
 
 Construction, exact lookup, matching, normalization and encoded formats remain
 unchanged. Canonical and retained adapter paths remain in this module, with
-their existing `Error`, `Rule` and `Form` aliases preserved within v2. The v1
-API projection and tags are retained; existing consumers can stay on their
-selected v1 dependencies. The maintained Tools consumer still selects v1.1.2;
-it is not evidence of v2 adoption.
+their existing `Error`, `Rule` and `Form` aliases preserved within v3. The v1
+and v2 API projections and tags are retained; existing consumers can stay on
+their selected earlier-major dependencies. The maintained Tools compatibility
+consumer selects Localized v2.0.0 with API Query and International v2; it is not
+evidence of v3 adoption.
 
 ## Target-oriented adapter imports
 
@@ -28,7 +30,7 @@ change. Either adopt the canonical package identifier and update selectors, or
 retain the old identifier with an explicit import alias:
 
 ```go
-import localizedvalidation "github.com/faustbrian/go-localized/v2/adapters/validation"
+import localizedvalidation "github.com/faustbrian/go-localized/v3/adapters/validation"
 ```
 
 ## Locale-keyed Go maps
