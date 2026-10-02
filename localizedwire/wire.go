@@ -2,7 +2,7 @@
 package localizedwire
 
 import (
-	localized "github.com/faustbrian/go-localized"
+	localized "github.com/faustbrian/go-localized/v2"
 	"github.com/faustbrian/go-wire/jsonwire"
 	"github.com/faustbrian/go-wire/msgpackwire"
 	"github.com/faustbrian/go-wire/tomlwire"

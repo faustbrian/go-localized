@@ -1,5 +1,13 @@
 # Adoption guide
 
+## Major identity
+
+Import the root and its packages beneath `github.com/faustbrian/go-localized/v2`.
+Use International, API Query and Validation v2.0.0 at nominal type boundaries;
+see the [coordinated migration steps](migration.md#official-v2-module-and-dependency-identities).
+The root module owns all canonical and retained adapters; none is a separate
+module or independently tagged release.
+
 ## Domain values
 
 Replace `map[string]string` fields with `localized.Text`. Construct at the

@@ -6,8 +6,8 @@ import (
 	"math"
 	"slices"
 
-	"github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
+	"github.com/faustbrian/go-international/v2/locale"
+	localized "github.com/faustbrian/go-localized/v2"
 	textlanguage "golang.org/x/text/language"
 )
 

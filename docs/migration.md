@@ -1,5 +1,21 @@
 # Migration guide
 
+## Official v2 module and dependency identities
+
+Use `github.com/faustbrian/go-localized/v2` and append `/v2` before package
+suffixes in every owning import. Migrate locale values to
+`github.com/faustbrian/go-international/v2/locale`, query values, operators and
+predicates to `github.com/faustbrian/go-api-query/v2`, and validators to
+`github.com/faustbrian/go-validation/v2`. All three dependencies select their
+published v2.0.0 releases. Types from different majors are not interchangeable.
+
+Construction, exact lookup, matching, normalization and encoded formats remain
+unchanged. Canonical and retained adapter paths remain in this module, with
+their existing `Error`, `Rule` and `Form` aliases preserved within v2. The v1
+API projection and tags are retained; existing consumers can stay on their
+selected v1 dependencies. The maintained Tools consumer still selects v1.1.2;
+it is not evidence of v2 adoption.
+
 ## Target-oriented adapter imports
 
 New consumers should import `adapters/config`, `adapters/httpclient`,
@@ -12,7 +28,7 @@ change. Either adopt the canonical package identifier and update selectors, or
 retain the old identifier with an explicit import alias:
 
 ```go
-import localizedvalidation "github.com/faustbrian/go-localized/adapters/validation"
+import localizedvalidation "github.com/faustbrian/go-localized/v2/adapters/validation"
 ```
 
 ## Locale-keyed Go maps

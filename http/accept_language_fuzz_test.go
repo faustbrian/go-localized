@@ -3,7 +3,7 @@ package http_test
 import (
 	"testing"
 
-	localizedhttp "github.com/faustbrian/go-localized/http"
+	localizedhttp "github.com/faustbrian/go-localized/v2/http"
 )
 
 func FuzzParseAcceptLanguage(f *testing.F) {
