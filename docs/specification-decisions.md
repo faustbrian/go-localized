@@ -163,6 +163,23 @@ Additional authoritative source: `{"id":"rfc4647-source","version":"RFC 4647","u
 | Upstream status | RFC 9110 and RFC 4647 errata are monitored; wildcard tie-breaking remains package policy. |
 | Reconsider when | A supported HTTP profile mandates different quality, duplicate, or wildcard behavior. |
 
+### RFC 9110 errata review, 2026-10-04
+
+The monitored [RFC 9110 errata](https://errata.rfc-editor.org/rfc9110)
+snapshot was reviewed against this decision and `http/accept_language.go`.
+Reported erratum 9162 concerns combining repeated HTTP field lines; the
+adapter receives one caller-supplied string and does not combine field lines.
+Reported erratum 9164 concerns equivalent renderings of the collected ABNF
+in Appendix A, including shortened repetition notation for quality values.
+It does not propose a different accepted language. The adapter directly
+validates quality syntax rather than generating code from Appendix A.
+
+Neither report changes this decision's quality, ordering, duplicate or
+wildcard policy. Both reports remain reported, not verified corrections.
+The monitoring digest records the reviewed page; monitoring remains enabled
+and subsequent authority changes still require review. Other authority pins
+and their review dates are unchanged.
+
 ## LOCALIZED-DEC-007: Canonical JSON object mapping
 
 Status `resolved`; owner `localized maintainers`; classification
