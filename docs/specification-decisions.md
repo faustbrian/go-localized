@@ -14,7 +14,7 @@ Status `resolved`; owner `localized maintainers`; classification
 authority URL https://www.rfc-editor.org/rfc/rfc5646.txt; section
 `Sections 2.1, 2.2.9, and 4.5`; requirement strength `SHOULD`.
 
-Additional authoritative source: `{"id":"iana-language-registry","version":"Registry File-Date 2026-06-14","url":"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry","specifications":["IANA Language Subtag Registry"]}`
+Additional authoritative source: `{"id":"iana-language-registry","version":"Registry File-Date 2026-09-17","url":"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry","specifications":["IANA Language Subtag Registry"]}`
 
 | Field | Decision |
 |---|---|
@@ -33,6 +33,23 @@ Additional authoritative source: `{"id":"iana-language-registry","version":"Regi
 | Documentation | `docs/specification-decisions.md`; `docs/semantics.md`; `docs/compatibility.md` |
 | Upstream status | RFC 5646 errata and the current IANA registry are monitored separately from the pinned locale dependency snapshot. |
 | Reconsider when | BCP 47, its errata, the IANA registry, or the locale dependency changes canonical identity semantics. |
+
+### Authority review, 2026-10-04
+
+All ten configured authority snapshots were checked. The RFC source and
+errata pages other than RFC 9110, and the IANA release index, retain their
+recorded digests. The RFC 9110 review is recorded under LOCALIZED-DEC-006.
+The current IANA registry has File-Date 2026-09-17; its monitored digest and
+version now identify that published page rather than the June snapshot.
+
+Monitoring a newer registry does not adopt it into runtime data. This
+decision continues to use the pinned International and x/text dependencies;
+the retained International language dataset has its separately asserted
+June provenance. No generated tables, dependency selections or locale
+acceptance semantics change here. These checks do not claim that every
+entry in the current upstream registry is implemented. Adopting changed
+registry data still requires the dependency, identity and persistence
+review stated by this decision.
 
 ## LOCALIZED-DEC-002: Special and private-use locale acceptance
 
@@ -177,8 +194,8 @@ validates quality syntax rather than generating code from Appendix A.
 Neither report changes this decision's quality, ordering, duplicate or
 wildcard policy. Both reports remain reported, not verified corrections.
 The monitoring digest records the reviewed page; monitoring remains enabled
-and subsequent authority changes still require review. Other authority pins
-and their review dates are unchanged.
+and subsequent authority changes still require review. RFC source pins and
+package behavior are unchanged.
 
 ## LOCALIZED-DEC-007: Canonical JSON object mapping
 
