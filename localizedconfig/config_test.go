@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/faustbrian/go-config/decode"
+	"github.com/faustbrian/go-config/v2/decode"
 	localized "github.com/faustbrian/go-localized/v3"
 	"github.com/faustbrian/go-localized/v3/localizedconfig"
 )

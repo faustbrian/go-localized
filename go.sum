@@ -9,6 +9,8 @@ github.com/faustbrian/go-circuit-breaker v1.0.0 h1:/Y9AeAwe0arONfJKhDYveBDosYK67
 github.com/faustbrian/go-circuit-breaker v1.0.0/go.mod h1:tJ8Xfrv6DG0NiGErqKERXkiBLsyNzOIZ5MZVoD36jEU=
 github.com/faustbrian/go-config v1.0.0 h1:jM5qlZmMbcLmo/SZmB5gRs4BoZIRdLg3ZXjSfkpnxrI=
 github.com/faustbrian/go-config v1.0.0/go.mod h1:pnqiOzoqa91gG8gWhQI7S1BXuE/E0DKRCOh19SQ3qYc=
+github.com/faustbrian/go-config/v2 v2.0.0 h1:G/ZWxfJ4S9aiws/wdora/2v+RILM893qZwCtS2t0Ytk=
+github.com/faustbrian/go-config/v2 v2.0.0/go.mod h1:LYiKGa3Eg8TAmN3w9wGeo6TvJ0alNPNMkofoqKnfvAg=
 github.com/faustbrian/go-http-client v1.1.0 h1:Kz6vfOkrjdvhI+ANn0o4CeZME9AXKnCCdECOoz+u/kI=
 github.com/faustbrian/go-http-client v1.1.0/go.mod h1:6TTp/UfA5TmhXRbFQwLKltShi7F+wF2nBwyubwKIoTw=
 github.com/faustbrian/go-international/v3 v3.0.0 h1:l9tcjTJIJnZbTwXvK6zVB314OfVLRRsCk2crELOw6PI=

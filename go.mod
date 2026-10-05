@@ -4,7 +4,7 @@ go 1.27.0
 
 require (
 	github.com/faustbrian/go-api-query/v3 v3.0.0
-	github.com/faustbrian/go-config v1.0.0
+	github.com/faustbrian/go-config/v2 v2.0.0
 	github.com/faustbrian/go-http-client v1.1.0
 	github.com/faustbrian/go-international/v3 v3.0.0
 	github.com/faustbrian/go-validation/v2 v2.0.0
