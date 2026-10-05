@@ -6,6 +6,9 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Use the published Config v2.0.0 decoder for configuration-hook integration
+  coverage. The localized config hooks and retained adapter aliases keep their
+  existing public types and decoding behavior.
 - Prepare the official `github.com/faustbrian/go-localized/v3` module with
   API Query and International v3.0.0 nominal identities while retaining
   Validation v2.0.0. Migrate locale and query imports together; all 16 package

@@ -9,7 +9,7 @@ Direct runtime dependencies are pinned in `go.mod`:
 - `github.com/jackc/pgx/v5`, MIT, provides native PostgreSQL and JSONB codecs;
 - `github.com/faustbrian/go-wire`, MIT, provides bounded YAML, TOML, JSON, and
   MessagePack adapters;
-- `github.com/faustbrian/go-config`, MIT, provides the tested configuration
+- `github.com/faustbrian/go-config/v2`, MIT, provides the tested configuration
   hook contract;
 - `github.com/faustbrian/go-validation`, MIT, provides typed bounded reports;
 - `github.com/faustbrian/go-api-query`, MIT, provides typed query values;
