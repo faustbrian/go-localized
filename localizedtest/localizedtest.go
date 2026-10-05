@@ -4,9 +4,9 @@ package localizedtest
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
-	localizedmatch "github.com/faustbrian/go-localized/match"
+	"github.com/faustbrian/go-international/v3/locale"
+	localized "github.com/faustbrian/go-localized/v3"
+	localizedmatch "github.com/faustbrian/go-localized/v3/match"
 )
 
 // Builder fails its test immediately when fixture construction is invalid.

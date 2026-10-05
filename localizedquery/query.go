@@ -2,9 +2,9 @@
 package localizedquery
 
 import (
-	apiquery "github.com/faustbrian/go-api-query"
-	"github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
+	apiquery "github.com/faustbrian/go-api-query/v3"
+	"github.com/faustbrian/go-international/v3/locale"
+	localized "github.com/faustbrian/go-localized/v3"
 )
 
 // ExactValue returns a api-query string value only when tag is present.

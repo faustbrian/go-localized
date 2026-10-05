@@ -10,7 +10,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/faustbrian/go-international/locale"
+	"github.com/faustbrian/go-international/v3/locale"
 )
 
 // Limits bounds construction work and retained content.

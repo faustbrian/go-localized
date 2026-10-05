@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized"
-	localizedmatch "github.com/faustbrian/go-localized/match"
+	localized "github.com/faustbrian/go-localized/v3"
+	localizedmatch "github.com/faustbrian/go-localized/v3/match"
 )
 
 func TestSecurityPlanLongestDepthIndependentOfMapOrder(t *testing.T) {

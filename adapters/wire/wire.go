@@ -1,8 +1,8 @@
 package wire
 
 import (
-	localized "github.com/faustbrian/go-localized"
-	legacy "github.com/faustbrian/go-localized/localizedwire"
+	localized "github.com/faustbrian/go-localized/v3"
+	legacy "github.com/faustbrian/go-localized/v3/localizedwire"
 	"github.com/faustbrian/go-wire/jsonwire"
 	"github.com/faustbrian/go-wire/msgpackwire"
 	"github.com/faustbrian/go-wire/tomlwire"

@@ -3,10 +3,10 @@ package query_test
 import (
 	"testing"
 
-	apiquery "github.com/faustbrian/go-api-query"
-	"github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
-	query "github.com/faustbrian/go-localized/adapters/query"
+	apiquery "github.com/faustbrian/go-api-query/v3"
+	"github.com/faustbrian/go-international/v3/locale"
+	localized "github.com/faustbrian/go-localized/v3"
+	query "github.com/faustbrian/go-localized/v3/adapters/query"
 )
 
 func TestCanonicalQueryAdapterPreservesExactLookup(t *testing.T) {

@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized"
-	localizedencoding "github.com/faustbrian/go-localized/encoding"
+	localized "github.com/faustbrian/go-localized/v3"
+	localizedencoding "github.com/faustbrian/go-localized/v3/encoding"
 )
 
 func TestSecurityEntriesRejectCountBeforeFurtherDecoding(t *testing.T) {

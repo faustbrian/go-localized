@@ -1,5 +1,11 @@
 # Security model
 
+Model version: 2. This document describes the v3.0.0 source published from
+`95d141cd9d0316bed21c96b3752ce219770e550d`. The nominal v2 and v3 migrations
+change module and dependency identities, not the localized algorithms or
+limits described here. See [migration.md](migration.md) for migration details
+and [../SECURITY.md](../SECURITY.md) for release-line and reporting policy.
+
 ## Threats and controls
 
 | Threat | Control |
@@ -101,9 +107,11 @@ privacy-safe errors and concurrent reads. The shared CI workflow owns static,
 dependency, secret and workflow gates; a source review or passing unit tests
 alone do not establish those gates.
 
-The resource-bound and nil-destination corrections preserve exported APIs,
-canonical values, matching order and successful encodings. Oversized or invalid
-inputs can now fail earlier, and graphs exceeding the existing depth policy
-are rejected consistently. These security fixes require a v1 patch release,
-not a major version. Release acceptance still requires exact-main CI and a
+The historical v1 resource-bound and nil-destination corrections preserve
+exported APIs, canonical values, matching order and successful encodings.
+Oversized or invalid inputs can now fail earlier, and graphs exceeding the
+existing depth policy are rejected consistently. Those fixes were published
+in v1.1.2 as a patch;
+the later module/dependency identity migrations require major releases.
+Release acceptance still requires exact-main CI and a
 clean public consumer; this threat model is not a claim of publication.

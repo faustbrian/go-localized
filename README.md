@@ -5,7 +5,7 @@
 [![Coverage](https://img.shields.io/badge/coverage-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Mutation](https://img.shields.io/badge/mutation-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
-[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized)
+[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v3.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v3)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-localized?sort=semver)](https://github.com/faustbrian/go-localized/releases)
 [![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -18,10 +18,16 @@ translation loading, language detection, or global locale policy.
 ## Install
 
 ```sh
-go get github.com/faustbrian/go-localized
+go get github.com/faustbrian/go-localized/v3
 ```
 
 Go 1.27.0 or later is required.
+
+The v3 module selects International and API Query v3 nominal types while
+retaining Validation v2. Migrate locale and query imports together as described
+in the [migration guide](docs/migration.md).
+Existing v1 and v2 releases remain independently available; publication is established
+by the repository's public tags and releases.
 
 ## Five-minute tour
 

@@ -5,8 +5,8 @@ import (
 	"reflect"
 	"testing"
 
-	language "github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
+	language "github.com/faustbrian/go-international/v3/locale"
+	localized "github.com/faustbrian/go-localized/v3"
 )
 
 func TestTextConstructionCanonicalizesAndOrdersLocales(t *testing.T) {

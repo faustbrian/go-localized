@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	httpclient "github.com/faustbrian/go-http-client"
-	"github.com/faustbrian/go-international/locale"
-	localized "github.com/faustbrian/go-localized"
-	localizedhttp "github.com/faustbrian/go-localized/http"
-	"github.com/faustbrian/go-localized/localizedhttpclient"
-	localizedmatch "github.com/faustbrian/go-localized/match"
+	"github.com/faustbrian/go-international/v3/locale"
+	localized "github.com/faustbrian/go-localized/v3"
+	localizedhttp "github.com/faustbrian/go-localized/v3/http"
+	"github.com/faustbrian/go-localized/v3/localizedhttpclient"
+	localizedmatch "github.com/faustbrian/go-localized/v3/match"
 )
 
 func TestPreferencesApplyCanonicalAcceptLanguageHeader(t *testing.T) {
