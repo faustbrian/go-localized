@@ -2,12 +2,14 @@
 
 ## Supported versions
 
-The current release line is v3, with the official
-`github.com/faustbrian/go-localized/v3` module identity. Security fixes are
-developed on `main`; incompatible changes require a new major tag from main.
+The latest stable root release is supported. The source on `main` uses the
+official `github.com/faustbrian/go-localized/v4` module identity; an unreleased
+main-branch module identity is not evidence of stable publication. Use published
+stable tags to identify released versions. Security fixes are developed on
+`main`; incompatible changes require a new major tag from main.
 See the [migration guide](docs/migration.md) for the corresponding dependency
-and import changes. Historical v1 and v2 tags remain available, but tag
-availability alone does not establish an additional backport commitment.
+and import changes. Historical tags remain available, but tag availability alone
+does not establish an additional backport commitment.
 
 The existing v1 support commitment is retained:
 
