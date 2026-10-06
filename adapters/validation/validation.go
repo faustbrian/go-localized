@@ -1,8 +1,8 @@
 package validation
 
 import (
-	localized "github.com/faustbrian/go-localized/v4"
-	legacy "github.com/faustbrian/go-localized/v4/localizedvalidation"
+	localized "github.com/faustbrian/go-localized/v5"
+	legacy "github.com/faustbrian/go-localized/v5/localizedvalidation"
 	validationcore "github.com/faustbrian/go-validation/v2"
 )
 

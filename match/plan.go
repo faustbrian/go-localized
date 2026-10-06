@@ -3,8 +3,8 @@ package match
 import (
 	"fmt"
 
-	"github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v4"
+	"github.com/faustbrian/go-international/v4/locale"
+	localized "github.com/faustbrian/go-localized/v5"
 )
 
 // CandidateKind selects exact lookup or locale-layer parent traversal.

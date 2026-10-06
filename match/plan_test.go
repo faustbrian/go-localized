@@ -4,9 +4,9 @@ import (
 	"errors"
 	"testing"
 
-	language "github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v4"
-	localizedmatch "github.com/faustbrian/go-localized/v4/match"
+	language "github.com/faustbrian/go-international/v4/locale"
+	localized "github.com/faustbrian/go-localized/v5"
+	localizedmatch "github.com/faustbrian/go-localized/v5/match"
 )
 
 func TestPlanUsesLocaleParentsWithoutInventingEntries(t *testing.T) {

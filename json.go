@@ -8,7 +8,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/faustbrian/go-international/v3/locale"
+	"github.com/faustbrian/go-international/v4/locale"
 )
 
 // JSONMode controls legacy compatibility during decoding.

@@ -5,7 +5,7 @@
 [![Coverage](https://img.shields.io/badge/coverage-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Mutation](https://img.shields.io/badge/mutation-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
-[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v3.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v3)
+[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v4.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v4)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-localized?sort=semver)](https://github.com/faustbrian/go-localized/releases)
 [![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -17,21 +17,22 @@ translation loading, language detection, or global locale policy.
 
 ## Install
 
-The current source prepares an unpublished `/v4` module for API Query v4
-nominal identities. The latest public stable Localized release remains v3.0.0;
+The current source prepares an unpublished `/v5` module for International v4,
+HTTP Client v2 and Wire v3 nominal identities. The latest public stable
+Localized release is v4.0.0;
 the installation command below selects that published baseline, not this
-candidate. See the [migration guide](docs/migration.md) for the pending v4 path.
+candidate. See the [migration guide](docs/migration.md) for the pending v5 path.
 
 ```sh
-go get github.com/faustbrian/go-localized/v3
+go get github.com/faustbrian/go-localized/v4@v4.0.0
 ```
 
 Go 1.27.0 or later is required.
 
-The v3 module selects International and API Query v3 nominal types while
+The published v4 module selects International v3 and API Query v4 nominal types while
 retaining Validation v2. Migrate locale and query imports together as described
 in the [migration guide](docs/migration.md).
-Existing v1 and v2 releases remain independently available; publication is established
+Existing v1–v3 releases remain independently available; publication is established
 by the repository's public tags and releases.
 
 ## Five-minute tour

@@ -2,12 +2,13 @@
 
 ## Major identity
 
-The prepared root and package paths use `github.com/faustbrian/go-localized/v4`.
-International v3.0.0 and Validation v2.0.0 identities remain unchanged. Query
-values and predicates use the published API Query v4.0.0 module. Localized v4
-publication remains pending. Published Localized v3 remains separately available;
+The prepared root and package paths use `github.com/faustbrian/go-localized/v5`.
+Locale tags use International v4.0.0, HTTP request specs/layers use HTTP Client
+v2.0.0, and codec options use Wire v3.0.0. Query v4.0.0, Validation v2.0.0 and
+Config v2.0.0 remain selected. Localized v5 publication remains pending;
+published Localized v4 remains separately available.
 see the
-[coordinated migration steps](migration.md#prepared-v4-query-identity).
+[coordinated migration steps](migration.md#prepared-v5-successor-composition).
 The root module owns all canonical and retained adapters; none is a separate
 module or independently tagged release.
 

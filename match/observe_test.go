@@ -4,8 +4,8 @@ import (
 	"sync"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v4"
-	localizedmatch "github.com/faustbrian/go-localized/v4/match"
+	localized "github.com/faustbrian/go-localized/v5"
+	localizedmatch "github.com/faustbrian/go-localized/v5/match"
 )
 
 func TestBestObserverReceivesBoundedContentFreeOutcome(t *testing.T) {

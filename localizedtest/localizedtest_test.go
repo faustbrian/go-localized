@@ -3,9 +3,9 @@ package localizedtest_test
 import (
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v4"
-	"github.com/faustbrian/go-localized/v4/localizedtest"
-	localizedmatch "github.com/faustbrian/go-localized/v4/match"
+	localized "github.com/faustbrian/go-localized/v5"
+	"github.com/faustbrian/go-localized/v5/localizedtest"
+	localizedmatch "github.com/faustbrian/go-localized/v5/match"
 )
 
 func TestBuilderAndAssertions(t *testing.T) {

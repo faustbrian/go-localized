@@ -3,7 +3,7 @@ package postgres_test
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v3/locale"
+	"github.com/faustbrian/go-international/v4/locale"
 )
 
 func mustLocale(t testing.TB, raw string) locale.Tag {

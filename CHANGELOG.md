@@ -6,6 +6,12 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Prepare the root `github.com/faustbrian/go-localized/v5` module with the
+  published International v4.0.0, HTTP Client v2.0.0 and Wire v3.0.0 nominal
+  contracts. Migrate locale tags, request specs/layers and codec options together
+  in canonical and retained adapters. API Query v4, Validation v2 and Config v2
+  remain selected. Preserve value semantics, formats and v1–v4 API projections;
+  v5 publication and public consumer qualification remain pending.
 - Prepare the root `github.com/faustbrian/go-localized/v4` module to adopt
   API Query v4 values, operators and predicates in both canonical and retained
   query adapters. International v3 and Validation v2 identities remain unchanged.

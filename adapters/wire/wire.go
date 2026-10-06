@@ -1,12 +1,12 @@
 package wire
 
 import (
-	localized "github.com/faustbrian/go-localized/v4"
-	legacy "github.com/faustbrian/go-localized/v4/localizedwire"
-	"github.com/faustbrian/go-wire/jsonwire"
-	"github.com/faustbrian/go-wire/msgpackwire"
-	"github.com/faustbrian/go-wire/tomlwire"
-	"github.com/faustbrian/go-wire/yamlwire"
+	localized "github.com/faustbrian/go-localized/v5"
+	legacy "github.com/faustbrian/go-localized/v5/localizedwire"
+	"github.com/faustbrian/go-wire/v3/jsonwire"
+	"github.com/faustbrian/go-wire/v3/msgpackwire"
+	"github.com/faustbrian/go-wire/v3/tomlwire"
+	"github.com/faustbrian/go-wire/v3/yamlwire"
 )
 
 // EncodeJSON encodes canonical keys through wire's bounded JSON encoder.

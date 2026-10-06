@@ -3,8 +3,8 @@ package postgres_test
 import (
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v4"
-	"github.com/faustbrian/go-localized/v4/postgres"
+	localized "github.com/faustbrian/go-localized/v5"
+	"github.com/faustbrian/go-localized/v5/postgres"
 )
 
 func FuzzSQLScan(f *testing.F) {

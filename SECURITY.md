@@ -3,7 +3,7 @@
 ## Supported versions
 
 The latest stable root release is supported. The source on `main` uses the
-official `github.com/faustbrian/go-localized/v4` module identity; an unreleased
+official `github.com/faustbrian/go-localized/v5` module identity; an unreleased
 main-branch module identity is not evidence of stable publication. Use published
 stable tags to identify released versions. Security fixes are developed on
 `main`; incompatible changes require a new major tag from main.
