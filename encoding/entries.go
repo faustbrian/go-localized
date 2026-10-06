@@ -7,7 +7,7 @@ import (
 	"io"
 	"unicode/utf8"
 
-	localized "github.com/faustbrian/go-localized/v3"
+	localized "github.com/faustbrian/go-localized/v4"
 )
 
 const defaultMaxInputBytes = 9 << 20

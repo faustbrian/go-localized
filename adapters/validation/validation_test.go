@@ -5,9 +5,9 @@ import (
 	"reflect"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v3"
-	validation "github.com/faustbrian/go-localized/v3/adapters/validation"
-	legacy "github.com/faustbrian/go-localized/v3/localizedvalidation"
+	localized "github.com/faustbrian/go-localized/v4"
+	validation "github.com/faustbrian/go-localized/v4/adapters/validation"
+	legacy "github.com/faustbrian/go-localized/v4/localizedvalidation"
 	validationcore "github.com/faustbrian/go-validation/v2"
 )
 

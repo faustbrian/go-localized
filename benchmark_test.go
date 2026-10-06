@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v3"
-	localizedmatch "github.com/faustbrian/go-localized/v3/match"
+	localized "github.com/faustbrian/go-localized/v4"
+	localizedmatch "github.com/faustbrian/go-localized/v4/match"
 )
 
 func benchmarkEntries(t testing.TB, size int) []localized.Entry {

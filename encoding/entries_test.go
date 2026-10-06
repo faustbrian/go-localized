@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v3"
-	localizedencoding "github.com/faustbrian/go-localized/v3/encoding"
+	localized "github.com/faustbrian/go-localized/v4"
+	localizedencoding "github.com/faustbrian/go-localized/v4/encoding"
 )
 
 func TestEntryArrayIsStableAndRoundTrips(t *testing.T) {

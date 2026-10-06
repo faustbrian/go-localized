@@ -2,10 +2,12 @@
 
 ## Major identity
 
-Import the root and its packages beneath `github.com/faustbrian/go-localized/v3`.
-Use International and API Query v3.0.0 at nominal type boundaries, while
-retaining Validation v2.0.0; see the
-[coordinated migration steps](migration.md#official-v3-module-and-dependency-identities).
+The prepared root and package paths use `github.com/faustbrian/go-localized/v4`.
+International v3.0.0 and Validation v2.0.0 identities remain unchanged. Query
+values and predicates use the published API Query v4.0.0 module. Localized v4
+publication remains pending. Published Localized v3 remains separately available;
+see the
+[coordinated migration steps](migration.md#prepared-v4-query-identity).
 The root module owns all canonical and retained adapters; none is a separate
 module or independently tagged release.
 

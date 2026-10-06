@@ -1,5 +1,22 @@
 # Migration guide
 
+## Prepared v4 query identity
+
+The current source prepares `github.com/faustbrian/go-localized/v4` at the
+repository root. It is not yet a published release. Move every Localized import
+to `/v4`, including canonical and retained adapters, and move query values,
+operators and predicates together to `github.com/faustbrian/go-api-query/v4`.
+International stays on `/v3/locale` v3.0.0 and Validation stays on `/v2` v2.0.0.
+Select the published API Query v4.0.0 module without sibling replacements.
+Localized v4 is still a prepared candidate, not a published consumer release.
+
+Both `localizedquery` and `adapters/query` expose the same API Query v4 nominal
+types. Exact lookup still distinguishes missing from present-empty and never
+applies language matching or fallback. Text construction, copying, lifecycle,
+sentinels and encoded formats are unchanged by this namespace migration.
+Historical v1–v3 API projections and public tags remain available. Tools adoption
+and Localized v4 release qualification remain separate pending boundaries.
+
 ## Official v3 module and dependency identities
 
 Use `github.com/faustbrian/go-localized/v3` and append `/v3` before package
@@ -30,7 +47,7 @@ change. Either adopt the canonical package identifier and update selectors, or
 retain the old identifier with an explicit import alias:
 
 ```go
-import localizedvalidation "github.com/faustbrian/go-localized/v3/adapters/validation"
+import localizedvalidation "github.com/faustbrian/go-localized/v4/adapters/validation"
 ```
 
 ## Locale-keyed Go maps

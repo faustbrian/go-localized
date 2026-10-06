@@ -8,11 +8,11 @@ import (
 
 	client "github.com/faustbrian/go-http-client"
 	"github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v3"
-	adapter "github.com/faustbrian/go-localized/v3/adapters/httpclient"
-	localizedhttp "github.com/faustbrian/go-localized/v3/http"
-	legacy "github.com/faustbrian/go-localized/v3/localizedhttpclient"
-	localizedmatch "github.com/faustbrian/go-localized/v3/match"
+	localized "github.com/faustbrian/go-localized/v4"
+	adapter "github.com/faustbrian/go-localized/v4/adapters/httpclient"
+	localizedhttp "github.com/faustbrian/go-localized/v4/http"
+	legacy "github.com/faustbrian/go-localized/v4/localizedhttpclient"
+	localizedmatch "github.com/faustbrian/go-localized/v4/match"
 )
 
 func TestCanonicalHTTPClientAdapterPreservesNegotiationAndIdentity(t *testing.T) {

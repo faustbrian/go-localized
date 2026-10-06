@@ -7,9 +7,9 @@ import (
 	"strings"
 
 	httpclient "github.com/faustbrian/go-http-client"
-	localized "github.com/faustbrian/go-localized/v3"
-	localizedhttp "github.com/faustbrian/go-localized/v3/http"
-	localizedmatch "github.com/faustbrian/go-localized/v3/match"
+	localized "github.com/faustbrian/go-localized/v4"
+	localizedhttp "github.com/faustbrian/go-localized/v4/http"
+	localizedmatch "github.com/faustbrian/go-localized/v4/match"
 )
 
 // Error is a stable privacy-safe HTTP client adapter error identity.
