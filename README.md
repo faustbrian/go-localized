@@ -17,14 +17,13 @@ translation loading, language detection, or global locale policy.
 
 ## Install
 
-The current source prepares an unpublished `/v5` module for International v4,
-HTTP Client v2 and Wire v3 nominal identities. The latest public stable
-Localized release is v4.0.0;
-the installation command below selects that published baseline, not this
-candidate. See the [migration guide](docs/migration.md) for the pending v5 path.
+The root `/v5` module composes International v4, HTTP Client v2 and Wire v3
+nominal identities. Select its versioned tag when adopting this composition;
+published tags, not the source on main, establish release availability.
+See the [migration guide](docs/migration.md) for coordinated import changes.
 
 ```sh
-go get github.com/faustbrian/go-localized/v4@v4.0.0
+go get github.com/faustbrian/go-localized/v5@v5.0.0
 ```
 
 Go 1.27.0 or later is required.
