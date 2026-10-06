@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	language "github.com/faustbrian/go-international/v3/locale"
-	localizedmatch "github.com/faustbrian/go-localized/v3/match"
+	localizedmatch "github.com/faustbrian/go-localized/v4/match"
 )
 
 func FuzzFallbackPlan(f *testing.F) {

@@ -2,16 +2,23 @@
 
 ## Toolchain and dependencies
 
+Published Localized v3 remains separately available. Prepared Localized v4
+selects published `api-query/v4` v4.0.0; its own release and consumer proof remain
+pending. API Query's x/text v0.42.0 requirement also advances the selected
+matching and normalization dependency, which needs compatibility vectors. Locale
+and validator nominal identities are unchanged. The v1–v3 API projections
+remain historical records, not proof of v4 compatibility.
+
 | Component | Pinned baseline | Role |
 |---|---|---|
 | Go | 1.27.0 | minimum language and iterator contract |
 | `international/v3/locale` | v3.0.0 | public BCP 47 identity and provenance |
-| `api-query/v3` | v3.0.0 | public query values, operators and predicates |
+| `api-query/v4` | v4.0.0 | public query values, operators and predicates |
 | `validation/v2` | v2.0.0 | public validator identity |
-| `golang.org/x/text` | v0.41.0 | private CLDR matching and Unicode normalization |
+| `golang.org/x/text` | v0.42.0 | private CLDR matching and Unicode normalization |
 | pgx | v5.11.0 | JSONB and PostgreSQL integration |
 | wire | v1.0.0 | bounded format adapters |
-| config | v1.0.0 | configuration hook conformance |
+| `config/v2` | v2.0.0 | configuration hook conformance |
 | PostgreSQL | 14–18 | JSONB integration matrix |
 
 `locale.DatasetProvenance` records the IANA Language Subtag Registry retrieved

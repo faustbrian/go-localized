@@ -3,8 +3,8 @@ package wire_test
 import (
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v3"
-	wire "github.com/faustbrian/go-localized/v3/adapters/wire"
+	localized "github.com/faustbrian/go-localized/v4"
+	wire "github.com/faustbrian/go-localized/v4/adapters/wire"
 	"github.com/faustbrian/go-wire/jsonwire"
 	"github.com/faustbrian/go-wire/msgpackwire"
 	"github.com/faustbrian/go-wire/tomlwire"

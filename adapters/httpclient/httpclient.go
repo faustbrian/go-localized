@@ -4,10 +4,10 @@ import (
 	"net/http"
 
 	client "github.com/faustbrian/go-http-client"
-	localized "github.com/faustbrian/go-localized/v3"
-	localizedhttp "github.com/faustbrian/go-localized/v3/http"
-	legacy "github.com/faustbrian/go-localized/v3/localizedhttpclient"
-	localizedmatch "github.com/faustbrian/go-localized/v3/match"
+	localized "github.com/faustbrian/go-localized/v4"
+	localizedhttp "github.com/faustbrian/go-localized/v4/http"
+	legacy "github.com/faustbrian/go-localized/v4/localizedhttpclient"
+	localizedmatch "github.com/faustbrian/go-localized/v4/match"
 )
 
 // Error preserves the released localizedhttpclient error identity.

@@ -17,6 +17,11 @@ translation loading, language detection, or global locale policy.
 
 ## Install
 
+The current source prepares an unpublished `/v4` module for API Query v4
+nominal identities. The latest public stable Localized release remains v3.0.0;
+the installation command below selects that published baseline, not this
+candidate. See the [migration guide](docs/migration.md) for the pending v4 path.
+
 ```sh
 go get github.com/faustbrian/go-localized/v3
 ```

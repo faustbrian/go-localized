@@ -4,8 +4,8 @@ import (
 	"errors"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v3"
-	"github.com/faustbrian/go-localized/v3/localizedwire"
+	localized "github.com/faustbrian/go-localized/v4"
+	"github.com/faustbrian/go-localized/v4/localizedwire"
 	"github.com/faustbrian/go-wire/jsonwire"
 	"github.com/faustbrian/go-wire/msgpackwire"
 	"github.com/faustbrian/go-wire/tomlwire"

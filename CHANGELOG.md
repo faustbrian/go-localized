@@ -6,6 +6,11 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Prepare the root `github.com/faustbrian/go-localized/v4` module to adopt
+  API Query v4 values, operators and predicates in both canonical and retained
+  query adapters. International v3 and Validation v2 identities remain unchanged.
+  Preserve the v1–v3 API projections; v4 publication and consumer qualification
+  remain pending.
 - Use the published Config v2.0.0 decoder for configuration-hook integration
   coverage. The localized config hooks and retained adapter aliases keep their
   existing public types and decoding behavior.

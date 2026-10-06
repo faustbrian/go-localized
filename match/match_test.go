@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	language "github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v3"
-	localizedmatch "github.com/faustbrian/go-localized/v3/match"
+	localized "github.com/faustbrian/go-localized/v4"
+	localizedmatch "github.com/faustbrian/go-localized/v4/match"
 )
 
 func fixture(t *testing.T) localized.Text {

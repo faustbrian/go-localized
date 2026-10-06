@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v3"
+	localized "github.com/faustbrian/go-localized/v4"
 )
 
 // CandidateKind selects exact lookup or locale-layer parent traversal.

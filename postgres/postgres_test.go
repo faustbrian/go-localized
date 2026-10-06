@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v3"
-	"github.com/faustbrian/go-localized/v3/postgres"
+	localized "github.com/faustbrian/go-localized/v4"
+	"github.com/faustbrian/go-localized/v4/postgres"
 	"github.com/jackc/pgx/v5/pgtype"
 )
 

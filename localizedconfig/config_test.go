@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/faustbrian/go-config/v2/decode"
-	localized "github.com/faustbrian/go-localized/v3"
-	"github.com/faustbrian/go-localized/v3/localizedconfig"
+	localized "github.com/faustbrian/go-localized/v4"
+	"github.com/faustbrian/go-localized/v4/localizedconfig"
 )
 
 func TestConfigValueHookDecodesLocalizedMapTransactionally(t *testing.T) {

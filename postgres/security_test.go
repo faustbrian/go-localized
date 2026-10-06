@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v3"
-	"github.com/faustbrian/go-localized/v3/postgres"
+	localized "github.com/faustbrian/go-localized/v4"
+	"github.com/faustbrian/go-localized/v4/postgres"
 )
 
 func TestSecurityPersistenceRejectsOversizedRowsBeforeParsing(t *testing.T) {
