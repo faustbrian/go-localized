@@ -1,9 +1,9 @@
 # Migration guide
 
-## Prepared v5 successor composition
+## v5 successor composition
 
-The current source prepares `github.com/faustbrian/go-localized/v5` at the
-repository root; it is not yet published. Move all owning Localized imports
+The source uses `github.com/faustbrian/go-localized/v5` at the repository
+root. Move all owning Localized imports
 to `/v5`, locale values to `github.com/faustbrian/go-international/v4/locale`
 v4.0.0, HTTP request specs and layers to `github.com/faustbrian/go-http-client/v2`
 v2.0.0, and codec options to `github.com/faustbrian/go-wire/v3` v3.0.0. Both
@@ -14,8 +14,9 @@ API Query v4.0.0, Validation v2.0.0 and Config v2.0.0 remain selected. No
 localized format, exact-presence, matching, fallback, ownership or alias
 semantics change is intended. Existing public v1–v4 tags and API projections
 remain available; frozen earlier-major consumers need not migrate. Select
-published dependencies without sibling replacements. Localized v5 release,
-public consumer and maintained Tools adoption are separate pending boundaries.
+published dependencies without sibling replacements. Public release, clean
+consumer and maintained Tools adoption are separate verification boundaries;
+source on main alone does not establish any of them.
 
 ## Prepared v4 query identity
 
