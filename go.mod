@@ -5,7 +5,7 @@ go 1.27.0
 require (
 	github.com/faustbrian/go-api-query/v4 v4.0.0
 	github.com/faustbrian/go-config/v2 v2.0.0
-	github.com/faustbrian/go-http-client v1.1.0
+	github.com/faustbrian/go-http-client v1.1.2
 	github.com/faustbrian/go-international/v3 v3.0.0
 	github.com/faustbrian/go-validation/v2 v2.0.0
 	github.com/faustbrian/go-wire v1.0.0
@@ -21,6 +21,6 @@ require (
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.6 // indirect
-	golang.org/x/net v0.57.0 // indirect
-	golang.org/x/oauth2 v0.36.0 // indirect
+	golang.org/x/net v0.59.0 // indirect
+	golang.org/x/oauth2 v0.37.0 // indirect
 )
