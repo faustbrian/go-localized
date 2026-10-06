@@ -8,7 +8,7 @@ require (
 	github.com/faustbrian/go-http-client v1.1.0
 	github.com/faustbrian/go-international/v3 v3.0.0
 	github.com/faustbrian/go-validation/v2 v2.0.0
-	github.com/faustbrian/go-wire v1.0.0
+	github.com/faustbrian/go-wire v1.0.1
 	github.com/jackc/pgx/v5 v5.11.0
 	golang.org/x/text v0.42.0
 )
