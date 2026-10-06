@@ -8,9 +8,9 @@ import (
 	"sync"
 	"testing"
 
-	language "github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v4"
-	localizedmatch "github.com/faustbrian/go-localized/v4/match"
+	language "github.com/faustbrian/go-international/v4/locale"
+	localized "github.com/faustbrian/go-localized/v5"
+	localizedmatch "github.com/faustbrian/go-localized/v5/match"
 )
 
 func TestStandardsCanonicalizationMatrix(t *testing.T) {
@@ -61,7 +61,7 @@ func TestStandardsRegistryProvenance(t *testing.T) {
 
 	provenance := language.DatasetProvenance()
 	if provenance.Dataset != "iana-language-subtag-registry" ||
-		provenance.UpstreamVersion != "IANA registry 2026-06-14; x/text v0.40.0" ||
+		provenance.UpstreamVersion != "IANA registry 2026-06-14; x/text v0.42.0" ||
 		provenance.SHA256 != "be1fad86a99e3a932d07b80c9b3c271ec2381a5909ce22420144e5077ab0a43a" {
 		t.Fatalf("locale provenance drifted: %+v", provenance)
 	}

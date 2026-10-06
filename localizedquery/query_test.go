@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	apiquery "github.com/faustbrian/go-api-query/v4"
-	"github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v4"
-	"github.com/faustbrian/go-localized/v4/localizedquery"
+	"github.com/faustbrian/go-international/v4/locale"
+	localized "github.com/faustbrian/go-localized/v5"
+	"github.com/faustbrian/go-localized/v5/localizedquery"
 )
 
 func TestExactValuePreservesMissingAndPresentEmpty(t *testing.T) {

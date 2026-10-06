@@ -6,13 +6,13 @@ import (
 	"reflect"
 	"testing"
 
-	client "github.com/faustbrian/go-http-client"
-	"github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v4"
-	adapter "github.com/faustbrian/go-localized/v4/adapters/httpclient"
-	localizedhttp "github.com/faustbrian/go-localized/v4/http"
-	legacy "github.com/faustbrian/go-localized/v4/localizedhttpclient"
-	localizedmatch "github.com/faustbrian/go-localized/v4/match"
+	client "github.com/faustbrian/go-http-client/v2"
+	"github.com/faustbrian/go-international/v4/locale"
+	localized "github.com/faustbrian/go-localized/v5"
+	adapter "github.com/faustbrian/go-localized/v5/adapters/httpclient"
+	localizedhttp "github.com/faustbrian/go-localized/v5/http"
+	legacy "github.com/faustbrian/go-localized/v5/localizedhttpclient"
+	localizedmatch "github.com/faustbrian/go-localized/v5/match"
 )
 
 func TestCanonicalHTTPClientAdapterPreservesNegotiationAndIdentity(t *testing.T) {

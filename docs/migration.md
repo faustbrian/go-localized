@@ -1,21 +1,38 @@
 # Migration guide
 
+## Prepared v5 successor composition
+
+The current source prepares `github.com/faustbrian/go-localized/v5` at the
+repository root; it is not yet published. Move all owning Localized imports
+to `/v5`, locale values to `github.com/faustbrian/go-international/v4/locale`
+v4.0.0, HTTP request specs and layers to `github.com/faustbrian/go-http-client/v2`
+v2.0.0, and codec options to `github.com/faustbrian/go-wire/v3` v3.0.0. Both
+canonical `adapters/*` and retained `localized*` packages select these same
+nominal types. Different majors cannot be mixed in a function signature.
+
+API Query v4.0.0, Validation v2.0.0 and Config v2.0.0 remain selected. No
+localized format, exact-presence, matching, fallback, ownership or alias
+semantics change is intended. Existing public v1–v4 tags and API projections
+remain available; frozen earlier-major consumers need not migrate. Select
+published dependencies without sibling replacements. Localized v5 release,
+public consumer and maintained Tools adoption are separate pending boundaries.
+
 ## Prepared v4 query identity
 
 The current source prepares `github.com/faustbrian/go-localized/v4` at the
-repository root. It is not yet a published release. Move every Localized import
+repository root. This baseline is published as v4.0.0. Move every Localized import
 to `/v4`, including canonical and retained adapters, and move query values,
 operators and predicates together to `github.com/faustbrian/go-api-query/v4`.
 International stays on `/v3/locale` v3.0.0 and Validation stays on `/v2` v2.0.0.
 Select the published API Query v4.0.0 module without sibling replacements.
-Localized v4 is still a prepared candidate, not a published consumer release.
+Localized v4 remains available as a published consumer release.
 
 Both `localizedquery` and `adapters/query` expose the same API Query v4 nominal
 types. Exact lookup still distinguishes missing from present-empty and never
 applies language matching or fallback. Text construction, copying, lifecycle,
 sentinels and encoded formats are unchanged by this namespace migration.
 Historical v1–v3 API projections and public tags remain available. Tools adoption
-and Localized v4 release qualification remain separate pending boundaries.
+and future-major release qualification remain separate boundaries.
 
 ## Official v3 module and dependency identities
 

@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	localized "github.com/faustbrian/go-localized/v4"
-	localizedpostgres "github.com/faustbrian/go-localized/v4/postgres"
+	localized "github.com/faustbrian/go-localized/v5"
+	localizedpostgres "github.com/faustbrian/go-localized/v5/postgres"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 )

@@ -3,7 +3,7 @@ package encoding_test
 import (
 	"testing"
 
-	localizedencoding "github.com/faustbrian/go-localized/v4/encoding"
+	localizedencoding "github.com/faustbrian/go-localized/v5/encoding"
 )
 
 func FuzzUnmarshalEntries(f *testing.F) {

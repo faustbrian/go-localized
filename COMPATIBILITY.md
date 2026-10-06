@@ -1,11 +1,11 @@
 # Compatibility Policy
 
 Each independently releasable Go module follows semantic versioning. The root
-module uses root Git tags such as `v4.0.0`; independently released nested modules
+module uses root Git tags such as `v5.0.0`; independently released nested modules
 use `<module-directory>/v<version>` tags.
 
 Implementation stays on `main`. Necessary breaking releases use new major Git
-tags from main and Go's required major module/import suffixes, such as `/v4`.
+tags from main and Go's required major module/import suffixes, such as `/v5`.
 Those suffixes do not imply version-specific source directories or branches.
 
 Before `v1`, minor releases MAY contain reviewed breaking changes, but every

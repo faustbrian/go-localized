@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v4"
-	"github.com/faustbrian/go-localized/v4/localizedconfig"
+	localized "github.com/faustbrian/go-localized/v5"
+	"github.com/faustbrian/go-localized/v5/localizedconfig"
 )
 
 func TestSecurityConfigRejectsCountBeforeCopy(t *testing.T) {

@@ -4,12 +4,12 @@ import (
 	"testing"
 
 	apiquery "github.com/faustbrian/go-api-query/v4"
-	"github.com/faustbrian/go-international/v3/locale"
-	localized "github.com/faustbrian/go-localized/v4"
-	query "github.com/faustbrian/go-localized/v4/adapters/query"
-	validation "github.com/faustbrian/go-localized/v4/adapters/validation"
-	legacyquery "github.com/faustbrian/go-localized/v4/localizedquery"
-	legacyvalidation "github.com/faustbrian/go-localized/v4/localizedvalidation"
+	"github.com/faustbrian/go-international/v4/locale"
+	localized "github.com/faustbrian/go-localized/v5"
+	query "github.com/faustbrian/go-localized/v5/adapters/query"
+	validation "github.com/faustbrian/go-localized/v5/adapters/validation"
+	legacyquery "github.com/faustbrian/go-localized/v5/localizedquery"
+	legacyvalidation "github.com/faustbrian/go-localized/v5/localizedvalidation"
 	validationcore "github.com/faustbrian/go-validation/v2"
 )
 
