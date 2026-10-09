@@ -33,6 +33,12 @@ that hide a failing package.
 
 ## Verification
 
+Use Go 1.27.2 for development and CI; the public minimum remains
+Go 1.27.0. CI builds the immutable `tooling_sha` in its workflow through
+the explicit source-bootstrap path. For equivalent local checks, build
+that revision and set `GOLIB` to its executable. The released tool
+identity in `.golib.yaml` does not identify this source-built verifier.
+
 Run during development:
 
 ```bash

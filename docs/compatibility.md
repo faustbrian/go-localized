@@ -2,9 +2,9 @@
 
 ## Toolchain and dependencies
 
-Published Localized v4 remains separately available. Localized v5 selects
-International v4.0.0, HTTP Client v2.0.0 and Wire v3.0.0. Public release,
-clean consumer and maintained Tools adoption require separate evidence;
+Published Localized v5.0.0 selects International v4.0.0, HTTP Client
+v2.0.0 and Wire v3.0.0; v4 remains separately available. Clean-consumer
+qualification and maintained Tools adoption require separate evidence;
 main's module identity does not establish them. Query v4.0.0, Validation v2.0.0,
 Config v2.0.0 and x/text v0.42.0 remain selected. The v1–v4 API projections
 remain historical records, not proof of v5 compatibility.
