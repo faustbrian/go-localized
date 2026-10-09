@@ -2,13 +2,18 @@
 
 All notable changes follow Keep a Changelog and Semantic Versioning.
 
-## [Unreleased]
+## [5.0.1] - 2026-10-09
 
 ### Changed
 
 - Use Go 1.27.2 for development and CI with compiler-compatible source
   tooling, preserving the public Go 1.27.0 minimum. Rebuild applications
   with a patched toolchain to receive standard-library security fixes.
+
+## [Unreleased]
+
+### Changed
+
 - Prepare the root `github.com/faustbrian/go-localized/v4` module to adopt
   API Query v4 values, operators and predicates in both canonical and retained
   query adapters. International v3 and Validation v2 identities remain unchanged.
@@ -195,7 +200,7 @@ The following initial scope is included in `v1.0.0`.
 
 - Initial production contract for localized domain values.
 
-[Unreleased]: https://github.com/faustbrian/go-localized/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/faustbrian/go-localized/compare/v5.0.0...HEAD
 [5.0.0]: https://github.com/faustbrian/go-localized/compare/v4.0.0...v5.0.0
 [1.1.0]: https://github.com/faustbrian/go-localized/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/faustbrian/go-localized/releases/tag/v1.0.0

@@ -5,7 +5,7 @@
 [![Coverage](https://img.shields.io/badge/coverage-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Mutation](https://img.shields.io/badge/mutation-100%25_required-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
-[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v4.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v4)
+[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v5.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v5)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-localized?sort=semver)](https://github.com/faustbrian/go-localized/releases)
 [![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -27,7 +27,8 @@ go get github.com/faustbrian/go-localized/v5@v5.0.0
 ```
 
 Go 1.27.0 or later is required. Development and CI use Go 1.27.2
-to include standard-library security fixes.
+to include standard-library security fixes. Rebuild applications with a
+patched compiler to receive those fixes.
 
 The published v4 module selects International v3 and API Query v4 nominal types while
 retaining Validation v2. Migrate locale and query imports together as described

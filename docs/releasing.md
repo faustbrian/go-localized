@@ -8,7 +8,9 @@
 4. Update `CHANGELOG.md`, compatibility provenance, API baseline, and evidence.
 5. Create a signed semantic-version tag only after the user verifies final
    hosted CI. Git state is never an implementation blocker.
-6. The release workflow verifies the tag and builds a deterministic source
-   archive with checksums before publishing notes from the changelog.
+6. CI does not publish tags or releases. Build a deterministic source archive
+   and checksums from the verified tag, then publish the changelog notes
+   separately. Verify the remote tag, release assets and public module
+   resolution before reporting publication complete.
 
 No release may claim successful hosted checks from local workflow syntax alone.
