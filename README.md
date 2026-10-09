@@ -26,7 +26,8 @@ See the [migration guide](docs/migration.md) for coordinated import changes.
 go get github.com/faustbrian/go-localized/v5@v5.0.0
 ```
 
-Go 1.27.0 or later is required.
+Go 1.27.0 or later is required. Development and CI use Go 1.27.2
+to include standard-library security fixes.
 
 The published v4 module selects International v3 and API Query v4 nominal types while
 retaining Validation v2. Migrate locale and query imports together as described
