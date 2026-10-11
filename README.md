@@ -3,7 +3,7 @@
 [![CI](https://github.com/faustbrian/go-localized/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/faustbrian/go-localized/actions/workflows/ci.yml)
 [![CodeQL](https://img.shields.io/badge/CodeQL-required-blue)](https://github.com/faustbrian/go-localized/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/badge/coverage-100%25_required-blue)](CONTRIBUTING.md#verification)
-[![Mutation](https://img.shields.io/badge/mutation-100%25_required-blue)](CONTRIBUTING.md#verification)
+[![Mutation](https://img.shields.io/badge/mutation-local_or_scheduled-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
 [![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v5.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v5)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-localized?sort=semver)](https://github.com/faustbrian/go-localized/releases)
@@ -125,20 +125,23 @@ and its [Foundations family](https://github.com/faustbrian/go-library-tools/blob
 
 ## Development
 
-`make check` runs the complete local gate stack through the pinned
-`go-library-tools` CLI. Pull requests run the bounded local CI tier; scheduled
-and release workflows retain the relevant aggregate and release checks. Local
-development does not depend on a remote branch or CI run. PostgreSQL-backed
-checks require an explicitly supplied disposable database:
+`make check` and `make ci` run bounded local checks through the public pinned
+`go-library-tools` CLI and retain the manifest's Docker-backed PostgreSQL service
+and integration tag. Use direct untagged Go tests for database-free development,
+and `make check-full` for explicit full assurance.
+Pull requests run the bounded local CI tier; scheduled and release workflows
+retain the relevant aggregate and release checks. Local
+development does not depend on a remote branch or CI run. Direct PostgreSQL
+tests are a separate route with an explicitly supplied disposable database:
 
 ```sh
 POSTGRES_URL='postgres://postgres:postgres@127.0.0.1:5432/localized?sslmode=disable' \
-  make check
+  go test -count=1 -tags=integration ./postgres
 ```
 
-The PostgreSQL version matrix is a CI operation. It uses isolated ephemeral
-containers and verifies PostgreSQL 14 through 18 without using ambient
-services.
+The explicit `make -f verification/package.mk postgres-matrix` diagnostic uses
+isolated ephemeral containers and verifies PostgreSQL 14 through 18 without
+using ambient services. Ordinary local checks do not launch that matrix.
 
 ## License
 

@@ -2,8 +2,8 @@
 
 ## Before Editing
 
-1. Read [`AGENTS.md`](AGENTS.md) and the affected module's goals and docs.
-2. Run `make inventory` and the narrow baseline gate for the module.
+1. Read [`AGENTS.md`](AGENTS.md) and the affected package's documentation.
+2. Run ordinary Go tests for the affected package before editing.
 3. Identify owned dependencies and reverse dependants in `modules.json`.
 4. Preserve unrelated work and generated/corpus provenance.
 
@@ -25,7 +25,7 @@ complete the Specification Decisions
 section of the pull request template. An unresolved interpretation or stale
 source pin is release-blocking; peer behavior cannot silently select policy.
 
-Required mutation gates must finish with zero surviving viable mutants.
+Selected mutation gates must finish with zero surviving viable mutants.
 
 Do not add package-local workflows, permanent replacements, machine-specific
 paths, bypass flags, broad mutation exclusions, or aggregate quality metrics
@@ -34,26 +34,44 @@ that hide a failing package.
 ## Verification
 
 Use Go 1.27.2 for development and CI; the public minimum remains
-Go 1.27.0. CI builds the immutable `tooling_sha` in its workflow through
-the explicit source-bootstrap path. For equivalent local checks, build
-that revision and set `GOLIB` to its executable. The released tool
-identity in `.golib.yaml` does not identify this source-built verifier.
-
-Run during development:
+Go 1.27.0. An ordinary checkout is sufficient for package tests and a focused
+active fuzz smoke; no sibling repository or goal ledger is required:
 
 ```bash
-make inventory
-make check
+go test ./...
+go test . -run '^$' -fuzz '^FuzzDecodeJSON$' -fuzztime=2s
 ```
 
-Before submitting a repository-wide change:
+Select the native target and package affected by your change. Ordinary Go tests
+already exercise deterministic fuzz seeds. For shared checks, install the
+public `golib` v2.1.0 release declared in `.golib.yaml` and verify its checksums;
+CI uses that same release, not a sibling source build:
 
 ```bash
+make check
 make ci
 ```
 
-The full scheduled and release gate is `make ci`. Report every unavailable or
-failing command; do not describe partial results as release-ready.
+Both commands use bounded local checks and retain the manifest's PostgreSQL
+service and integration tag, so the verifier routes require Docker. Untagged
+direct Go tests are the database-free route; a supplied `POSTGRES_URL` for direct
+tagged tests is distinct from verifier-managed services. Optional focused
+mutation analysis retains those service prerequisites and can select one package:
+
+```bash
+golib mutation --module . --package ./encoding
+```
+
+Use `make check-full` for explicit full assurance with the configured native fuzz
+budgets, standards, API compatibility and other selected full gates. For
+PostgreSQL JSONB changes, supply a disposable database and explicitly run
+`go test -count=1 -tags=integration ./postgres` with `POSTGRES_URL` set; the
+manual `make -f verification/package.mk postgres-matrix` checks PostgreSQL
+14 through 18. Run affected adapters and direct consumer tests for public-contract
+changes. Scheduled and release qualification retain their full selected gates;
+follow [the release guide](docs/releasing.md), and report unavailable or failing
+checks without claiming release readiness. CI/configuration-only changes do not
+require a library release.
 
 ## Adding A Module
 

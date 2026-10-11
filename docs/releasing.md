@@ -1,8 +1,10 @@
 # Releasing
 
 1. Finish implementation and documentation locally with a clean worktree.
-2. Run `go mod tidy -diff`, `make check`, and the shared release gates through
-   `make ci`.
+2. Run `go mod tidy -diff`, `make check-full`, and the selected shared release
+   rehearsal. Ordinary `make check` and `make ci` are bounded local routes, not
+   release qualification. PostgreSQL changes also require the explicit tagged
+   integration test and PostgreSQL 14–18 matrix described in `CONTRIBUTING.md`.
 3. Review mutation survivors, fuzz crashes, vulnerability findings, benchmark
    changes, dependency licenses, and locale-data changes.
 4. Update `CHANGELOG.md`, compatibility provenance, API baseline, and evidence.
