@@ -131,3 +131,12 @@ Intent/ACK safe-wrapper commit. Parent owns remotes/CI/publication/tooling/ledge
 
 Final added/staged-content secret and complete ordinary Tier A review results
 are reported in the worker handoff, separately from native source proof.
+
+## Objective Enforcement
+
+The checksum-pinned public Tools v2.4.0 verifier now supplies
+`make source-docs-check` as a prerequisite of the existing local and CI Make
+routes. Ordinary shared CI selects strict source-documentation checking and
+requires its result. Native prerequisites, operation budgets, security and
+release controls are retained. Hosted exact-head evidence is recorded by the
+coordination ledger; configuration alone does not establish green delivery.
