@@ -81,3 +81,40 @@ floods cannot bypass work limits.
 
 Canonicalization changes tag spelling and preferred aliases only. It never
 creates, copies, translates, or removes a localized string.
+
+## Existing operation and decoder limitations
+
+These describe current implementation limitations, not additional normative
+protocol interpretations or conformance success.
+
+Only wholly zero `Limits` selects defaults. A partially specified struct keeps
+individual zero allowances. Count and total-text-byte admission includes all
+input entries before duplicate reduction; tag bytes and total heap are not part
+of `MaxTotalBytes`. Raw pair and core JSON keys also keep an independent
+255-byte parser ceiling when a caller raises the canonical tag limit.
+
+`Set`, `Map` and explicit normalization reconstruct under default limits,
+not the originating custom construction policy. `Remove` and non-nil `Filter`
+also reconstruct under defaults but discard failure: a valid custom-limit value
+can silently become empty. Use explicit construction with the intended limits
+when that distinction matters. Builder feeding, merge temporaries and callback
+execution occur before final value admission. Callback side effects are not
+rolled back; observers isolate panics, not blocking or concurrent access.
+
+Raw malformed UTF-8 is rejected, but encoding/json can repair unpaired surrogate
+escapes in decoded text to U+FFFD. Entry-array decoding accepts case aliases and
+repeated object fields with the last occurrence winning; omitted/null `text`
+becomes a present-empty string. Canonical duplicate locales across entries still
+reject. The null column above refers to the top-level representation, not strict
+required-member or nested scalar-type enforcement. Encoders have no output-byte
+ceiling: escaping can exceed default decoder admission even for a value admitted
+under default construction limits. Callers own subsequent wire-boundary limits.
+
+`Best` tries exact then approximate matching for each preference in descending
+weight/stable-tie order; a higher-weight approximate match can precede a
+lower-weight exact one. Matching delegates to pinned x/text data, not this
+package's own CLDR implementation. `ParentRange` starts at a candidate's strict
+parent, excluding that candidate. HTTP wildcard picks the first lexical stored
+locale and zero-weight ranges are not a global exclusion set for wildcard or
+approximate selection. These helpers do not perform network I/O or response
+header policy.

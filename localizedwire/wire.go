@@ -1,4 +1,8 @@
-// Package localizedwire adapts Text to bounded wire format packages.
+// Package localizedwire adapts Text to the pinned wire format packages.
+// Inputs are borrowed during synchronous decoding; returned Text owns its
+// containers. Upstream options/errors retain upstream behavior and may expose
+// input details. Localized construction uses default value limits, not a new
+// total heap/time budget; these helpers own no transport or I/O lifecycle.
 package localizedwire
 
 import (
@@ -23,7 +27,9 @@ func EncodeJSON(value localized.Text, options jsonwire.EncodeOptions) ([]byte, e
 }
 
 // DecodeJSON validates wire boundaries, then applies canonical duplicate and
-// locale semantics from the localized JSON decoder.
+// locale semantics from the localized JSON decoder. The raw bytes are decoded
+// twice: upstream shape admission, then strict core decoding under default value
+// limits and the converted MaxBytes input bound. Neither pass retains input.
 func DecodeJSON(data []byte, options jsonwire.DecodeOptions) (localized.Text, error) {
 	var shape map[string]string
 	if err := jsonwire.Decode(data, &shape, options); err != nil {
@@ -38,7 +44,9 @@ func EncodeYAML(value localized.Text, options yamlwire.EncodeOptions) ([]byte, e
 	return yamlwire.Encode(stringMap(value), options)
 }
 
-// DecodeYAML decodes a strict string map and validates canonical locale keys.
+// DecodeYAML delegates string-map parsing to wire then applies default localized
+// construction. Duplicate raw-key handling is upstream; map conversion cannot
+// recover occurrences already collapsed by the upstream decoder.
 func DecodeYAML(data []byte, options yamlwire.DecodeOptions) (localized.Text, error) {
 	var values map[string]string
 	if err := yamlwire.Decode(data, &values, options); err != nil {
@@ -52,7 +60,8 @@ func EncodeTOML(value localized.Text, options tomlwire.EncodeOptions) ([]byte, e
 	return tomlwire.Encode(stringMap(value), options)
 }
 
-// DecodeTOML decodes a string map and validates canonical locale keys.
+// DecodeTOML delegates string-map parsing to wire then applies default localized
+// construction. Raw duplicate-key visibility and parser policy belong to wire.
 func DecodeTOML(data []byte, options tomlwire.DecodeOptions) (localized.Text, error) {
 	var values map[string]string
 	if err := tomlwire.Decode(data, &values, options); err != nil {
@@ -67,7 +76,9 @@ func EncodeMessagePack(value localized.Text, options msgpackwire.EncodeOptions) 
 	return msgpackwire.Encode(stringMap(value), options)
 }
 
-// DecodeMessagePack decodes a strict string map and validates locale keys.
+// DecodeMessagePack delegates string-map parsing to wire then applies default
+// localized construction. Raw duplicate-key visibility belongs to wire; canonical
+// duplicates still visible in distinct map keys are rejected by core.
 func DecodeMessagePack(data []byte, options msgpackwire.DecodeOptions) (localized.Text, error) {
 	var values map[string]string
 	if err := msgpackwire.Decode(data, &values, options); err != nil {

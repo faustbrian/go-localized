@@ -14,6 +14,11 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ### Changed
 
+- Clarify construction and callback ownership, exact versus approximate selection,
+  adapter boundaries and resource-limit scope. Document existing default-limit
+  transform failures and entry-array/surrogate decoding limitations without
+  changing runtime behavior or specification requirements.
+
 - Prepare the root `github.com/faustbrian/go-localized/v4` module to adopt
   API Query v4 values, operators and predicates in both canonical and retained
   query adapters. International v3 and Validation v2 identities remain unchanged.

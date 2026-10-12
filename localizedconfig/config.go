@@ -1,4 +1,6 @@
 // Package localizedconfig adapts Text to config's value-hook contracts.
+// Hooks mutate caller-owned nullable wrappers, snapshot input maps on success and
+// retain immutable payloads. No configuration source, reload or watcher is owned.
 package localizedconfig
 
 import (
@@ -18,8 +20,11 @@ const ErrInvalidValue Error = "localized config: invalid value"
 
 // Text is a presence-aware config value hook.
 type Text struct {
+	// Localized is the immutable payload; meaningful only when Valid is true.
 	Localized localized.Text
-	Valid     bool
+	// Valid distinguishes present empty content from null/absent wrapper state; it is
+	// caller-owned mutable state.
+	Valid bool
 }
 
 // NewText creates a present configuration wrapper.
@@ -32,7 +37,10 @@ func (Text) ConfigTextTarget() reflect.Type {
 	return reflect.TypeFor[map[string]string]()
 }
 
-// UnmarshalConfigValue implements config's ValueUnmarshaler contract.
+// UnmarshalConfigValue snapshots string-valued maps under default construction
+// limits and assigns only on success; prior state survives failure. Untyped nil
+// clears to invalid, while a typed nil map constructs present-empty Text. A nil
+// receiver returns ErrInvalidValue; input maps must not change during the call.
 func (t *Text) UnmarshalConfigValue(input any) error {
 	if t == nil {
 		return ErrInvalidValue

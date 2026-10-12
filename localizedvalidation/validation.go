@@ -19,18 +19,28 @@ type Error string
 func (e Error) Error() string { return string(e) }
 
 const (
-	ErrBytesExceeded    Error = "localized validation: byte limit exceeded"
+	// ErrBytesExceeded reports a byte-count rule failure.
+	ErrBytesExceeded Error = "localized validation: byte limit exceeded"
+	// ErrControlCharacter reports a disallowed Unicode control character.
 	ErrControlCharacter Error = "localized validation: control character"
-	ErrEmpty            Error = "localized validation: empty text"
-	ErrInvalidForm      Error = "localized validation: invalid normalization form"
-	ErrInvalidRule      Error = "localized validation: invalid rule"
-	ErrLinesExceeded    Error = "localized validation: line limit exceeded"
-	ErrRunesExceeded    Error = "localized validation: rune limit exceeded"
-	ErrWhitespace       Error = "localized validation: whitespace-only text"
+	// ErrEmpty reports an empty present string, not an absent locale.
+	ErrEmpty Error = "localized validation: empty text"
+	// ErrInvalidForm reports an unsupported explicit normalization form.
+	ErrInvalidForm Error = "localized validation: invalid normalization form"
+	// ErrInvalidRule reports a nil rule or invalid rule bound when applied.
+	ErrInvalidRule Error = "localized validation: invalid rule"
+	// ErrLinesExceeded reports a newline-delimited line-count rule failure.
+	ErrLinesExceeded Error = "localized validation: line limit exceeded"
+	// ErrRunesExceeded reports a Unicode code-point-count rule failure.
+	ErrRunesExceeded Error = "localized validation: rune limit exceeded"
+	// ErrWhitespace reports empty or Unicode-whitespace-only text.
+	ErrWhitespace Error = "localized validation: whitespace-only text"
 )
 
 // Rule validates one localized string without receiving its locale identity.
 type Rule interface {
+	// ValidateText runs synchronously on one present value. Custom errors can contain
+	// content; implementations own callback time and concurrent-call safety.
 	ValidateText(string) error
 }
 
@@ -38,7 +48,10 @@ type ruleFunc func(string) error
 
 func (rule ruleFunc) ValidateText(value string) error { return rule(value) }
 
-// Validate applies every rule to every present value in deterministic order.
+// Validate applies rules synchronously in canonical entry and supplied rule order,
+// stopping at the first error. Empty collections apply no rules, including nil rules.
+// Custom errors propagate unchanged and may contain content; callbacks own time
+// and concurrent-call safety, without panic recovery or forced cancellation.
 func Validate(value localized.Text, rules ...Rule) error {
 	for _, entry := range value.Entries() {
 		for _, rule := range rules {
@@ -56,7 +69,9 @@ func Validate(value localized.Text, rules ...Rule) error {
 // Validator adapts immutable localized text rules to validation. The
 // returned validator snapshots the rule slice and emits content-free findings
 // at canonical locale-key paths. Built-in rules are immutable; callers remain
-// responsible for the concurrency safety of custom Rule implementations.
+// responsible for custom Rule lifetimes and concurrent-call safety. It still
+// evaluates rules after report retention limits are reached; report limits do not
+// bound callback work or add cancellation. Locale paths can expose private-use IDs.
 func Validator(rules ...Rule) validationcore.Validator[localized.Text] {
 	return validationcore.ValidatorFunc[localized.Text](
 		localizedRules(append([]Rule(nil), rules...)).validate,
@@ -201,7 +216,9 @@ const (
 )
 
 // Normalize returns a new value with the selected transform applied to text
-// only. Locale identifiers are never normalized or rewritten here.
+// only. Locale identifiers are never normalized or rewritten here. Allocation
+// happens before default-limit output reconstruction; originating custom limits
+// are not retained. Failure returns zero Text and never mutates the receiver.
 func Normalize(value localized.Text, form Form) (localized.Text, error) {
 	var normalizer norm.Form
 	switch form {

@@ -1,4 +1,14 @@
-// Package localized provides immutable values keyed by canonical BCP 47 tags.
+// Package localized provides immutable UTF-8 text keyed by canonical BCP 47 tags.
+// Locale identity and registry policy belong to the pinned International locale
+// dependency. Exact lookup, preference matching and configured fallback are
+// separate operations; missing, present-empty and nullable wrapper state differ.
+// Core preserves text without normalization, pluralization, interpolation, message
+// formatting, language detection or translation. No CLDR conformance is claimed.
+//
+// Containers are snapshotted and accessors expose copies or immutable values.
+// Builders, nullable wrappers and callback implementations remain caller-owned.
+// CPU work and callbacks are synchronous without context deadlines or workers;
+// limits count content, not all heap allocation or callback execution time.
 package localized
 
 import (
@@ -15,9 +25,16 @@ import (
 
 // Limits bounds construction work and retained content.
 type Limits struct {
-	MaxLocales    int
-	MaxTagBytes   int
-	MaxTextBytes  int
+	// MaxLocales caps supplied entries before duplicate reduction; default 128.
+	MaxLocales int
+	// MaxTagBytes caps canonical tag bytes; default 255. Raw pair/JSON boundaries also
+	// have an independent 255-byte parser ceiling.
+	MaxTagBytes int
+	// MaxTextBytes caps UTF-8 bytes in each supplied text; default 1 MiB, not runes or
+	// graphemes.
+	MaxTextBytes int
+	// MaxTotalBytes caps summed supplied text bytes including discarded duplicates;
+	// default 8 MiB. Tags and total heap are not counted.
 	MaxTotalBytes int
 }
 
@@ -35,16 +52,23 @@ const (
 
 // ConstructionOptions configures bounded construction behavior.
 type ConstructionOptions struct {
-	Limits     Limits
+	// Limits uses defaults only when the whole struct is zero; partially specified zero
+	// fields stay zero allowances.
+	Limits Limits
+	// Duplicates selects handling of repeated canonical identities; zero rejects them.
 	Duplicates DuplicatePolicy
-	Locales    LocalePolicy
+	// Locales rejects selected otherwise valid locale classes without changing text.
+	Locales LocalePolicy
 }
 
 // LocalePolicy explicitly rejects selected otherwise-valid BCP 47 classes.
 // Its zero value accepts und, mul, and private-use tags.
 type LocalePolicy struct {
-	RejectUnd        bool
-	RejectMul        bool
+	// RejectUnd rejects und and tags beginning und-.
+	RejectUnd bool
+	// RejectMul rejects mul and tags beginning mul-.
+	RejectMul bool
+	// RejectPrivateUse rejects any canonical tag containing private-use components.
 	RejectPrivateUse bool
 }
 
@@ -55,7 +79,8 @@ const (
 	defaultMaxTotalBytes = 8 << 20
 )
 
-// DefaultLimits returns conservative production defaults.
+// DefaultLimits returns explicit construction defaults, not universal process
+// memory/time or application policy limits.
 func DefaultLimits() Limits {
 	return Limits{
 		MaxLocales: defaultMaxLocales, MaxTagBytes: defaultMaxTagBytes,
@@ -75,8 +100,11 @@ func constructionLimits(limits Limits) (Limits, error) {
 
 // Entry associates text with a BCP 47 locale.
 type Entry struct {
+	// Locale is a typed locale canonicalized at construction.
 	Locale locale.Tag
-	Text   string
+	// Text is UTF-8 content preserved without normalization; empty is present, not
+	// missing.
+	Text string
 }
 
 // Text is an immutable collection of UTF-8 strings keyed by locale. Its zero
@@ -96,7 +124,11 @@ func NewTextWithLimits(limits Limits, entries ...Entry) (Text, error) {
 	return NewTextWithOptions(ConstructionOptions{Limits: limits}, entries...)
 }
 
-// NewTextWithOptions constructs Text with explicit duplicate and limit policy.
+// NewTextWithOptions snapshots entries with explicit duplicate/locale/limit policy.
+// All supplied entries, including discarded duplicates, consume count/text budgets.
+// Caller containers must not be mutated during the call. Negative bounds reject;
+// only wholly zero Limits gains defaults. Failure returns zero Text, not partial
+// content. Text strings are immutable values, not Unicode-normalized copies.
 func NewTextWithOptions(options ConstructionOptions, entries ...Entry) (Text, error) {
 	if options.Duplicates > LastWins {
 		return Text{}, ErrInvalidPolicy
@@ -164,7 +196,9 @@ func NewTextWithOptions(options ConstructionOptions, entries ...Entry) (Text, er
 	return Text{entries: owned, index: index}, nil
 }
 
-// TextFromMap parses locale keys and constructs an owned Text value.
+// TextFromMap parses strict raw keys under default admission and snapshots the
+// map. The caller must not mutate it during decoding; failure is content-free.
+// Map iteration makes the first reported failure order unspecified.
 func TextFromMap(values map[string]string) (Text, error) {
 	if len(values) > defaultMaxLocales {
 		return Text{}, fmt.Errorf("%w: locale count", ErrLimitExceeded)
@@ -241,8 +275,11 @@ func (t Text) Entries() []Entry { return append([]Entry(nil), t.entries...) }
 
 // Pair is a canonical string-keyed construction and wire convenience.
 type Pair struct {
+	// Locale is a strict raw locale key parsed at construction; it need not already use
+	// canonical casing.
 	Locale string
-	Text   string
+	// Text is UTF-8 content, including meaningful present-empty values.
+	Text string
 }
 
 // TextFromPairs parses strict BCP 47 pair keys and constructs an owned Text.
@@ -250,8 +287,10 @@ func TextFromPairs(pairs ...Pair) (Text, error) {
 	return TextFromPairsWithOptions(ConstructionOptions{}, pairs...)
 }
 
-// TextFromPairsWithOptions parses strict pair keys and applies explicit
-// construction, duplicate, locale-acceptance, and resource policies.
+// TextFromPairsWithOptions parses strict keys and applies explicit construction
+// policies. Raw keys keep a 255-byte parser ceiling independent of MaxTagBytes;
+// the configured bound is also checked after canonicalization. Input is borrowed
+// only for the call; output entries are owned and lexically ordered.
 func TextFromPairsWithOptions(options ConstructionOptions, pairs ...Pair) (Text, error) {
 	limits, err := constructionLimits(options.Limits)
 	if err != nil {
@@ -287,6 +326,8 @@ func (t Text) Pairs() []Pair {
 }
 
 // All returns a deterministic iterator over immutable locale and text values.
+// The yield callback runs synchronously without library locks or panic recovery.
+// Returning false stops iteration; its time and side effects are caller-owned.
 func (t Text) All() iter.Seq2[locale.Tag, string] {
 	return func(yield func(locale.Tag, string) bool) {
 		for _, entry := range t.entries {
@@ -297,7 +338,9 @@ func (t Text) All() iter.Seq2[locale.Tag, string] {
 	}
 }
 
-// Builder collects entries and copies them into an immutable Text on Build.
+// Builder accumulates mutable entries without construction admission until Build.
+// It requires caller synchronization when shared; returned Text snapshots remain
+// independent of future additions. Zero Builder uses default construction policy.
 type Builder struct {
 	options ConstructionOptions
 	entries []Entry
@@ -332,7 +375,8 @@ func (b *Builder) AddString(rawLocale, text string) error {
 	return nil
 }
 
-// Build validates and copies the builder's current entries.
+// Build validates and snapshots current entries without clearing the builder.
+// Nil builder produces empty Text. Feeding a builder is not bounded by Build limits.
 func (b *Builder) Build() (Text, error) {
 	if b == nil {
 		return Text{}, nil
@@ -340,7 +384,8 @@ func (b *Builder) Build() (Text, error) {
 	return NewTextWithOptions(b.options, b.entries...)
 }
 
-// Set returns a copy with locale added or replaced.
+// Set reconstructs a copy with locale added/replaced using DefaultLimits. Custom
+// construction policy is not retained; valid larger receivers can fail revalidation.
 func (t Text) Set(tag locale.Tag, value string) (Text, error) {
 	entries := t.Entries()
 	canonical, err := tag.Canonical()
@@ -355,7 +400,10 @@ func (t Text) Set(tag locale.Tag, value string) (Text, error) {
 	return NewText(entries...)
 }
 
-// Remove returns a copy without locale. Removing an absent locale is a no-op.
+// Remove removes one locale using default-limit reconstruction; absent/invalid
+// locale is a no-op. Existing limitation: reconstruction errors are discarded,
+// so a valid custom-limit receiver can silently produce empty Text. No originating
+// policy is retained; use explicit bounded reconstruction when this matters.
 func (t Text) Remove(tag locale.Tag) Text {
 	i, ok := t.canonicalIndex(tag)
 	if !ok {
@@ -369,7 +417,10 @@ func (t Text) Remove(tag locale.Tag) Text {
 }
 
 // Filter returns entries accepted by predicate in deterministic order. A nil
-// predicate returns the receiver unchanged.
+// predicate returns the receiver unchanged. Callback calls are synchronous in
+// canonical order, without forced cancellation or panic recovery. Existing
+// limitation: default-limit reconstruction errors are discarded and can yield
+// empty Text for a valid custom-limit receiver. Callback effects are not rolled back.
 func (t Text) Filter(predicate func(locale.Tag, string) bool) Text {
 	if predicate == nil {
 		return t
@@ -384,7 +435,10 @@ func (t Text) Filter(predicate func(locale.Tag, string) bool) Text {
 	return result
 }
 
-// Map returns a copy with every text transformed transactionally.
+// Map runs synchronous transforms in canonical order, then revalidates using
+// DefaultLimits, not the receiver's originating policy. Errors return zero Text
+// without a partial value, but callback side effects are not rolled back. The
+// callback is borrowed and owns cancellation, reentrancy and concurrent-call safety.
 func (t Text) Map(transform func(locale.Tag, string) (string, error)) (Text, error) {
 	if transform == nil {
 		return Text{}, ErrInvalidPolicy
@@ -454,15 +508,23 @@ const (
 	EmptyIsAbsent
 )
 
-// MergeResolver returns the text to retain for one canonical conflict.
+// MergeResolver synchronously returns text for a canonical conflict. It is
+// borrowed, not made concurrency-safe or cancellable; errors propagate unchanged
+// and may contain content. External side effects are not rolled back.
 type MergeResolver func(locale locale.Tag, left, right string) (string, error)
 
 // MergeOptions configures explicit conflict, empty, and output bounds.
 type MergeOptions struct {
+	// Conflicts selects overlapping-locale resolution; zero preserves the left value.
 	Conflicts MergePolicy
-	Empty     EmptyPolicy
-	Resolver  MergeResolver
-	Limits    Limits
+	// Empty selects whether empty strings participate; zero treats them as present values.
+	Empty EmptyPolicy
+	// Resolver is borrowed synchronous caller code, required for ResolveConflict. Its side
+	// effects are not transactional.
+	Resolver MergeResolver
+	// Limits bounds the final reconstructed output, not callback execution or all
+	// temporary merge storage.
+	Limits Limits
 }
 
 // Merge combines two values using an explicit conflict policy.
@@ -470,7 +532,10 @@ func (t Text) Merge(other Text, policy MergePolicy) (Text, error) {
 	return t.MergeWithOptions(other, MergeOptions{Conflicts: policy})
 }
 
-// MergeWithOptions combines values using named conflict and empty semantics.
+// MergeWithOptions combines values with explicit conflict/empty/output policy.
+// Resolver calls occur in the overlay's canonical order before final output
+// validation; no partial Text is returned on failure, but callback effects remain.
+// Limits bound final construction, not preliminary map allocation or callback time.
 func (t Text) MergeWithOptions(other Text, options MergeOptions) (Text, error) {
 	if options.Conflicts > ResolveConflict || options.Empty > EmptyIsAbsent {
 		return Text{}, ErrInvalidPolicy

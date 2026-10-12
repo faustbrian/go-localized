@@ -20,7 +20,8 @@ func ExactValue(value localized.Text, tag locale.Tag) (apiquery.Value, bool) {
 
 // ExactPredicate creates one api-query predicate from an exact localized
 // value. Missing returns localized.ErrMissingLocale; present-empty remains an
-// explicit empty string for the schema to accept or reject.
+// explicit empty string for the schema to accept or reject. Name/operator/arity
+// validation, policy enforcement, query execution and cancellation are not performed.
 func ExactPredicate(
 	name string,
 	operator apiquery.Operator,

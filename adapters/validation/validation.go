@@ -45,7 +45,8 @@ const (
 	NFKD = legacy.NFKD
 )
 
-// Validate applies every rule to every present value in deterministic order.
+// Validate delegates canonical entry/rule-order evaluation, stopping at the first
+// error. An empty collection invokes no rules, including nil rules.
 func Validate(value localized.Text, rules ...Rule) error {
 	return legacy.Validate(value, rules...)
 }

@@ -23,8 +23,9 @@ adapters/validation ──────┘
 ```
 
 There is no reverse dependency from core to an adapter. Observers receive only
-bounded outcome metadata after resolution and are panic-isolated. No operation
-starts a goroutine or uses a cache.
+bounded outcome metadata after resolution and are panic-isolated. They still run
+synchronously and can block; shared observers require concurrent-call safety.
+No operation starts a goroutine or uses a cache.
 
 Released `localized*` adapter paths own the existing implementation and public
 named identities. Target-oriented `adapters/*` packages delegate to those

@@ -14,17 +14,23 @@ const defaultMaxInputBytes = 9 << 20
 
 // Entry is the stable entry-array wire representation.
 type Entry struct {
+	// Locale is the strict raw locale member, canonicalized at construction.
 	Locale string `json:"locale"`
-	Text   string `json:"text"`
+	// Text is the content; omitted/null text currently decodes as empty via encoding/json.
+	Text string `json:"text"`
 }
 
 // DecodeOptions bounds entry-array input and constructed values.
 type DecodeOptions struct {
+	// MaxInputBytes caps raw bytes before decoding; zero defaults to 9 MiB and negatives
+	// reject.
 	MaxInputBytes int
-	Limits        localized.Limits
+	// Limits bounds supplied entries and text; only wholly zero uses defaults.
+	Limits localized.Limits
 }
 
-// MarshalEntries encodes deterministic canonical entry order.
+// MarshalEntries encodes deterministic canonical entry order into fresh bytes.
+// It adds no output-byte ceiling; JSON escaping may exceed decoder defaults.
 func MarshalEntries(value localized.Text) ([]byte, error) {
 	entries := value.Entries()
 	wire := make([]Entry, len(entries))
@@ -34,7 +40,13 @@ func MarshalEntries(value localized.Text) ([]byte, error) {
 	return json.Marshal(wire)
 }
 
-// UnmarshalEntries strictly decodes one bounded entry array.
+// UnmarshalEntries incrementally decodes an admitted entry array and rejects
+// ordinary unknown fields, canonical duplicate locales and trailing input.
+// Existing encoding/json struct limitations apply: case aliases are accepted,
+// repeated fields overwrite, and missing/null text becomes present-empty.
+// Unpaired surrogate escapes can repair to U+FFFD despite raw UTF-8 admission.
+// These are existing wire limitations, not a strict object-shape guarantee.
+// Errors return zero Text; the caller must not mutate input during decoding.
 func UnmarshalEntries(data []byte, options DecodeOptions) (localized.Text, error) {
 	maxInput := options.MaxInputBytes
 	if maxInput < 0 {

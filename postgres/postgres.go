@@ -1,4 +1,8 @@
-// Package postgres provides explicit SQL and pgx JSONB integration.
+// Package postgres provides explicit SQL values and pgx JSONB codecs.
+// It owns no database connection, pool, transaction, query or migration lifecycle.
+// Already-fetched data is decoded synchronously; database cancellation and ingress
+// byte admission remain caller-owned. Nullable wrappers and codecs are mutable
+// caller-owned objects, unlike their immutable localized payloads.
 package postgres
 
 import (
@@ -22,8 +26,11 @@ const ErrUnsupportedDatabaseType Error = "localized postgres: unsupported databa
 
 // Text is a nullable localized value for database/sql boundaries.
 type Text struct {
+	// Localized is the immutable payload; meaningful only when Valid is true.
 	Localized localized.Text
-	Valid     bool
+	// Valid distinguishes present empty content from null/absent wrapper state; it is
+	// caller-owned mutable state.
+	Valid bool
 }
 
 // NewText creates a non-null SQL value.
@@ -39,7 +46,10 @@ func (t Text) Value() (driver.Value, error) {
 	return localized.EncodeJSON(t.Localized)
 }
 
-// Scan implements sql.Scanner transactionally for JSON text and SQL NULL.
+// Scan assigns only after successful strict default-limit JSON decoding; SQL NULL
+// resets the wrapper. Byte input is borrowed during decoding, not retained. String
+// input is copied before byte admission, so cap driver row sizes before this call.
+// JSON null is not SQL NULL and is rejected. A nil receiver returns a fixed error.
 func (t *Text) Scan(source any) error {
 	if t == nil {
 		return ErrUnsupportedDatabaseType
@@ -66,7 +76,10 @@ func (t *Text) Scan(source any) error {
 }
 
 // JSONBCodec returns a pgx codec that preserves generic JSONB behavior while
-// using localized's canonical encoding and strict decoding for Text values.
+// using localized's canonical encoding and strict decoding for Text values. Each
+// call returns a new mutable codec; callers own registration and synchronization.
+// A nil *localized.Text encodes JSON null, which strict localized decoding rejects.
+// Generic branches use encoding/json and do not inherit core content-free errors.
 func JSONBCodec() *pgtype.JSONBCodec {
 	return &pgtype.JSONBCodec{
 		Marshal: func(value any) ([]byte, error) {
@@ -101,8 +114,10 @@ func JSONBCodec() *pgtype.JSONBCodec {
 
 // Row is a normalized persistence representation with a canonical locale key.
 type Row struct {
+	// Locale is the canonical row key on output and a strict raw key on input.
 	Locale string
-	Text   string
+	// Text is the stored UTF-8 content, including empty text.
+	Text string
 }
 
 // Rows returns deterministic caller-owned normalized rows.
@@ -115,7 +130,9 @@ func Rows(value localized.Text) []Row {
 	return rows
 }
 
-// FromRows constructs an immutable value from normalized rows.
+// FromRows admits row count/raw tag bytes under defaults before constructing an
+// immutable value. Input is borrowed during the call; canonical duplicates reject
+// and failure returns zero Text rather than a partial row set.
 func FromRows(rows []Row) (localized.Text, error) {
 	limits := localized.DefaultLimits()
 	if len(rows) > limits.MaxLocales {

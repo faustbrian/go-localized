@@ -29,35 +29,56 @@ const (
 
 // Preference is a requested locale with an HTTP-style quality weight.
 type Preference struct {
+	// Locale is canonicalized before weight filtering; zero is invalid even for weight
+	// zero.
 	Locale locale.Tag
+	// Weight is finite in [0,1]; zero excludes a valid preference, ties preserve input
+	// order.
 	Weight float64
 }
 
 // Result describes resolution without conflating missing and present-empty.
 type Result struct {
-	Kind      Kind
+	// Kind classifies exact, matched, configured fallback, default or missing resolution.
+	Kind Kind
+	// Requested is the canonical requested preference/graph locale; flat fallback uses its
+	// candidate and wildcard uses zero.
 	Requested locale.Tag
-	Locale    locale.Tag
-	Text      string
-	Present   bool
-	Empty     bool
+	// Locale is the selected stored locale when Present is true.
+	Locale locale.Tag
+	// Text is the selected immutable string, potentially sensitive content.
+	Text string
+	// Present distinguishes successful empty text from missing.
+	Present bool
+	// Empty is true only for a selected present-empty value, not missing.
+	Empty bool
 }
 
 const maxPreferences = 64
 
 // Options bounds matching and attaches an optional content-free observer.
 type Options struct {
+	// MaxCandidates caps supplied preferences before zero-weight filtering; zero defaults
+	// to 64 and negatives reject.
 	MaxCandidates int
-	Observer      Observer
+	// Observer is a borrowed synchronous callback; panics are isolated, blocking and
+	// concurrency safety remain caller-owned.
+	Observer Observer
 }
 
 // Best performs standards-aligned language matching. It never applies an
-// application fallback or changes the stored value.
+// application fallback or changes the stored value. Preferences are ordered by
+// descending weight with stable ties; each preference tries exact presence then
+// the pinned x/text matcher before a lower-priority preference is considered.
+// This delegates language matching, not a new independent CLDR conformance claim.
 func Best(value localized.Text, preferences ...Preference) (Result, error) {
 	return BestWithOptions(value, Options{}, preferences...)
 }
 
-// BestWithOptions performs standards matching with explicit limits and hooks.
+// BestWithOptions copies preferences and applies explicit count admission,
+// canonical locale validation and synchronous observation. Supported values are
+// lexically ordered, and approximate choices follow the pinned x/text tables.
+// No context/time deadline or fallback plan is applied.
 func BestWithOptions(value localized.Text, options Options, preferences ...Preference) (Result, error) {
 	maxCandidates := options.MaxCandidates
 	if maxCandidates < 0 {
@@ -140,7 +161,8 @@ type FallbackPlan struct {
 }
 
 // NewFallbackPlan validates and copies an ordered exact-locale chain. A
-// positive max bounds both the chain and optional default candidate.
+// positive max bounds both chain and default. Zero is a zero allowance here,
+// unlike Options.MaxCandidates defaults. Nil default means no final default.
 func NewFallbackPlan(candidates []locale.Tag, defaultTag *locale.Tag, max int) (FallbackPlan, error) {
 	count := len(candidates)
 	if defaultTag != nil {
@@ -184,7 +206,8 @@ func NewFallbackPlan(candidates []locale.Tag, defaultTag *locale.Tag, max int) (
 }
 
 // Resolve performs exact lookup along the configured chain, then the optional
-// default. It never materializes a fallback entry.
+// default. It never materializes a fallback entry. A present-empty candidate
+// succeeds immediately; the zero plan resolves missing without a default.
 func (p FallbackPlan) Resolve(value localized.Text) Result {
 	for _, candidate := range p.candidates {
 		if text, ok := value.Get(candidate); ok {

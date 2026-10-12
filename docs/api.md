@@ -67,7 +67,9 @@
 
 - `Entry`: `locale`/`text` JSON entry.
 - `DecodeOptions`: entry-array input and value limits.
-- `MarshalEntries`, `UnmarshalEntries`: stable strict entry arrays.
+- `MarshalEntries`, `UnmarshalEntries`: stable entry arrays with incremental
+  admission and canonical duplicate detection. The decoding limitations in
+  [semantics](semantics.md#existing-operation-and-decoder-limitations) apply.
 
 ## `http`
 
@@ -98,8 +100,9 @@
 
 `EncodeJSON`/`DecodeJSON`, `EncodeYAML`/`DecodeYAML`,
 `EncodeTOML`/`DecodeTOML`, and
-`EncodeMessagePack`/`DecodeMessagePack` delegate bounded I/O to corresponding
-`wire` packages and revalidate localized ownership.
+`EncodeMessagePack`/`DecodeMessagePack` delegate in-memory encoding/decoding to
+corresponding `wire` packages and apply default localized construction. They own no transport
+I/O or cancellation; upstream parser and error behavior remains upstream-owned.
 
 ## `adapters/config`
 
@@ -116,8 +119,9 @@
 
 ## `adapters/httpclient`
 
-- `WithPreferences`: write or remove a canonical bounded `Accept-Language`
-  header on an immutable http-client request spec.
+- `WithPreferences`: write or remove a canonical `Accept-Language` header on an
+  immutable http-client request spec. Outbound admission derives from the supplied
+  list/header sizes, so callers must bound untrusted preferences themselves.
 - `SelectResponse`: select from the originating request preferences using
   matching only, never configured fallback.
 - `Error`, `ErrInvalidResponse`: safe response-shape error identity.
@@ -131,5 +135,5 @@ consumer can migrate imports without changing values, defaults, or behavior.
 
 - `Builder`, `New`, `Add`, `Build`: fail-fast fixtures.
 - `AssertEqual`, `AssertExact`, `AssertResult`: consumer assertions.
-- `CanonicalizationVector`, `CanonicalizationVectors`: caller-owned standards
-  cases with provenance labels.
+- `CanonicalizationVector`, `CanonicalizationVectors`: caller-owned synthetic
+  cases with provenance labels, not an independent official conformance oracle.

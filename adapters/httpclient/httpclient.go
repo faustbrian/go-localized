@@ -17,7 +17,9 @@ type Error = legacy.Error
 const ErrInvalidResponse = legacy.ErrInvalidResponse
 
 // WithPreferences returns a request spec with a canonical Accept-Language
-// header at layer. An empty preference list removes the header at that layer.
+// header at layer. Empty preferences remove that layer's header. The full header
+// is built before admission; derived size bounds are not inbound defaults. Bound
+// untrusted preferences before calling; this helper sends no request.
 func WithPreferences(
 	spec client.RequestSpec,
 	layer client.RequestLayer,

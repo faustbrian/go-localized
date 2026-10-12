@@ -1,4 +1,6 @@
-// Package localizedtest provides consumer-facing builders, vectors, and assertions.
+// Package localizedtest provides consumer fixture builders, vectors and assertions.
+// These compare application expectations, not independent official conformance.
+// Use synthetic content: failed assertions may print text and private locale IDs.
 package localizedtest
 
 import (
@@ -9,7 +11,8 @@ import (
 	localizedmatch "github.com/faustbrian/go-localized/v5/match"
 )
 
-// Builder fails its test immediately when fixture construction is invalid.
+// Builder is mutable caller-owned fixture state, requiring synchronization if
+// shared. It fails the test on invalid construction; it is not an ingress parser.
 type Builder struct {
 	t       testing.TB
 	entries []localized.Entry
@@ -69,9 +72,12 @@ func AssertResult(t testing.TB, result localizedmatch.Result, kind localizedmatc
 
 // CanonicalizationVector is a standards-oriented parser fixture.
 type CanonicalizationVector struct {
-	Input     string
+	// Input is the synthetic raw tag fixture.
+	Input string
+	// Canonical is its expected pinned-dependency identity.
 	Canonical string
-	Source    string
+	// Source is a provenance label, not an independent official conformance oracle.
+	Source string
 }
 
 // CanonicalizationVectors returns caller-owned BCP 47 canonicalization cases.

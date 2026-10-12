@@ -105,8 +105,8 @@ existing consumers.
 - missing and present-empty are distinguished by every lookup result;
 - iteration and canonical encoding are lexically deterministic;
 - fallback never inserts an invented translation;
-- parser, locale, text, matching, fallback, merge, and telemetry work is
-  bounded;
+- parser bytes, entry content and candidate/graph counts have explicit limits;
+  these are not total heap, callback-time or cancellation guarantees;
 - production code has no mutable globals, unsafe, cgo, `go:linkname`, cache,
   goroutine, registry refresh, or process-global locale;
 - package-generated errors and events never include localized content.

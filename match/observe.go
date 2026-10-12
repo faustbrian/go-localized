@@ -13,13 +13,22 @@ const (
 // Event contains bounded low-cardinality resolution telemetry. It intentionally
 // excludes requested, resolved, and content values.
 type Event struct {
-	Operation      Operation
-	Kind           Kind
+	// Operation identifies preference matching or configured fallback.
+	Operation Operation
+	// Kind is the completed resolution classification.
+	Kind Kind
+	// CandidateCount is accepted preference count or configured edge count, not actual
+	// probes or locale identities.
 	CandidateCount int
 }
 
-// Observer receives completed resolution events and cannot alter outcomes.
+// Observer receives completed resolution events. notify isolates panics but
+// calls remain synchronous; blocking observers delay return and concurrent
+// readers require a concurrency-safe implementation. No lock is held or worker
+// detached, and external callback effects remain caller-owned.
 type Observer interface {
+	// Observe receives a completed content-free event synchronously. Implementations
+	// own bounded execution and concurrent-call safety.
 	Observe(Event)
 }
 

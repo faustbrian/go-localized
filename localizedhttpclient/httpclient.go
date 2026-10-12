@@ -22,7 +22,10 @@ func (e Error) Error() string { return string(e) }
 const ErrInvalidResponse Error = "localized http client: invalid response"
 
 // WithPreferences returns a request spec with a canonical Accept-Language
-// header at layer. An empty preference list removes the header at that layer.
+// header at layer. Empty preferences remove that layer's header. Inputs are
+// trusted: the complete header is built before validation and its limits derive
+// from actual list/header sizes, not the inbound adapter's defaults. Bound
+// untrusted lists before this call; no network request is sent.
 func WithPreferences(
 	spec httpclient.RequestSpec,
 	layer httpclient.RequestLayer,

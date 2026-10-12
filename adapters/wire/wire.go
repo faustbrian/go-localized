@@ -24,7 +24,8 @@ func EncodeYAML(value localized.Text, options yamlwire.EncodeOptions) ([]byte, e
 	return legacy.EncodeYAML(value, options)
 }
 
-// DecodeYAML decodes a strict string map and validates canonical locale keys.
+// DecodeYAML delegates wire string-map parsing and default localized construction;
+// raw duplicate-key visibility is upstream-owned.
 func DecodeYAML(data []byte, options yamlwire.DecodeOptions) (localized.Text, error) {
 	return legacy.DecodeYAML(data, options)
 }
@@ -45,7 +46,8 @@ func EncodeMessagePack(value localized.Text, options msgpackwire.EncodeOptions) 
 	return legacy.EncodeMessagePack(value, options)
 }
 
-// DecodeMessagePack decodes a strict string map and validates locale keys.
+// DecodeMessagePack delegates wire string-map parsing and default localized
+// construction; raw duplicate-key visibility is upstream-owned.
 func DecodeMessagePack(data []byte, options msgpackwire.DecodeOptions) (localized.Text, error) {
 	return legacy.DecodeMessagePack(data, options)
 }

@@ -25,12 +25,20 @@ const defaultMaxJSONBytes = 9437184
 
 // DecodeOptions bounds JSON parsing and selects strictness.
 type DecodeOptions struct {
-	Mode          JSONMode
+	// Mode selects strict object decoding or the explicit permissive null/underscore
+	// bridge.
+	Mode JSONMode
+	// MaxInputBytes caps raw bytes before parsing; zero defaults to 9 MiB and negatives
+	// reject.
 	MaxInputBytes int
-	Limits        Limits
+	// Limits bounds constructed values; only wholly zero uses defaults.
+	Limits Limits
 }
 
-// EncodeJSON returns the deterministic canonical JSON object representation.
+// EncodeJSON returns a fresh deterministic canonical object representation.
+// Encoding has no output-byte ceiling; escaping can produce more bytes than
+// default DecodeJSON admission permits even for a default-limit Text. Callers
+// must choose output and subsequent decoder limits at their own wire boundary.
 func EncodeJSON(value Text) ([]byte, error) {
 	var buffer bytes.Buffer
 	buffer.WriteByte('{')
@@ -48,7 +56,12 @@ func EncodeJSON(value Text) ([]byte, error) {
 	return buffer.Bytes(), nil
 }
 
-// DecodeJSON parses one bounded localized JSON object without partial results.
+// DecodeJSON parses one bounded object and rejects canonical duplicate locale
+// keys, non-string values and trailing input without partial Text. Raw malformed
+// UTF-8 is rejected before parsing; existing encoding/json behavior can repair
+// unpaired surrogate escapes in text to U+FFFD. This is a wire limitation, not
+// an intentional specification interpretation. Entry/text limits are checked as
+// decoded tokens arrive; input byte admission is not a total allocation ceiling.
 func DecodeJSON(data []byte, options DecodeOptions) (Text, error) {
 	if options.Mode > PermissiveJSON {
 		return Text{}, ErrInvalidPolicy
@@ -153,7 +166,8 @@ func parseJSONLocale(raw string, mode JSONMode) (locale.Tag, error) {
 // MarshalJSON implements json.Marshaler with canonical object encoding.
 func (t Text) MarshalJSON() ([]byte, error) { return EncodeJSON(t) }
 
-// UnmarshalJSON implements json.Unmarshaler using strict bounded decoding.
+// UnmarshalJSON uses strict bounded object decoding and assigns only on success.
+// A nil receiver returns ErrInvalidEncoding; prior receiver state survives failure.
 func (t *Text) UnmarshalJSON(data []byte) error {
 	if t == nil {
 		return ErrInvalidEncoding

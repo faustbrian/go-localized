@@ -19,23 +19,36 @@ const (
 
 // Candidate is one ordered configured fallback operation.
 type Candidate struct {
-	Kind   CandidateKind
+	// Kind selects exact identity or strict-parent traversal before following a configured
+	// chain.
+	Kind CandidateKind
+	// Locale is canonicalized and copied during plan construction.
 	Locale locale.Tag
 }
 
 // Chain configures candidates to try after From is absent.
 type Chain struct {
-	From       locale.Tag
+	// From is the unique canonical source identity for this fallback chain.
+	From locale.Tag
+	// Candidates is an ordered copied list; duplicate Kind/Locale pairs are rejected.
 	Candidates []Candidate
 }
 
 // PlanOptions bounds a graph and provides an optional final default.
 // MaxCandidates separately bounds source-chain count and candidate-edge count.
 type PlanOptions struct {
-	Default       *locale.Tag
-	MaxDepth      int
+	// Default is a copied optional final exact locale, not charged against candidate-edge
+	// count.
+	Default *locale.Tag
+	// MaxDepth is a required positive configured-chain path ceiling, not a locale-parent
+	// or callback time budget.
+	MaxDepth int
+	// MaxCandidates separately caps source chains and total candidate edges; zero allows
+	// neither.
 	MaxCandidates int
-	Observer      Observer
+	// Observer is borrowed for the plan lifetime and can be invoked concurrently by
+	// readers.
+	Observer Observer
 }
 
 // Plan is an immutable validated fallback graph.
@@ -46,7 +59,11 @@ type Plan struct {
 	candidates int
 }
 
-// NewPlan validates, bounds, copies, and cycle-checks fallback chains.
+// NewPlan admits source/edge counts before copying, canonicalizes candidates and
+// validates cycles and longest configured-chain depth. The optional default is
+// copied but not charged as a candidate edge. Observer is borrowed for the plan
+// lifetime; immutable readers may invoke it concurrently. No locale-parent depth
+// or callback-time budget is added by these graph limits.
 func NewPlan(chains []Chain, options PlanOptions) (Plan, error) {
 	if options.MaxDepth <= 0 {
 		return Plan{}, ErrDepthLimit
@@ -165,7 +182,11 @@ func validateGraph(chains map[string]Chain, maxDepth int) error {
 }
 
 // Resolve checks the requested locale, traverses its configured graph, and
-// finally checks the optional default without changing the source value.
+// finally checks the optional default without changing the source value. Empty
+// strings are successful presence. ParentRange starts with the strict parent of
+// its candidate, excluding the candidate itself; parent identities come from the
+// pinned dependency. Invalid requests return Missing without observation. The
+// zero Plan still performs exact lookup, with no configured fallback/default.
 func (p Plan) Resolve(value localized.Text, requested locale.Tag) Result {
 	canonicalRequested, err := requested.Canonical()
 	if err != nil {

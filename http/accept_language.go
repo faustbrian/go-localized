@@ -20,12 +20,18 @@ type Error string
 func (e Error) Error() string { return string(e) }
 
 const (
-	ErrCandidateLimit   Error = "localized http: candidate limit exceeded"
-	ErrDuplicateRange   Error = "localized http: duplicate range"
-	ErrHeaderLimit      Error = "localized http: header limit exceeded"
+	// ErrCandidateLimit reports an HTTP preference-item count refusal.
+	ErrCandidateLimit Error = "localized http: candidate limit exceeded"
+	// ErrDuplicateRange reports a repeated canonical HTTP range, including wildcard.
+	ErrDuplicateRange Error = "localized http: duplicate range"
+	// ErrHeaderLimit reports invalid or exceeded raw header admission.
+	ErrHeaderLimit Error = "localized http: header limit exceeded"
+	// ErrInvalidParameter reports a malformed or unsupported HTTP parameter.
 	ErrInvalidParameter Error = "localized http: invalid parameter"
-	ErrInvalidRange     Error = "localized http: invalid range"
-	ErrInvalidWeight    Error = "localized http: invalid weight"
+	// ErrInvalidRange reports malformed range text or UTF-8.
+	ErrInvalidRange Error = "localized http: invalid range"
+	// ErrInvalidWeight reports malformed or out-of-range quality text.
+	ErrInvalidWeight Error = "localized http: invalid weight"
 )
 
 const (
@@ -35,12 +41,17 @@ const (
 
 // ParseOptions bounds Accept-Language parser work.
 type ParseOptions struct {
-	MaxBytes      int
+	// MaxBytes caps raw header bytes; zero defaults to 8 KiB and negatives reject.
+	MaxBytes int
+	// MaxCandidates caps comma-separated items before sorting; zero defaults to 64 and
+	// negatives reject.
 	MaxCandidates int
 }
 
 // ParseAcceptLanguage parses ordered RFC-style preferences without applying a
-// default locale. Wildcard uses the zero locale only inside this adapter.
+// default locale. Results retain input order; canonical duplicate ranges reject
+// even at weight zero. Wildcard uses the zero locale only inside this adapter.
+// Byte/count limits are admission bounds, not deadlines or total heap bounds.
 func ParseAcceptLanguage(header string, options ParseOptions) ([]localizedmatch.Preference, error) {
 	maxBytes := options.MaxBytes
 	if maxBytes < 0 {
@@ -145,7 +156,11 @@ func digitsOnly(value string) bool {
 	return true
 }
 
-// Select parses preferences and performs matching without configured fallback.
+// Select parses preferences and tries descending weights with stable ties. Each
+// non-wildcard candidate delegates to Best before the next preference; wildcard
+// chooses the lexically first stored locale. Zero-weight ranges are not a global
+// exclusion set for wildcard or approximate matches. No configured fallback,
+// request I/O, cancellation or response-header policy is owned here.
 func Select(value localized.Text, header string, options ParseOptions) (localizedmatch.Result, error) {
 	preferences, err := ParseAcceptLanguage(header, options)
 	if err != nil {
