@@ -1,5 +1,7 @@
 # Dependencies
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 Core depends on `international/locale` for bounded BCP 47 identity,
 canonicalization, parent fallback, and registry provenance. It uses `x/text`
 privately for language matching and Unicode normalization. PostgreSQL and
@@ -14,3 +16,6 @@ Owned dependencies are consumed as released modules. `go.mod` contains no
 checkout-relative replacements or workspace-only resolution. The
 checksum-pinned `go-library-tools` contract validates the module graph and
 prevents dependency or action drift. See [compatibility](compatibility.md).
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

@@ -1,5 +1,7 @@
 # Architecture
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 The root package owns immutable text entries, exact lookup, construction,
 persistent transforms, merge policy, limits, equality, hashing, and canonical
 JSON. It does not import HTTP, database, configuration, validation, or wire
@@ -45,3 +47,6 @@ normalization; it does not appear in the public API.
 The package intentionally omits `Value[T]` in v1. Arbitrary mutable `T` values
 cannot satisfy the same understandable immutable ownership guarantee without a
 required clone contract. Text receives the strongest supported API.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

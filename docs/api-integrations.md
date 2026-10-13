@@ -1,5 +1,7 @@
 # API integration examples
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 Localized fields remain ordinary JSON objects. Protocol adapters must not add
 matching, fallback, pluralization, or a default locale.
 
@@ -76,3 +78,6 @@ canonical BCP 47 key contract:
 OpenRPC/JSON Schema cannot express the complete pinned registry membership
 contract as a key regex. Parse keys with `international/locale` through this
 package rather than claiming regex equivalence.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

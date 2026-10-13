@@ -1,5 +1,7 @@
 # Adoption guide
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Major identity
 
 The root and package paths use `github.com/faustbrian/go-localized/v5`.
@@ -87,3 +89,6 @@ The original `localizedconfig`, `localizedhttpclient`, `localizedquery`,
 New code should prefer target-oriented `adapters/*` imports. Callers can either
 adopt the canonical package identifier or keep their old identifier with an
 explicit import alias.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

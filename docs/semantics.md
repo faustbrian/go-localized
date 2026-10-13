@@ -1,5 +1,7 @@
 # Normative semantics
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Lookup and resolution
 
 | Operation | Input | May choose another tag | Uses app default | Mutates value |
@@ -118,3 +120,6 @@ parent, excluding that candidate. HTTP wildcard picks the first lexical stored
 locale and zero-weight ranges are not a global exclusion set for wildcard or
 approximate selection. These helpers do not perform network I/O or response
 header policy.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

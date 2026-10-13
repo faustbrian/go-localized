@@ -1,5 +1,7 @@
 # Cookbook
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Regional fallback
 
 Create a `match.Plan` from `fr-CA` to exact `fr` and then an application
@@ -55,3 +57,6 @@ value := localizedtest.New(t).Add("en", "Hello").Add("fi", "Hei").Build()
 english, _ := locale.Parse("en")
 localizedtest.AssertExact(t, value, english, "Hello")
 ```
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

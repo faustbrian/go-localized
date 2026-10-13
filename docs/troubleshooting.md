@@ -1,5 +1,7 @@
 # Troubleshooting
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## `ErrDuplicateLocale`
 
 Two raw keys canonicalized to the same tag, such as `EN-us` and `en-US`.
@@ -40,3 +42,6 @@ distinguish SQL NULL.
 Continue locally with `make check` and the bounded package gates. The hosted
 workflow supplies the PostgreSQL matrix and release-level verification. Do not
 describe a partial local run as release-ready.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

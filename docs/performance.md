@@ -1,5 +1,7 @@
 # Performance guide
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 Use exact lookup for hot paths: it is map-backed and currently reports zero
 allocations in the smoke benchmark. Shared `Text` and `Plan` values require no
 locks for concurrent reads.
@@ -33,3 +35,6 @@ and canonical JSON decoding 384 allocations per operation. The ceilings are
 guardrails against amplification, not optimization targets. A deliberate
 toolchain or dependency update MAY revise them only with recorded benchmark
 evidence and changelog classification.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

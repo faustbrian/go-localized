@@ -1,5 +1,7 @@
 # Migration guide
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## v5 successor composition
 
 The source uses `github.com/faustbrian/go-localized/v5` at the repository
@@ -121,3 +123,6 @@ SQL is in `postgres/testdata/normalized-rows.sql`.
 - dual-read without silently preferring one representation;
 - never materialize fallback results into stored translations;
 - retain rollback data until semantic counts match.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

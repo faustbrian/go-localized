@@ -1,5 +1,7 @@
 # Specification decisions
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 This register records observable choices where BCP 47, the IANA Language
 Subtag Registry, RFC 4647, RFC 9110, RFC 8259, or a maintained dependency does
 not by itself select one package behavior. Source pins, update monitoring,
@@ -259,3 +261,6 @@ requirement strength `MAY`.
 
 None. New ambiguity, errata, registry drift, matching policy, or wire behavior
 must be registered before it changes observable behavior.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

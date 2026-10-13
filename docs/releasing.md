@@ -1,5 +1,7 @@
 # Releasing
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 1. Finish implementation and documentation locally with a clean worktree.
 2. Run `go mod tidy -diff`, `make check-full`, and the selected shared release
    rehearsal. Ordinary `make check` and `make ci` are bounded local routes, not
@@ -16,3 +18,6 @@
    resolution before reporting publication complete.
 
 No release may claim successful hosted checks from local workflow syntax alone.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

@@ -1,5 +1,7 @@
 # Quickstart
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Construct and look up exactly
 
 ```go
@@ -101,3 +103,6 @@ err = db.QueryRowContext(ctx,
 
 With pgx, register `postgres.JSONBCodec()` for JSONB OID on the connection type
 map. See [migration](migration.md) before changing existing columns.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

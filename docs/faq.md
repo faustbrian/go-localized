@@ -1,5 +1,7 @@
 # FAQ
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Is this a translation catalog?
 
 No. It stores one immutable localized domain value. It does not load messages,
@@ -40,3 +42,6 @@ boundary. SQL adapters pass values as parameters; they do not construct SQL.
 ## Can I configure a default locale globally?
 
 No. Pass a fallback plan at the operation or application boundary.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

@@ -1,5 +1,7 @@
 # Compatibility and provenance
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Toolchain and dependencies
 
 Published Localized v5.0.0 selects International v4.0.0, HTTP Client
@@ -47,3 +49,6 @@ query remains v4 and validator remains v2. Types cannot be mixed across module
 majors. The original v1–v4 API baselines are preserved; v5 uses a separate
 projection. Matcher choices may change
 only with a documented locale-data dependency update and compatibility vectors.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

@@ -1,5 +1,7 @@
 # API reference
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 ## Root package
 
 ### Values and construction
@@ -137,3 +139,6 @@ consumer can migrate imports without changing values, defaults, or behavior.
 - `AssertEqual`, `AssertExact`, `AssertResult`: consumer assertions.
 - `CanonicalizationVector`, `CanonicalizationVectors`: caller-owned synthetic
   cases with provenance labels, not an independent official conformance oracle.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.

@@ -1,5 +1,7 @@
 # Security model
 
+[Documentation index](README.md) · [Repository entry](../README.md)
+
 Model version: 2. This document describes the v3.0.0 source published from
 `95d141cd9d0316bed21c96b3752ce219770e550d`. The nominal v2 and v3 migrations
 change module and dependency identities, not the localized algorithms or
@@ -115,3 +117,6 @@ in v1.1.2 as a patch;
 the later module/dependency identity migrations require major releases.
 Release acceptance still requires exact-main CI and a
 clean public consumer; this threat model is not a claim of publication.
+
+Choose the next guide in the [documentation index](README.md)
+or return to the [repository entry](../README.md) for installation and ownership.
