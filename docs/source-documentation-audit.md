@@ -2,6 +2,14 @@
 
 [Documentation index](README.md) · [Repository entry](../README.md)
 
+## Harden follow-up
+
+The findings below retain the original documentation-only audit. The subsequent
+Harden repair makes `Remove` and `Filter` preserve already-admitted subsets
+without default-limit revalidation or discarded construction errors.
+`Set`, `Map` and explicit normalization still validate changed output under
+default limits; the historical entry-array decoding observations remain separate.
+
 ## Pre-edit scope and plan
 
 Base `a231c5c60db231626b15094e58f5dbf5ce75c503`; comments/docs-only Tier A.

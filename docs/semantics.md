@@ -96,10 +96,12 @@ of `MaxTotalBytes`. Raw pair and core JSON keys also keep an independent
 255-byte parser ceiling when a caller raises the canonical tag limit.
 
 `Set`, `Map` and explicit normalization reconstruct under default limits,
-not the originating custom construction policy. `Remove` and non-nil `Filter`
-also reconstruct under defaults but discard failure: a valid custom-limit value
-can silently become empty. Use explicit construction with the intended limits
-when that distinction matters. Builder feeding, merge temporaries and callback
+not the originating custom construction policy. Use explicit construction with
+the intended limits when that distinction matters. `Remove` and `Filter` only
+select already-admitted entries: they preserve retained translations, including
+present-empty values, without reapplying default construction limits. Their
+results keep canonical order and exact lookup; the original value is unchanged.
+Builder feeding, merge temporaries and callback
 execution occur before final value admission. Callback side effects are not
 rolled back; observers isolate panics, not blocking or concurrent access.
 

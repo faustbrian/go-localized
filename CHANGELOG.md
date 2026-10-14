@@ -12,6 +12,14 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 
 ## [Unreleased]
 
+### Fixed
+
+- Preserve retained translations when `Remove` or `Filter` selects a subset
+  of a value admitted with custom limits above the defaults. These operations
+  no longer silently return an empty value after default-limit revalidation.
+  Canonical order, present-empty values and the original immutable value are
+  preserved; content-changing transforms retain their existing output limits.
+
 ### Changed
 
 - Clarify construction and callback ownership, exact versus approximate selection,

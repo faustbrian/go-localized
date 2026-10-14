@@ -188,12 +188,21 @@ func NewTextWithOptions(options ConstructionOptions, entries ...Entry) (Text, er
 	slices.SortFunc(owned, func(left, right Entry) int {
 		return strings.Compare(left.Locale.String(), right.Locale.String())
 	})
-	index := make(map[string]int, len(owned))
-	for i := range owned {
-		index[owned[i].Locale.String()] = i
-	}
+	return textFromCanonicalEntries(owned), nil
+}
 
-	return Text{entries: owned, index: index}, nil
+// textFromCanonicalEntries takes ownership of sorted, unique, validated entries.
+// Subsets preserve those invariants and cannot exceed their admitted source, so
+// they need a fresh lookup index rather than another construction-limit check.
+func textFromCanonicalEntries(entries []Entry) Text {
+	if len(entries) == 0 {
+		return Text{}
+	}
+	index := make(map[string]int, len(entries))
+	for i := range entries {
+		index[entries[i].Locale.String()] = i
+	}
+	return Text{entries: entries, index: index}
 }
 
 // TextFromMap parses strict raw keys under default admission and snapshots the
@@ -400,10 +409,8 @@ func (t Text) Set(tag locale.Tag, value string) (Text, error) {
 	return NewText(entries...)
 }
 
-// Remove removes one locale using default-limit reconstruction; absent/invalid
-// locale is a no-op. Existing limitation: reconstruction errors are discarded,
-// so a valid custom-limit receiver can silently produce empty Text. No originating
-// policy is retained; use explicit bounded reconstruction when this matters.
+// Remove removes one locale without reapplying construction limits to retained
+// entries. Absent/invalid locale is a no-op. The receiver remains unchanged.
 func (t Text) Remove(tag locale.Tag) Text {
 	i, ok := t.canonicalIndex(tag)
 	if !ok {
@@ -412,15 +419,14 @@ func (t Text) Remove(tag locale.Tag) Text {
 	entries := make([]Entry, 0, len(t.entries))
 	entries = append(entries, t.entries[:i]...)
 	entries = append(entries, t.entries[i+1:]...)
-	result, _ := NewText(entries...)
-	return result
+	return textFromCanonicalEntries(entries)
 }
 
 // Filter returns entries accepted by predicate in deterministic order. A nil
 // predicate returns the receiver unchanged. Callback calls are synchronous in
-// canonical order, without forced cancellation or panic recovery. Existing
-// limitation: default-limit reconstruction errors are discarded and can yield
-// empty Text for a valid custom-limit receiver. Callback effects are not rolled back.
+// canonical order, without forced cancellation or panic recovery. Retained
+// entries are not rechecked against construction limits. The receiver remains
+// unchanged; callback effects are not rolled back.
 func (t Text) Filter(predicate func(locale.Tag, string) bool) Text {
 	if predicate == nil {
 		return t
@@ -431,8 +437,7 @@ func (t Text) Filter(predicate func(locale.Tag, string) bool) Text {
 			entries = append(entries, entry)
 		}
 	}
-	result, _ := NewText(entries...)
-	return result
+	return textFromCanonicalEntries(entries)
 }
 
 // Map runs synchronous transforms in canonical order, then revalidates using

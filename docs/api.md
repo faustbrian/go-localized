@@ -27,6 +27,9 @@
 - `Locales`, `Entries`, `Pairs`: caller-owned deterministic slices.
 - `All`: deterministic range-over-function iterator.
 - `Set`, `Remove`, `Filter`, `Map`: persistent transforms.
+  `Remove` and `Filter` preserve already-admitted retained entries without
+  applying default limits again. `Set` and `Map` validate their changed output
+  under default limits and return admission errors.
 - `Equal`, `Hash`: stable structural identity and length-framed SHA-256.
 
 ### Merge
