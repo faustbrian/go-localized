@@ -44,7 +44,7 @@ go test . -run '^$' -fuzz '^FuzzDecodeJSON$' -fuzztime=2s
 
 Select the native target and package affected by your change. Ordinary Go tests
 already exercise deterministic fuzz seeds. For shared checks, install the
-public `golib` v2.4.0 release declared in `.golib.yaml` and verify its checksums;
+public `golib` v2.5.1 release declared in `.golib.yaml` and verify its checksums;
 CI uses that same release, not a sibling source build:
 
 ```bash
