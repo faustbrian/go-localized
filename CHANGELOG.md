@@ -2,6 +2,24 @@
 
 All notable changes follow Keep a Changelog and Semantic Versioning.
 
+## [5.0.2] - 2026-10-14
+
+### Fixed
+
+- Preserve retained translations when Remove or Filter selects a subset of
+  a value admitted above default limits. Canonical order, present-empty values
+  and receiver immutability are retained; content-changing transforms preserve
+  their existing output limits. [d497fff694](https://github.com/faustbrian/go-localized/commit/d497fff69470a3efcb2de8867d4910475c260eee)
+
+### Changed
+
+- Clarify construction/callback ownership, selection/resource-limit scope and
+  adapter boundaries. Align contributor tooling and standalone adoption
+  guidance with the configured public verifier. [739ae5f744](https://github.com/faustbrian/go-localized/commit/739ae5f744d5204a4353d2a55e729313f7a713fe), [e3847ed734](https://github.com/faustbrian/go-localized/commit/e3847ed73478fdee1a7526f1bd429e47fdf5bad0), [a952552a07](https://github.com/faustbrian/go-localized/commit/a952552a073ba1162bf81fe0ee660d4f260734fd)
+- Maintain bounded authenticated CI/source-documentation assurance and shared
+  repository policy without changing the public API or dependency selection.
+  [c438087be4](https://github.com/faustbrian/go-localized/commit/c438087be432a6ce110ae47c97778b4357785f9a), [79b5eead28](https://github.com/faustbrian/go-localized/commit/79b5eead2878e62a2285d9fb1ca7a1123c28bfc9), [a231c5c60d](https://github.com/faustbrian/go-localized/commit/a231c5c60db231626b15094e58f5dbf5ce75c503), [3a5d2c03f8](https://github.com/faustbrian/go-localized/commit/3a5d2c03f81b611d24e4045de4fffb35af7c1d80), [7c08afd18f](https://github.com/faustbrian/go-localized/commit/7c08afd18fe862b4be1992adcc3c00de0e5488fe)
+
 ## [5.0.1] - 2026-10-09
 
 ### Changed
@@ -11,14 +29,6 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
   with a patched toolchain to receive standard-library security fixes.
 
 ## [Unreleased]
-
-### Fixed
-
-- Preserve retained translations when `Remove` or `Filter` selects a subset
-  of a value admitted with custom limits above the defaults. These operations
-  no longer silently return an empty value after default-limit revalidation.
-  Canonical order, present-empty values and the original immutable value are
-  preserved; content-changing transforms retain their existing output limits.
 
 ### Changed
 
@@ -213,7 +223,8 @@ The following initial scope is included in `v1.0.0`.
 
 - Initial production contract for localized domain values.
 
-[Unreleased]: https://github.com/faustbrian/go-localized/compare/v5.0.0...HEAD
+[Unreleased]: https://github.com/faustbrian/go-localized/compare/v5.0.2...HEAD
 [5.0.0]: https://github.com/faustbrian/go-localized/compare/v4.0.0...v5.0.0
 [1.1.0]: https://github.com/faustbrian/go-localized/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/faustbrian/go-localized/releases/tag/v1.0.0
+[5.0.2]: https://github.com/faustbrian/go-localized/releases/tag/v5.0.2
