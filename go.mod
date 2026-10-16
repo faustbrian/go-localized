@@ -5,7 +5,7 @@ go 1.27.0
 require (
 	github.com/faustbrian/go-api-query/v4 v4.0.0
 	github.com/faustbrian/go-config/v2 v2.0.0
-	github.com/faustbrian/go-http-client/v2 v2.0.0
+	github.com/faustbrian/go-http-client/v2 v2.0.3
 	github.com/faustbrian/go-international/v4 v4.0.0
 	github.com/faustbrian/go-validation/v2 v2.0.0
 	github.com/faustbrian/go-wire/v3 v3.0.0
@@ -15,12 +15,12 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.6.0 // indirect
-	github.com/faustbrian/go-circuit-breaker v1.0.0 // indirect
+	github.com/faustbrian/go-circuit-breaker v1.0.1 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	go.yaml.in/yaml/v4 v4.0.0-rc.6 // indirect
-	golang.org/x/net v0.59.0 // indirect
+	golang.org/x/net v0.60.0 // indirect
 	golang.org/x/oauth2 v0.37.0 // indirect
 )
