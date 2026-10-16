@@ -3,8 +3,8 @@ github.com/BurntSushi/toml v1.6.0/go.mod h1:ukJfTF/6rtPPRCnwkur4qwRxa8vTRFBF0uk2
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/faustbrian/go-api-query/v4 v4.0.0 h1:odUWsP6sM0oJdozJ/1CG4d4kvSj+QdA95xb/vW4Wx+c=
-github.com/faustbrian/go-api-query/v4 v4.0.0/go.mod h1:1cWg73KkXjGc7v0LZmWEkG9NlqIIXsr/JS1yFOXNFXc=
+github.com/faustbrian/go-api-query/v4 v4.0.1 h1:3T63nfK7x71xQGxgFikISnoY0yTdkPVL6R58g8Zl05o=
+github.com/faustbrian/go-api-query/v4 v4.0.1/go.mod h1:1cWg73KkXjGc7v0LZmWEkG9NlqIIXsr/JS1yFOXNFXc=
 github.com/faustbrian/go-circuit-breaker v1.0.0 h1:/Y9AeAwe0arONfJKhDYveBDosYK67yc21QG09WC9/DY=
 github.com/faustbrian/go-circuit-breaker v1.0.0/go.mod h1:tJ8Xfrv6DG0NiGErqKERXkiBLsyNzOIZ5MZVoD36jEU=
 github.com/faustbrian/go-config/v2 v2.0.0 h1:G/ZWxfJ4S9aiws/wdora/2v+RILM893qZwCtS2t0Ytk=
