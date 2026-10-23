@@ -20,7 +20,7 @@ api:
   baselines:
     - module: .
       mode: apidiff
-      path: api/v5.txt
+      path: api/v6.txt
 
 operations:
   - module: .
@@ -68,7 +68,7 @@ operations:
         budget: 2s
         timeout: 2m
       - type: go-test
-        packages: [./localizedwire]
+        packages: [./adapters/wire]
         fuzz: '^FuzzWireDecoders$'
         budget: 2s
         timeout: 2m

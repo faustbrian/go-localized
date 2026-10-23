@@ -6,9 +6,9 @@ package localizedtest
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v4/locale"
-	localized "github.com/faustbrian/go-localized/v5"
-	localizedmatch "github.com/faustbrian/go-localized/v5/match"
+	"github.com/faustbrian/go-international/v5/locale"
+	localized "github.com/faustbrian/go-localized/v6"
+	localizedmatch "github.com/faustbrian/go-localized/v6/match"
 )
 
 // Builder is mutable caller-owned fixture state, requiring synchronization if

@@ -2,6 +2,24 @@
 
 All notable changes follow Keep a Changelog and Semantic Versioning.
 
+## 6.0.0 - 2026-10-23
+
+### Changed
+
+- Move the module to `github.com/faustbrian/go-localized/v6` and adopt
+  `go-api-query/v5`, `go-config/v3`, `go-http-client/v3`,
+  `go-international/v5` and `go-validation/v3`. Text, matching, encoding
+  and persistence behaviour are unchanged.
+
+### Removed
+
+- Remove the `localizedconfig`, `localizedhttpclient`, `localizedquery`,
+  `localizedvalidation` and `localizedwire` packages. Their implementations
+  moved unchanged into `adapters/config`, `adapters/httpclient`,
+  `adapters/query`, `adapters/validation` and `adapters/wire`, which now own
+  the named types and errors instead of aliasing them. Published v5 releases
+  keep the former paths; only the latest major receives security fixes.
+
 ## [5.0.2] - 2026-10-14
 
 ### Fixed

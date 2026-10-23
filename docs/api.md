@@ -131,10 +131,10 @@ I/O or cancellation; upstream parser and error behavior remains upstream-owned.
   matching only, never configured fallback.
 - `Error`, `ErrInvalidResponse`: safe response-shape error identity.
 
-The released `localizedvalidation`, `localizedwire`, `localizedconfig`,
-`localizedquery`, and `localizedhttpclient` import paths remain supported.
-Canonical adapter aliases preserve their named type and error identities so a
-consumer can migrate imports without changing values, defaults, or behavior.
+Version 6 removed the `localizedvalidation`, `localizedwire`, `localizedconfig`,
+`localizedquery`, and `localizedhttpclient` import paths. Their implementations
+moved unchanged into the matching `adapters/*` packages, which now own the
+named types and error identities.
 
 ## `localizedtest`
 

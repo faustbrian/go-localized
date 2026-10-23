@@ -1,10 +1,10 @@
-package localizedwire_test
+package wire_test
 
 import (
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v5"
-	"github.com/faustbrian/go-localized/v5/localizedwire"
+	localized "github.com/faustbrian/go-localized/v6"
+	localizedwire "github.com/faustbrian/go-localized/v6/adapters/wire"
 	"github.com/faustbrian/go-wire/v3/jsonwire"
 	"github.com/faustbrian/go-wire/v3/msgpackwire"
 	"github.com/faustbrian/go-wire/v3/tomlwire"

@@ -5,7 +5,7 @@
 [![Coverage](https://img.shields.io/badge/coverage-risk_selected-blue)](CONTRIBUTING.md#verification)
 [![Mutation](https://img.shields.io/badge/mutation-optional_local%2Fselected_scheduled-blue)](CONTRIBUTING.md#verification)
 [![Documentation](https://img.shields.io/badge/docs-checked_in_CI-blue)](docs/)
-[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v5.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v5)
+[![Go Reference](https://pkg.go.dev/badge/github.com/faustbrian/go-localized/v6.svg)](https://pkg.go.dev/github.com/faustbrian/go-localized/v6)
 [![Release](https://img.shields.io/github/v/release/faustbrian/go-localized?sort=semver)](https://github.com/faustbrian/go-localized/releases)
 [![Go](https://img.shields.io/badge/go-1.27.0-00ADD8?logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -17,13 +17,13 @@ translation loading, language detection, or global locale policy.
 
 ## Install
 
-The root `/v5` module composes International v4, HTTP Client v2 and Wire v3
-nominal identities. Select its versioned tag when adopting this composition;
+The root `/v6` module composes API Query v5, International v5, HTTP Client v3,
+Validation v3 and Wire v3 nominal identities. Select its versioned tag when adopting this composition;
 published tags, not the source on main, establish release availability.
 See the [migration guide](docs/migration.md) for coordinated import changes.
 
 ```sh
-go get github.com/faustbrian/go-localized/v5@v5.0.0
+go get github.com/faustbrian/go-localized/v6@v6.0.0
 ```
 
 Go 1.27.0 or later is required. Development and CI use Go 1.27.2
@@ -92,10 +92,9 @@ construction, fallback, merge, JSON, and PostgreSQL examples.
 
 Optional Golib integrations use target-oriented imports under `adapters/`:
 `adapters/config`, `adapters/httpclient`, `adapters/query`,
-`adapters/validation`, and `adapters/wire`. The original
+`adapters/validation`, and `adapters/wire`. Version 6 removed the former
 `localizedconfig`, `localizedhttpclient`, `localizedquery`,
-`localizedvalidation`, and `localizedwire` paths remain compatible entry points for
-existing consumers.
+`localizedvalidation`, and `localizedwire` paths; the v5 line keeps them.
 
 ## Guarantees
 

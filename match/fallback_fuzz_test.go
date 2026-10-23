@@ -3,8 +3,8 @@ package match_test
 import (
 	"testing"
 
-	language "github.com/faustbrian/go-international/v4/locale"
-	localizedmatch "github.com/faustbrian/go-localized/v5/match"
+	language "github.com/faustbrian/go-international/v5/locale"
+	localizedmatch "github.com/faustbrian/go-localized/v6/match"
 )
 
 func FuzzFallbackPlan(f *testing.F) {

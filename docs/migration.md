@@ -2,6 +2,19 @@
 
 [Documentation index](README.md) · [Repository entry](../README.md)
 
+## v6 adapter consolidation
+
+Version 6 uses `github.com/faustbrian/go-localized/v6`. Move Localized imports
+to `/v6`, locale values to `github.com/faustbrian/go-international/v5/locale`,
+query values to `github.com/faustbrian/go-api-query/v5`, HTTP request specs and
+layers to `github.com/faustbrian/go-http-client/v3`, and validation reports to
+`github.com/faustbrian/go-validation/v3`; tests use `go-config/v3`. Replace the
+removed `localizedconfig`, `localizedhttpclient`, `localizedquery`,
+`localizedvalidation` and `localizedwire` imports with `adapters/config`,
+`adapters/httpclient`, `adapters/query`, `adapters/validation` and
+`adapters/wire`. Their implementations moved unchanged; the adapter packages
+now own the named types and errors. The v5 line keeps the former paths.
+
 ## v5 successor composition
 
 The source uses `github.com/faustbrian/go-localized/v5` at the repository

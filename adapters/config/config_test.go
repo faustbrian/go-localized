@@ -1,29 +1,77 @@
 package config_test
 
 import (
+	"errors"
 	"reflect"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v5"
-	config "github.com/faustbrian/go-localized/v5/adapters/config"
-	legacy "github.com/faustbrian/go-localized/v5/localizedconfig"
+	"github.com/faustbrian/go-config/v3/decode"
+	localized "github.com/faustbrian/go-localized/v6"
+	localizedconfig "github.com/faustbrian/go-localized/v6/adapters/config"
 )
 
-func TestCanonicalConfigAdapterPreservesCompatibilityIdentity(t *testing.T) {
+func TestConfigValueHookDecodesLocalizedMapTransactionally(t *testing.T) {
+	t.Parallel()
+	var target localizedconfig.Text
+	if err := decode.Value(map[string]any{"EN-us": "Hello", "fi": "Hei"}, &target); err != nil {
+		t.Fatalf("decode.Value() error = %v", err)
+	}
+	if !target.Valid {
+		t.Fatal("Valid = false")
+	}
+	if got, ok := target.Localized.Get(mustLocale(t, "en-US")); !ok || got != "Hello" {
+		t.Fatalf("Get(en-US) = %q, %v", got, ok)
+	}
+
+	before := target
+	if err := decode.Value(map[string]any{"en": 42}, &target); err == nil {
+		t.Fatal("decode.Value() error = nil")
+	}
+	if target.Valid != before.Valid || !target.Localized.Equal(before.Localized) {
+		t.Fatal("failed decode mutated target")
+	}
+}
+
+func TestConfigValueHookBoundaryFailures(t *testing.T) {
 	t.Parallel()
 
-	value, err := localized.TextFromMap(map[string]string{"en": "Hello"})
-	if err != nil {
+	if got := localizedconfig.ErrInvalidValue.Error(); got != "localized config: invalid value" {
+		t.Fatalf("Error() = %q", got)
+	}
+	var nilTarget *localizedconfig.Text
+	if err := nilTarget.UnmarshalConfigValue(nil); !errors.Is(err, localizedconfig.ErrInvalidValue) {
+		t.Fatalf("nil target error = %v", err)
+	}
+	var target localizedconfig.Text
+	if err := target.UnmarshalConfigValue(map[string]string{"en": "Hello"}); err != nil || !target.Valid {
+		t.Fatalf("string map = %+v, %v", target, err)
+	}
+	if err := target.UnmarshalConfigValue(42); !errors.Is(err, localizedconfig.ErrInvalidValue) {
+		t.Fatalf("unsupported input error = %v", err)
+	}
+	if err := target.UnmarshalConfigValue(map[string]string{"en_": "bad"}); !errors.Is(err, localized.ErrInvalidLocale) {
+		t.Fatalf("invalid locale error = %v", err)
+	}
+}
+
+func TestConfigValueHookDistinguishesNull(t *testing.T) {
+	t.Parallel()
+	target := localizedconfig.NewText(func() localized.Text {
+		value, _ := localized.TextFromMap(map[string]string{"en": "Hello"})
+		return value
+	}())
+	if err := decode.Value(nil, &target); err != nil {
 		t.Fatal(err)
 	}
-	got := config.NewText(value)
-	if !got.Valid || !got.Localized.Equal(value) {
-		t.Fatalf("NewText() = %+v", got)
+	if target.Valid || !target.Localized.IsEmpty() {
+		t.Fatalf("target = %+v", target)
 	}
-	if reflect.TypeFor[config.Text]() != reflect.TypeFor[legacy.Text]() {
-		t.Fatal("compatibility Text identity changed")
-	}
-	if reflect.TypeOf(config.ErrInvalidValue) != reflect.TypeOf(legacy.ErrInvalidValue) {
-		t.Fatal("compatibility Error identity changed")
+}
+
+func TestConfigTextTargetRequestsStringMap(t *testing.T) {
+	t.Parallel()
+	var target localizedconfig.Text
+	if got, want := target.ConfigTextTarget(), reflect.TypeFor[map[string]string](); got != want {
+		t.Fatalf("ConfigTextTarget() = %v, want %v", got, want)
 	}
 }

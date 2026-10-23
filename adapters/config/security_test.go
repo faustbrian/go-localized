@@ -1,12 +1,12 @@
-package localizedconfig_test
+package config_test
 
 import (
 	"errors"
 	"fmt"
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v5"
-	"github.com/faustbrian/go-localized/v5/localizedconfig"
+	localized "github.com/faustbrian/go-localized/v6"
+	localizedconfig "github.com/faustbrian/go-localized/v6/adapters/config"
 )
 
 func TestSecurityConfigRejectsCountBeforeCopy(t *testing.T) {

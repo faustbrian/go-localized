@@ -3,7 +3,7 @@ package localized_test
 import (
 	"testing"
 
-	localized "github.com/faustbrian/go-localized/v5"
+	localized "github.com/faustbrian/go-localized/v6"
 )
 
 func FuzzDecodeJSON(f *testing.F) {

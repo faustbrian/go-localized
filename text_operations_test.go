@@ -6,7 +6,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	localized "github.com/faustbrian/go-localized/v5"
+	localized "github.com/faustbrian/go-localized/v6"
 )
 
 func TestTextFromMapValidatesAndOwnsInput(t *testing.T) {

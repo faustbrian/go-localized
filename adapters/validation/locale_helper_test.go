@@ -1,9 +1,9 @@
-package localizedwire_test
+package validation_test
 
 import (
 	"testing"
 
-	"github.com/faustbrian/go-international/v4/locale"
+	"github.com/faustbrian/go-international/v5/locale"
 )
 
 func mustLocale(t testing.TB, raw string) locale.Tag {

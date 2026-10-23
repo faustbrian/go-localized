@@ -1,31 +1,60 @@
+// Package httpclient integrates localized negotiation with go-http-client.
+// Outbound preferences are caller-bounded, selection uses the originating
+// request, and these helpers perform no network I/O.
 package httpclient
 
 import (
 	"net/http"
+	"strconv"
+	"strings"
 
-	client "github.com/faustbrian/go-http-client/v2"
-	localized "github.com/faustbrian/go-localized/v5"
-	localizedhttp "github.com/faustbrian/go-localized/v5/http"
-	legacy "github.com/faustbrian/go-localized/v5/localizedhttpclient"
-	localizedmatch "github.com/faustbrian/go-localized/v5/match"
+	httpclient "github.com/faustbrian/go-http-client/v3"
+	localized "github.com/faustbrian/go-localized/v6"
+	localizedhttp "github.com/faustbrian/go-localized/v6/http"
+	localizedmatch "github.com/faustbrian/go-localized/v6/match"
 )
 
-// Error preserves the released localizedhttpclient error identity.
-type Error = legacy.Error
+// Error is a stable privacy-safe HTTP client adapter error identity.
+type Error string
+
+// Error implements error.
+func (e Error) Error() string { return string(e) }
 
 // ErrInvalidResponse reports a nil response or originating request.
-const ErrInvalidResponse = legacy.ErrInvalidResponse
+const ErrInvalidResponse Error = "localized http client: invalid response"
 
 // WithPreferences returns a request spec with a canonical Accept-Language
-// header at layer. Empty preferences remove that layer's header. The full header
-// is built before admission; derived size bounds are not inbound defaults. Bound
-// untrusted preferences before calling; this helper sends no request.
+// header at layer. Empty preferences remove that layer's header. Inputs are
+// trusted: the complete header is built before validation and its limits derive
+// from actual list/header sizes, not the inbound adapter's defaults. Bound
+// untrusted lists before this call; no network request is sent.
 func WithPreferences(
-	spec client.RequestSpec,
-	layer client.RequestLayer,
+	spec httpclient.RequestSpec,
+	layer httpclient.RequestLayer,
 	preferences ...localizedmatch.Preference,
-) (client.RequestSpec, error) {
-	return legacy.WithPreferences(spec, layer, preferences...)
+) (httpclient.RequestSpec, error) {
+	if len(preferences) == 0 {
+		return spec.WithoutHeader(layer, "Accept-Language")
+	}
+	parts := make([]string, len(preferences))
+	for i, preference := range preferences {
+		canonical, err := preference.Locale.Canonical()
+		if err != nil {
+			return httpclient.RequestSpec{}, localizedhttp.ErrInvalidRange
+		}
+		part := canonical.String()
+		if preference.Weight != 1 {
+			part += ";q=" + strconv.FormatFloat(preference.Weight, 'f', -1, 64)
+		}
+		parts[i] = part
+	}
+	header := strings.Join(parts, ", ")
+	if _, err := localizedhttp.ParseAcceptLanguage(header, localizedhttp.ParseOptions{
+		MaxBytes: len(header), MaxCandidates: len(preferences),
+	}); err != nil {
+		return httpclient.RequestSpec{}, err
+	}
+	return spec.WithHeader(layer, "Accept-Language", header)
 }
 
 // SelectResponse selects a localized value from the Accept-Language header on
@@ -35,5 +64,8 @@ func SelectResponse(
 	response *http.Response,
 	options localizedhttp.ParseOptions,
 ) (localizedmatch.Result, error) {
-	return legacy.SelectResponse(value, response, options)
+	if response == nil || response.Request == nil {
+		return localizedmatch.Result{}, ErrInvalidResponse
+	}
+	return localizedhttp.Select(value, response.Request.Header.Get("Accept-Language"), options)
 }

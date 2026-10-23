@@ -5,19 +5,17 @@ import (
 	"net/http"
 	"testing"
 
-	client "github.com/faustbrian/go-http-client/v2"
-	"github.com/faustbrian/go-international/v4/locale"
-	localized "github.com/faustbrian/go-localized/v5"
-	httpadapter "github.com/faustbrian/go-localized/v5/adapters/httpclient"
-	wireadapter "github.com/faustbrian/go-localized/v5/adapters/wire"
-	localizedhttp "github.com/faustbrian/go-localized/v5/http"
-	legacyhttp "github.com/faustbrian/go-localized/v5/localizedhttpclient"
-	legacywire "github.com/faustbrian/go-localized/v5/localizedwire"
-	localizedmatch "github.com/faustbrian/go-localized/v5/match"
+	client "github.com/faustbrian/go-http-client/v3"
+	"github.com/faustbrian/go-international/v5/locale"
+	localized "github.com/faustbrian/go-localized/v6"
+	httpadapter "github.com/faustbrian/go-localized/v6/adapters/httpclient"
+	wireadapter "github.com/faustbrian/go-localized/v6/adapters/wire"
+	localizedhttp "github.com/faustbrian/go-localized/v6/http"
+	localizedmatch "github.com/faustbrian/go-localized/v6/match"
 	"github.com/faustbrian/go-wire/v3/jsonwire"
 )
 
-func TestPublicSuccessorHTTPWireComposition(t *testing.T) {
+func TestPublicHTTPWireComposition(t *testing.T) {
 	t.Parallel()
 	english, err := locale.Parse("en-US")
 	if err != nil {
@@ -32,7 +30,7 @@ func TestPublicSuccessorHTTPWireComposition(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, preferences := range []func(client.RequestSpec, client.RequestLayer, ...localizedmatch.Preference) (client.RequestSpec, error){
-		httpadapter.WithPreferences, legacyhttp.WithPreferences,
+		httpadapter.WithPreferences,
 	} {
 		selected, err := preferences(spec, client.LayerRequest, localizedmatch.Preference{Locale: english, Weight: 1})
 		if err != nil {
@@ -50,7 +48,7 @@ func TestPublicSuccessorHTTPWireComposition(t *testing.T) {
 			t.Fatalf("original request changed: %v", err)
 		}
 		for _, selectResponse := range []func(localized.Text, *http.Response, localizedhttp.ParseOptions) (localizedmatch.Result, error){
-			httpadapter.SelectResponse, legacyhttp.SelectResponse,
+			httpadapter.SelectResponse,
 		} {
 			result, err := selectResponse(value, &http.Response{Request: request}, localizedhttp.ParseOptions{})
 			if err != nil || result.Text != "Hello" || result.Locale.String() != "en-US" {
@@ -59,14 +57,14 @@ func TestPublicSuccessorHTTPWireComposition(t *testing.T) {
 		}
 	}
 	for _, encode := range []func(localized.Text, jsonwire.EncodeOptions) ([]byte, error){
-		wireadapter.EncodeJSON, legacywire.EncodeJSON,
+		wireadapter.EncodeJSON,
 	} {
 		encoded, err := encode(value, jsonwire.EncodeOptions{})
 		if err != nil || string(encoded) != `{"en-US":"Hello"}` {
 			t.Fatalf("canonical JSON = %q, %v", encoded, err)
 		}
 		for _, decode := range []func([]byte, jsonwire.DecodeOptions) (localized.Text, error){
-			wireadapter.DecodeJSON, legacywire.DecodeJSON,
+			wireadapter.DecodeJSON,
 		} {
 			decoded, err := decode(encoded, jsonwire.DecodeOptions{})
 			if err != nil || !decoded.Equal(value) {

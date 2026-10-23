@@ -4,14 +4,14 @@
 
 ## Major identity
 
-The root and package paths use `github.com/faustbrian/go-localized/v5`.
-Locale tags use International v4.0.0, HTTP request specs/layers use HTTP Client
-v2.0.0, and codec options use Wire v3.0.0. Query v4.0.0, Validation v2.0.0 and
-Config v2.0.0 remain selected. Published Localized v4 remains separately
-available; release availability is established by public tags, not main.
-See the [coordinated migration steps](migration.md#v5-successor-composition).
-The root module owns all canonical and retained adapters; none is a separate
-module or independently tagged release.
+The root and package paths use `github.com/faustbrian/go-localized/v6`.
+Locale tags use International v5, query values use API Query v5, HTTP request
+specs/layers use HTTP Client v3, validation reports use Validation v3, and
+codec options use Wire v3; tests use Config v3. Published Localized v5 remains
+separately available; release availability is established by public tags, not
+main. See the [coordinated migration steps](migration.md#v6-adapter-consolidation).
+The root module owns all adapters; none is a separate module or independently
+tagged release.
 
 ## Domain values
 
@@ -84,11 +84,10 @@ has selected the locale policy explicitly. The adapter never matches or falls
 back, and it does not invent a database JSON-path mapping; declare that mapping
 in the owning `api-query` compiler configuration.
 
-The original `localizedconfig`, `localizedhttpclient`, `localizedquery`,
-`localizedvalidation`, and `localizedwire` paths remain source-compatible.
-New code should prefer target-oriented `adapters/*` imports. Callers can either
-adopt the canonical package identifier or keep their old identifier with an
-explicit import alias.
+Version 6 removed the original `localizedconfig`, `localizedhttpclient`,
+`localizedquery`, `localizedvalidation`, and `localizedwire` paths; import the
+target-oriented `adapters/*` packages. Callers can adopt the adapter package
+identifier or keep their old identifier with an explicit import alias.
 
 Choose the next guide in the [documentation index](README.md)
 or return to the [repository entry](../README.md) for installation and ownership.

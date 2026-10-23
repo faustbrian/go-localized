@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	language "github.com/faustbrian/go-international/v4/locale"
-	localized "github.com/faustbrian/go-localized/v5"
+	language "github.com/faustbrian/go-international/v5/locale"
+	localized "github.com/faustbrian/go-localized/v6"
 )
 
 func TestDuplicatePoliciesApplyAfterCanonicalization(t *testing.T) {

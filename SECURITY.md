@@ -3,7 +3,7 @@
 ## Supported versions
 
 The latest stable root release is supported. The source on `main` uses the
-official `github.com/faustbrian/go-localized/v5` module identity; an unreleased
+official `github.com/faustbrian/go-localized/v6` module identity; an unreleased
 main-branch module identity is not evidence of stable publication. Use published
 stable tags to identify released versions. Security fixes are developed on
 `main`; incompatible changes require a new major tag from main.
@@ -11,12 +11,8 @@ See the [migration guide](docs/migration.md) for the corresponding dependency
 and import changes. Historical tags remain available, but tag availability alone
 does not establish an additional backport commitment.
 
-The existing v1 support commitment is retained:
-
-The latest stable v1 release is supported. Security fixes are developed on
-`main` and published as compatible v1 patches when the public contract permits.
-Older v1 versions should upgrade to the latest patch; no separate maintenance
-branch is promised.
+Only the latest patch of the latest major receives security fixes. Superseded
+majors, including v1 to v5, remain published but receive no further releases.
 
 ## Reporting
 
