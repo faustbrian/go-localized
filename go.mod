@@ -10,7 +10,7 @@ require (
 	github.com/faustbrian/go-validation/v3 v3.0.1
 	github.com/faustbrian/go-wire/v3 v3.0.0
 	github.com/jackc/pgx/v5 v5.11.0
-	golang.org/x/text v0.42.0
+	golang.org/x/text v0.43.0
 )
 
 require (
