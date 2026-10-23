@@ -13,6 +13,7 @@ default limits; the historical entry-array decoding observations remain separate
 ## Pre-edit scope and plan
 
 Base `a231c5c60db231626b15094e58f5dbf5ce75c503`; comments/docs-only Tier A.
+This audit was taken on the v5 source and is historical for v6.
 One root `github.com/faustbrian/go-localized/v5` module, 16 package directories,
 75 tracked Go files. Original unrelated chore checkout is preserved; this is
 an isolated detached main-source worktree. Runtime, API/dependency projections,

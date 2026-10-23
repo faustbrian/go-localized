@@ -33,26 +33,26 @@ spec, err = localizedhttpclient.WithPreferences(
 
 ## v5 successor composition
 
-The source uses `github.com/faustbrian/go-localized/v5` at the repository
-root. Move all owning Localized imports
+Version 5 used `github.com/faustbrian/go-localized/v5` at the repository
+root. To adopt it, move all owning Localized imports
 to `/v5`, locale values to `github.com/faustbrian/go-international/v4/locale`
 v4.0.0, HTTP request specs and layers to `github.com/faustbrian/go-http-client/v2`
 v2.0.0, and codec options to `github.com/faustbrian/go-wire/v3` v3.0.0. Both
 canonical `adapters/*` and retained `localized*` packages select these same
 nominal types. Different majors cannot be mixed in a function signature.
 
-API Query v4.0.0, Validation v2.0.0 and Config v2.0.0 remain selected. No
+API Query v4.0.0, Validation v2.0.0 and Config v2.0.0 remained selected. No
 localized format, exact-presence, matching, fallback, ownership or alias
 semantics change is intended. Existing public v1–v4 tags and API projections
 remain available; frozen earlier-major consumers need not migrate. Select
 published dependencies without sibling replacements. Public release, clean
 consumer and maintained Tools adoption are separate verification boundaries;
-source on main alone does not establish any of them.
+tags, not source, established release availability.
 
-## Prepared v4 query identity
+## v4 query identity
 
-The current source prepares `github.com/faustbrian/go-localized/v4` at the
-repository root. This baseline is published as v4.0.0. Move every Localized import
+Version 4.0.0 moved the module to `github.com/faustbrian/go-localized/v4` at
+the repository root. Move every Localized import
 to `/v4`, including canonical and retained adapters, and move query values,
 operators and predicates together to `github.com/faustbrian/go-api-query/v4`.
 International stays on `/v3/locale` v3.0.0 and Validation stays on `/v2` v2.0.0.

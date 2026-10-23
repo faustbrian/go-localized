@@ -7,9 +7,9 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
 ### Changed
 
 - Move the module to `github.com/faustbrian/go-localized/v6` and adopt
-  `go-api-query/v5`, `go-config/v3`, `go-http-client/v3`,
-  `go-international/v5` and `go-validation/v3`. Text, matching, encoding
-  and persistence behaviour are unchanged.
+  `go-api-query/v5`, `go-http-client/v3`, `go-international/v5` and
+  `go-validation/v3`; tests use `go-config/v3`. Text, matching, encoding and
+  persistence behaviour are unchanged.
 
 ### Removed
 
