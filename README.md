@@ -30,11 +30,9 @@ Go 1.27.0 or later is required. Development and CI use Go 1.27.2
 to include standard-library security fixes. Rebuild applications with a
 patched compiler to receive those fixes.
 
-The published v4 module selects International v3 and API Query v4 nominal types while
-retaining Validation v2. Migrate locale and query imports together as described
-in the [migration guide](docs/migration.md).
-Existing v1–v3 releases remain independently available; publication is established
-by the repository's public tags and releases.
+Releases v1 to v5 remain published but receive no further security fixes.
+Migrate Localized, locale, query, HTTP client and validation imports together as
+described in the [migration guide](docs/migration.md).
 
 ## Five-minute tour
 

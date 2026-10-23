@@ -15,6 +15,22 @@ removed `localizedconfig`, `localizedhttpclient`, `localizedquery`,
 `adapters/wire`. Their implementations moved unchanged; the adapter packages
 now own the named types and errors. The v5 line keeps the former paths.
 
+The adapter package identifiers equal their directory names (`config`,
+`httpclient`, `query`, `validation` and `wire`), so the old selectors change
+and each name can collide with the package it adapts. Keep the former name as an
+import alias to make the move mechanical:
+
+```go
+import (
+    httpclient "github.com/faustbrian/go-http-client/v3"
+    localizedhttpclient "github.com/faustbrian/go-localized/v6/adapters/httpclient"
+)
+
+spec, err = localizedhttpclient.WithPreferences(
+    spec, httpclient.LayerRequest, preferences...,
+)
+```
+
 ## v5 successor composition
 
 The source uses `github.com/faustbrian/go-localized/v5` at the repository
