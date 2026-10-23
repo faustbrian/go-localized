@@ -2,7 +2,7 @@
 
 All notable changes follow Keep a Changelog and Semantic Versioning.
 
-## 6.0.0 - 2026-10-23
+## [6.0.0] - 2026-10-23
 
 ### Changed
 
@@ -17,7 +17,9 @@ All notable changes follow Keep a Changelog and Semantic Versioning.
   `localizedvalidation` and `localizedwire` packages. Their implementations
   moved unchanged into `adapters/config`, `adapters/httpclient`,
   `adapters/query`, `adapters/validation` and `adapters/wire`, which now own
-  the named types and errors instead of aliasing them. Published v5 releases
+  the named types and errors instead of aliasing them. Selectors change
+  with the package identifier (for example `localizedconfig.Text` becomes
+  `config.Text`) unless the old identifier is kept as an import alias. Published v5 releases
   keep the former paths; only the latest major receives security fixes.
 
 ## [5.0.2] - 2026-10-14
@@ -241,7 +243,8 @@ The following initial scope is included in `v1.0.0`.
 
 - Initial production contract for localized domain values.
 
-[Unreleased]: https://github.com/faustbrian/go-localized/compare/v5.0.2...HEAD
+[Unreleased]: https://github.com/faustbrian/go-localized/compare/v6.0.0...HEAD
+[6.0.0]: https://github.com/faustbrian/go-localized/compare/v5.0.2...v6.0.0
 [5.0.0]: https://github.com/faustbrian/go-localized/compare/v4.0.0...v5.0.0
 [1.1.0]: https://github.com/faustbrian/go-localized/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/faustbrian/go-localized/releases/tag/v1.0.0

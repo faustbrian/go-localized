@@ -263,6 +263,8 @@
         "github.com/faustbrian/go-config/v3",
         "github.com/faustbrian/go-http-client/v3",
         "github.com/faustbrian/go-international/v5",
+        "github.com/faustbrian/go-resilience/v2",
+        "github.com/faustbrian/go-retry/v3",
         "github.com/faustbrian/go-validation/v3",
         "github.com/faustbrian/go-wire/v3"
       ],

@@ -9,7 +9,7 @@ import (
 	localized "github.com/faustbrian/go-localized/v6"
 )
 
-// ExactValue returns a api-query string value only when tag is present.
+// ExactValue returns an api-query string value only when tag is present.
 // It performs no language matching or application fallback, and preserves a
 // present-empty string as a present query value.
 func ExactValue(value localized.Text, tag locale.Tag) (apiquery.Value, bool) {

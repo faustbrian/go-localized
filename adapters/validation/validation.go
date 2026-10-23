@@ -149,12 +149,12 @@ func RequireNonWhitespace() Rule {
 }
 
 // MaxBytes bounds UTF-8 encoded bytes.
-func MaxBytes(max int) Rule {
+func MaxBytes(maximum int) Rule {
 	return ruleFunc(func(value string) error {
-		if max < 0 {
+		if maximum < 0 {
 			return ErrInvalidRule
 		}
-		if len(value) > max {
+		if len(value) > maximum {
 			return ErrBytesExceeded
 		}
 		return nil
@@ -162,12 +162,12 @@ func MaxBytes(max int) Rule {
 }
 
 // MaxRunes bounds Unicode code points without claiming grapheme semantics.
-func MaxRunes(max int) Rule {
+func MaxRunes(maximum int) Rule {
 	return ruleFunc(func(value string) error {
-		if max < 0 {
+		if maximum < 0 {
 			return ErrInvalidRule
 		}
-		if utf8.RuneCountInString(value) > max {
+		if utf8.RuneCountInString(value) > maximum {
 			return ErrRunesExceeded
 		}
 		return nil
@@ -175,16 +175,16 @@ func MaxRunes(max int) Rule {
 }
 
 // MaxLines bounds newline-delimited logical lines. Empty text has zero lines.
-func MaxLines(max int) Rule {
+func MaxLines(maximum int) Rule {
 	return ruleFunc(func(value string) error {
-		if max < 0 {
+		if maximum < 0 {
 			return ErrInvalidRule
 		}
 		lines := 0
 		if value != "" {
 			lines = strings.Count(value, "\n") + 1
 		}
-		if lines > max {
+		if lines > maximum {
 			return ErrLinesExceeded
 		}
 		return nil

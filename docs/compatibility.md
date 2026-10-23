@@ -4,24 +4,24 @@
 
 ## Toolchain and dependencies
 
-Published Localized v5.0.0 selects International v4.0.0, HTTP Client
-v2.0.0 and Wire v3.0.0; v4 remains separately available. Clean-consumer
-qualification and maintained Tools adoption require separate evidence;
-main's module identity does not establish them. Query v4.0.0, Validation v2.0.0,
-Config v2.0.0 and x/text v0.42.0 remain selected. The v1–v4 API projections
-remain historical records, not proof of v5 compatibility.
+Localized v6 selects API Query v5, International v5, HTTP Client v3,
+Validation v3 and Wire v3, with Config v3 in tests and x/text v0.42.0; v5
+remains separately available. Clean-consumer qualification and maintained
+Tools adoption require separate evidence; main's module identity does not
+establish them. The v1–v5 API projections remain historical records, not proof
+of v6 compatibility; v6 uses `api/v6.txt`.
 
 | Component | Pinned baseline | Role |
 |---|---|---|
 | Go | 1.27.0 | minimum language and iterator contract |
-| `international/v4/locale` | v4.0.0 | public BCP 47 identity and provenance |
-| `api-query/v4` | v4.0.0 | public query values, operators and predicates |
-| `validation/v2` | v2.0.0 | public validator identity |
+| `international/v5/locale` | v5.0.0 | public BCP 47 identity and provenance |
+| `api-query/v5` | v5.0.0 | public query values, operators and predicates |
+| `validation/v3` | v3.0.1 | public validator identity |
 | `golang.org/x/text` | v0.42.0 | private CLDR matching and Unicode normalization |
 | pgx | v5.11.0 | JSONB and PostgreSQL integration |
 | `wire/v3` | v3.0.0 | bounded format adapters |
-| `http-client/v2` | v2.0.0 | immutable request specs and layers |
-| `config/v2` | v2.0.0 | configuration hook conformance |
+| `http-client/v3` | v3.0.0 | immutable request specs and layers |
+| `config/v3` | v3.0.0 | configuration hook conformance tests |
 | PostgreSQL | 14–18 | JSONB integration matrix |
 
 `locale.DatasetProvenance` records the IANA Language Subtag Registry retrieved
@@ -43,11 +43,10 @@ package does not expose registry enumeration or mutable registry state.
 ## Stability
 
 Canonical JSON, exact presence, missing/present-empty distinction, merge policy,
-and result kinds preserve the earlier-major value commitments in v5. Nominal
-locale, HTTP and wire identities adopt their supported successor majors;
-query remains v4 and validator remains v2. Types cannot be mixed across module
-majors. The original v1–v4 API baselines are preserved; v5 uses a separate
-projection. Matcher choices may change
+and result kinds preserve the earlier-major value commitments in v6. Nominal
+locale, query, HTTP, validation and wire identities adopt their current
+majors. Types cannot be mixed across module majors. The original v1–v5 API
+baselines are preserved; v6 uses a separate projection. Matcher choices may change
 only with a documented locale-data dependency update and compatibility vectors.
 
 Choose the next guide in the [documentation index](README.md)

@@ -68,12 +68,13 @@ their selected earlier-major dependencies. The maintained Tools compatibility
 consumer selects Localized v2.0.0 with API Query and International v2; it is not
 evidence of v3 adoption.
 
-## Target-oriented adapter imports
+## Target-oriented adapter imports (v3 to v5)
 
-New consumers should import `adapters/config`, `adapters/httpclient`,
-`adapters/query`, `adapters/validation`, and `adapters/wire`. Existing
+In v3 to v5, new consumers imported `adapters/config`, `adapters/httpclient`,
+`adapters/query`, `adapters/validation`, and `adapters/wire`, and the
 `localizedconfig`, `localizedhttpclient`, `localizedquery`,
-`localizedvalidation`, and `localizedwire` imports remain supported. Their
+`localizedvalidation`, and `localizedwire` imports remained supported; v6
+removed them. Their
 named values and errors are aliased by the canonical packages, so migration is
 behavior-compatible with no serialization, ownership, default, or runtime
 change. Either adopt the canonical package identifier and update selectors, or
