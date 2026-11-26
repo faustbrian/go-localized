@@ -16,7 +16,7 @@ Status `resolved`; owner `localized maintainers`; classification
 authority URL https://www.rfc-editor.org/rfc/rfc5646.txt; section
 `Sections 2.1, 2.2.9, and 4.5`; requirement strength `SHOULD`.
 
-Additional authoritative source: `{"id":"iana-language-registry","version":"Registry File-Date 2026-09-17","url":"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry","specifications":["IANA Language Subtag Registry"]}`
+Additional authoritative source: `{"id":"iana-language-registry","version":"Registry File-Date 2026-11-18","url":"https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry","specifications":["IANA Language Subtag Registry"]}`
 
 | Field | Decision |
 |---|---|
